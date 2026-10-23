@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "roboenv-runtime"
+version = "1.0.0"
+description = "Environment-owned typed simulator devices and journaled worker runtime"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = ["roboenv[server]==1.0.0", "numpy>=1.23", "PyYAML>=6"]
+
+[project.scripts]
+roboenv-worker = "roboenv_runtime.runtime.worker:main"
+roboenv-supervise = "roboenv_runtime.runtime.supervisor:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+roboenv_runtime = ["**/*.yaml", "**/*.json", "**/*.txt"]

@@ -1,0 +1,16 @@
+__pycache__/
+*.py[cod]
+.venv/
+node_modules/
+.runs/
+.cache/
+/assets/
+/recordings/
+*.mp4
+*.tgz
+*.tar.gz
+.env
+auth.json
+*credential*.json
+*.pem
+*.key

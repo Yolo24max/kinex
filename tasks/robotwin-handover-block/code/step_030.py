@@ -1,0 +1,6 @@
+# Extracted historical tool call; depends on prior observations and device state.
+from kinex import device,call,finish
+s=device('right_arm');p=call('relative_pose',child={'frame':'world','pose':[.095,.052,1.005,0,0,1,0]},parent={'frame':'right_arm'})['pose'];js=device('right_arm','ik',{'pose':p,'seed':s['positions']})['joints']
+print(call('servo',device='right_arm',joints=js,speedFraction=.35))
+print(device('right_arm'));print(call('relative_pose',child={'frame':'right_gripper:tcp'},parent={'frame':'world'}))
+x=device('head_camera',args={'output':'file'});finish({},file=x['file'])

@@ -1,0 +1,550 @@
+KinEx 复现进度与官方132项任务清单
+核对日期：2026-10-23
+
+依据：本机已核验结果、RoboEnv原生terminal，以及固定版本官方benchmark数据。未把下载的官方案例当作本人复现。
+已完成：LIBERO黑碗放盘中、RoboTwin木块双臂交接、RoboDojo三个碗套叠。均为seed=0、KinEx/gpt-6.1-sol/high上的单次原生功能成功。
+三项使用practice/realtime，未设置官方固定预算；RoboTwin/RoboDojo的official_action_equivalence=false，LIBERO的native_osc_equivalence=false。因此没有完成严格官方配置的全量复现。RoboDojo终态diagnostics_complete=false的证据缺口保留。
+已保存：最终状态、agent日志、多视角视频；相关任务另有动作/观察记录。恢复与重试只是同一任务的不同回合，不增加独立任务数。
+
+任务范围：LIBERO40、RoboTwin50、RoboDojo42，共132。官方三组agent/interface合计396回合：KinEx设备API、Codex原生设备API、Codex原生控制API。396不是独立任务数。
+下列“待复现”表示目前没有本地成功复现记录；“已成功”仅表示上面的功能复现口径。中文为便于阅读的简写，实际目标/约束以随附英文指令、任务代码和原生判定为准。
+预算列使用官方control/action steps；本地action_frames属于不同协议，不能直接数值比较。
+
+【LIBERO：40项】
+01. [待复现] 字母汤罐和番茄沙司放入篮子
+    ID：libero/libero-10-01
+    官方预算：600
+    原始指令：put both the blue-and-yellow alphabet soup can and the tomato sauce in the basket
+02. [待复现] 奶油奶酪盒和黄油放入篮子
+    ID：libero/libero-10-02
+    官方预算：600
+    原始指令：put both the white-and-blue cream cheese box and the butter in the basket
+03. [待复现] 打开炉灶并放上摩卡壶
+    ID：libero/libero-10-03
+    官方预算：600
+    原始指令：turn on the stove and put the moka pot on it
+04. [待复现] 黑碗放入底层抽屉并关闭
+    ID：libero/libero-10-04
+    官方预算：600
+    原始指令：put the black bowl in the bottom drawer of the cabinet and close it
+05. [待复现] 两个杯子分别放到左右盘子中央
+    ID：libero/libero-10-05
+    官方预算：600
+    原始指令：put the white mug in the center of the left plate and put the yellow and white mug in the center of the right plate
+06. [待复现] 书放入收纳架后部隔间
+    ID：libero/libero-10-06
+    官方预算：600
+    原始指令：pick up the book and place it in the back compartment of the caddy, between the two large side compartments
+07. [待复现] 白杯放盘中且布丁放盘右侧
+    ID：libero/libero-10-07
+    官方预算：600
+    原始指令：put the white mug in the center of the plate and put the chocolate pudding immediately to the right of the plate
+08. [待复现] 字母汤罐和奶油奶酪盒放入篮子
+    ID：libero/libero-10-08
+    官方预算：600
+    原始指令：put both the blue-and-yellow alphabet soup can and the white-and-blue cream cheese box in the basket
+09. [待复现] 两个摩卡壶放到炉灶（指令差异见原始清单）
+    ID：libero/libero-10-09
+    官方预算：600
+    原始指令：put both moka pots on the stove and turn the stove on
+10. [待复现] 杯子放入微波炉并关闭
+    ID：libero/libero-10-10
+    官方预算：600
+    原始指令：put the yellow and white mug in the microwave and close it
+11. [待复现] 盘子与小碗之间的黑碗放到盘子中央
+    ID：libero/libero-spatial-01
+    官方预算：600
+    原始指令：Pick the akita black bowl between the plate and the ramekin and place it in the center of the plate
+12. [待复现] 小碗旁的黑碗放到盘子中央
+    ID：libero/libero-spatial-02
+    官方预算：600
+    原始指令：Pick the akita black bowl next to the ramekin and place it in the center of the plate
+13. [已成功（功能回合）] 桌子中央的黑碗放到盘子中央
+    ID：libero/libero-spatial-03
+    官方预算：600
+    原始指令：Pick the akita black bowl from table center and place it in the center of the plate
+14. [待复现] 饼干盒上的黑碗放到盘子中央
+    ID：libero/libero-spatial-04
+    官方预算：600
+    原始指令：Pick the akita black bowl on the cookies box and place it in the center of the plate
+15. [待复现] 柜子顶层抽屉中的黑碗放到盘子中央
+    ID：libero/libero-spatial-05
+    官方预算：600
+    原始指令：Pick the akita black bowl in the top drawer of the wooden cabinet and place it in the center of the plate
+16. [待复现] 小碗上的黑碗放到盘子中央
+    ID：libero/libero-spatial-06
+    官方预算：600
+    原始指令：Pick the akita black bowl on the ramekin and place it in the center of the plate
+17. [待复现] 饼干盒旁的黑碗放到盘子中央
+    ID：libero/libero-spatial-07
+    官方预算：600
+    原始指令：Pick the akita black bowl next to the cookies box and place it in the center of the plate
+18. [待复现] 炉灶上的黑碗放到盘子中央
+    ID：libero/libero-spatial-08
+    官方预算：600
+    原始指令：Pick the akita black bowl on the stove and place it in the center of the plate
+19. [待复现] 盘子旁的黑碗放到盘子中央
+    ID：libero/libero-spatial-09
+    官方预算：600
+    原始指令：Pick the akita black bowl next to the plate and place it in the center of the plate
+20. [待复现] 柜子上的黑碗放到盘子中央
+    ID：libero/libero-spatial-10
+    官方预算：600
+    原始指令：Pick the akita black bowl on the wooden cabinet and place it in the center of the plate
+21. [待复现] 字母汤罐放入篮子
+    ID：libero/libero-object-01
+    官方预算：600
+    原始指令：Pick the blue-and-yellow alphabet soup can and place it in the basket
+22. [待复现] 奶油奶酪盒放入篮子
+    ID：libero/libero-object-02
+    官方预算：600
+    原始指令：Pick the white-and-blue cream cheese box and place it in the basket
+23. [待复现] 沙拉酱放入篮子
+    ID：libero/libero-object-03
+    官方预算：600
+    原始指令：Pick the salad dressing and place it in the basket
+24. [待复现] 烧烤酱放入篮子
+    ID：libero/libero-object-04
+    官方预算：600
+    原始指令：Pick the bbq sauce and place it in the basket
+25. [待复现] 白盖番茄酱瓶放入篮子
+    ID：libero/libero-object-05
+    官方预算：600
+    原始指令：Pick the white-capped ketchup bottle and place it in the basket
+26. [待复现] 番茄沙司放入篮子
+    ID：libero/libero-object-06
+    官方预算：600
+    原始指令：Pick the tomato sauce and place it in the basket
+27. [待复现] 黄油放入篮子
+    ID：libero/libero-object-07
+    官方预算：600
+    原始指令：Pick the butter and place it in the basket
+28. [待复现] 牛奶放入篮子
+    ID：libero/libero-object-08
+    官方预算：600
+    原始指令：Pick the milk and place it in the basket
+29. [待复现] 巧克力布丁放入篮子
+    ID：libero/libero-object-09
+    官方预算：600
+    原始指令：Pick the chocolate pudding and place it in the basket
+30. [待复现] 橙汁放入篮子
+    ID：libero/libero-object-10
+    官方预算：600
+    原始指令：Pick the orange juice and place it in the basket
+31. [待复现] 完全打开中层抽屉
+    ID：libero/libero-goal-01
+    官方预算：600
+    原始指令：Fully open the middle layer of the drawer
+32. [待复现] 碗放到炉灶上
+    ID：libero/libero-goal-02
+    官方预算：600
+    原始指令：Put the bowl on the stove
+33. [待复现] 酒瓶放到柜子顶部
+    ID：libero/libero-goal-03
+    官方预算：600
+    原始指令：Put the wine bottle on the top of the drawer
+34. [待复现] 打开顶层抽屉并放入碗
+    ID：libero/libero-goal-04
+    官方预算：600
+    原始指令：Open the top layer of the drawer and put the bowl inside
+35. [待复现] 碗放到柜子顶部
+    ID：libero/libero-goal-05
+    官方预算：600
+    原始指令：Put the bowl on the top of the drawer
+36. [待复现] 盘子推到炉灶前沿
+    ID：libero/libero-goal-06
+    官方预算：600
+    原始指令：Push the plate to the front of the stove, close to its front edge
+37. [待复现] 奶油奶酪盒放到碗中央
+    ID：libero/libero-goal-07
+    官方预算：600
+    原始指令：Put the white-and-blue cream cheese box in the center of the bowl
+38. [待复现] 打开炉灶
+    ID：libero/libero-goal-08
+    官方预算：600
+    原始指令：Turn on the stove
+39. [待复现] 碗放到盘子中央
+    ID：libero/libero-goal-09
+    官方预算：600
+    原始指令：Put the bowl in the center of the plate
+40. [待复现] 酒瓶放到上层架子
+    ID：libero/libero-goal-10
+    官方预算：600
+    原始指令：Put the wine bottle on the upper rack, with its base against the lower rail
+
+【ROBOTWIN：50项】
+01. [已成功（功能回合）] 木块双臂交接
+    ID：robotwin/handover-block-aloha-agilex
+    官方预算：800
+    原始指令：use the left arm to grasp the red block on the table, hand it over to the right arm, and set it down in the center of the blue pad. Release it with the right gripper open
+02. [待复现] 双鞋装盒
+    ID：robotwin/place-dual-shoes-aloha-agilex
+    官方预算：600
+    原始指令：use both arms to pick up the two shoes on the table and put them flat in the shoebox, with the shoe tips pointing to the left and the shoe initially on the left nearer the robot. Leave both grippers open
+03. [待复现] 瓶子入垃圾桶
+    ID：robotwin/put-bottles-dustbin-aloha-agilex
+    官方预算：1700
+    原始指令：use arms to grab the bottles and put them into the dustbin to the left of the table
+04. [待复现] 扫描物体
+    ID：robotwin/scan-object-aloha-agilex
+    官方预算：500
+    原始指令：pick up the scanner and the object simultaneously with separate arms. Hold the scanner’s scanning face close to and directly facing the object’s center, keeping both grippers closed around the items
+05. [待复现] 三个碗套叠
+    ID：robotwin/stack-bowls-three-aloha-agilex
+    官方预算：1200
+    原始指令：nest the three bowls on the table, leaving both grippers open
+06. [待复现] 三个积木堆叠
+    ID：robotwin/stack-blocks-three-aloha-agilex
+    官方预算：1200
+    原始指令：build a three-block stack at the center by placing the red block first, the green block on red, and the blue block on green
+07. [待复现] 挂杯子
+    ID：robotwin/hanging-mug-aloha-agilex
+    官方预算：900
+    原始指令：Use left arm to pick the mug on the table, rotate the mug and put the mug down in the middle of the table, use the right arm to pick the mug and hang it onto the rack.
+08. [待复现] 物体放入柜子
+    ID：robotwin/put-object-cabinet-aloha-agilex
+    官方预算：700
+    原始指令：use one arm to hold the object and the other arm to open the bottom cabinet drawer. Set the object down near the center of the drawer interior and release it
+09. [待复现] 积木按大小排序
+    ID：robotwin/blocks-ranking-size-aloha-agilex
+    官方预算：1200
+    原始指令：move the three randomly colored blocks to the center of the table and arrange them in a close, straight row from largest to smallest, from left to right. Release them with both grippers open
+10. [待复现] 双臂抬锅
+    ID：robotwin/lift-pot-aloha-agilex
+    官方预算：400
+    原始指令：grasp the round kitchenpot with handles and lift it well clear of the tabletop. Keep each gripper centered on its handle while holding the pot up
+11. [待复现] 调整瓶子姿态
+    ID：robotwin/adjust-bottle-aloha-agilex
+    官方预算：400
+    原始指令：Pick up the {bottle_description} head-up and hold it high toward the {side} edge of the table
+12. [待复现] 锤击积木
+    ID：robotwin/beat-block-hammer-aloha-agilex
+    官方预算：400
+    原始指令：pick up the hammer and hit the center of the block
+13. [待复现] 积木按红绿蓝排序
+    ID：robotwin/blocks-ranking-rgb-aloha-agilex
+    官方预算：1200
+    原始指令：Place the red, green, and blue blocks in a close horizontal row from left to right, then release them with both grippers open.
+14. [待复现] 按闹钟
+    ID：robotwin/click-alarmclock-aloha-agilex
+    官方预算：400
+    原始指令：click the center of the alarm clock's top button, keeping the gripper on the clock's side closed
+15. [待复现] 按铃
+    ID：robotwin/click-bell-aloha-agilex
+    官方预算：400
+    原始指令：click the bell's top center, keeping the gripper on the bell's side closed
+16. [待复现] 小桶物料倒入大桶
+    ID：robotwin/dump-bin-bigbin-aloha-agilex
+    官方预算：600
+    原始指令：Grab the small bin and pour the balls into the big bin, keeping the empty small bin held high
+17. [待复现] 双臂抓起滚筒
+    ID：robotwin/grab-roller-aloha-agilex
+    官方预算：400
+    原始指令：use both grippers to grasp the roller and lift it well clear of the table. Keep both grippers closed while holding it up
+18. [待复现] 交接麦克风
+    ID：robotwin/handover-mic-aloha-agilex
+    官方预算：600
+    原始指令：Hand the microphone to the arm opposite its starting side and hold it high on that side
+19. [待复现] 罐子移到锅旁
+    ID：robotwin/move-can-pot-aloha-agilex
+    官方预算：400
+    原始指令：place the can upright directly beside the pot on the can's starting side. Leave both grippers open
+20. [待复现] 药瓶放到垫子
+    ID：robotwin/move-pillbottle-pad-aloha-agilex
+    官方预算：400
+    原始指令：Pick up the pill bottle and set it down in the center of the pad. Release it with both grippers open.
+21. [待复现] 移走扑克牌
+    ID：robotwin/move-playingcard-away-aloha-agilex
+    官方预算：400
+    原始指令：pick up the playing-card box and move it farther outward on its starting side, leaving both grippers open.
+22. [待复现] 订书机移到垫子
+    ID：robotwin/move-stapler-pad-aloha-agilex
+    官方预算：400
+    原始指令：place the stapler straight in the center of the colored mat, leaving both grippers open
+23. [待复现] 打开笔记本电脑
+    ID：robotwin/open-laptop-aloha-agilex
+    官方预算：700
+    原始指令：open the laptop, keeping the gripper on its opening side near the lid
+24. [待复现] 打开微波炉
+    ID：robotwin/open-microwave-aloha-agilex
+    官方预算：1500
+    原始指令：Open the microwave door widely.
+25. [待复现] 抓取不同瓶子
+    ID：robotwin/pick-diverse-bottles-aloha-agilex
+    官方预算：400
+    原始指令：simultaneously pick up the two different bottles, one with each arm, and hold them high near the front center of the table, each on its original side
+26. [待复现] 双臂抓瓶
+    ID：robotwin/pick-dual-bottles-aloha-agilex
+    官方预算：400
+    原始指令：simultaneously pick up one bottle with each arm, and hold them high near the front center of the table, each on its original side
+27. [待复现] 物体从A移到B（左臂）
+    ID：robotwin/place-a2b-left-aloha-agilex
+    官方预算：400
+    原始指令：place the {movable_object_description} directly to the left of the {reference_object_description}, with a small gap between them and both grippers open
+28. [待复现] 物体从A移到B（右臂）
+    ID：robotwin/place-a2b-right-aloha-agilex
+    官方预算：400
+    原始指令：place the {movable_object_description} directly to the right of the {reference_object_description}, with a small gap between them and both grippers open
+29. [待复现] 面包放入篮子
+    ID：robotwin/place-bread-basket-aloha-agilex
+    官方预算：700
+    原始指令：place all the bread in the basket near its center, leaving both grippers open
+30. [待复现] 面包放到煎锅
+    ID：robotwin/place-bread-skillet-aloha-agilex
+    官方预算：500
+    原始指令：use one arm to keep the skillet lifted clear of the table while the other places the bread in its center
+31. [待复现] 摆放汉堡和薯条
+    ID：robotwin/place-burger-fries-aloha-agilex
+    官方预算：500
+    原始指令：simultaneously pick up the hamburger and fries with both arms, then place the hamburger in the left section of the tray and the fries in the right section, leaving both grippers open
+32. [待复现] 罐子放入篮子
+    ID：robotwin/place-can-basket-aloha-agilex
+    官方预算：700
+    原始指令：use one arm to put the can inside the basket, then use the other arm to lift the basket with the can inside. Keep the basket upright and both the can and basket clear of the table
+33. [待复现] 罐子放入塑料盒
+    ID：robotwin/place-cans-plasticbox-aloha-agilex
+    官方预算：800
+    原始指令：simultaneously pick up both cans with separate arms, then place them side by side in the plastic box, leaving both grippers open
+34. [待复现] 容器放到盘子
+    ID：robotwin/place-container-plate-aloha-agilex
+    官方预算：400
+    原始指令：place the container in the center of the plate, leaving both grippers open
+35. [待复现] 摆放空杯
+    ID：robotwin/place-empty-cup-aloha-agilex
+    官方预算：500
+    原始指令：place the empty cup in the center of the coaster, leaving both grippers open
+36. [待复现] 摆放风扇
+    ID：robotwin/place-fan-aloha-agilex
+    官方预算：400
+    原始指令：place the fan in the center of the colored mat, facing the robot, leaving both grippers open
+37. [待复现] 鼠标放到鼠标垫
+    ID：robotwin/place-mouse-pad-aloha-agilex
+    官方预算：400
+    原始指令：place the mouse in the center of the colored mat, facing straight, leaving both grippers open
+38. [待复现] 物体放入篮子
+    ID：robotwin/place-object-basket-aloha-agilex
+    官方预算：700
+    原始指令：use one arm to place the target object inside the basket, then use the other arm to lift the basket with the object inside. Keep the basket upright and both the object and basket clear of the table
+39. [待复现] 物体放到秤上
+    ID：robotwin/place-object-scale-aloha-agilex
+    官方预算：400
+    原始指令：place the object in the center of the scale's weighing platform. Leave the gripper on the object's starting side open
+40. [待复现] 物体放到支架
+    ID：robotwin/place-object-stand-aloha-agilex
+    官方预算：400
+    原始指令：set the target object on the center of the display stand, leaving both grippers open
+41. [待复现] 手机放到支架
+    ID：robotwin/place-phone-stand-aloha-agilex
+    官方预算：400
+    原始指令：place the phone on the phone stand, centered against its support, leaving both grippers open
+42. [待复现] 摆放鞋子
+    ID：robotwin/place-shoe-aloha-agilex
+    官方预算：500
+    原始指令：place the shoe straight in the center of the mat with its toe pointing left, leaving both grippers open
+43. [待复现] 按订书机
+    ID：robotwin/press-stapler-aloha-agilex
+    官方预算：400
+    原始指令：Use one arm to press the stapler.
+44. [待复现] 旋转二维码板
+    ID：robotwin/rotate-qrcode-aloha-agilex
+    官方预算：400
+    原始指令：Use arm to catch the qrcode board on the table, pick it up, rotate to let the qrcode face towards you, then put it back on the table and release it
+45. [待复现] 摇晃瓶子
+    ID：robotwin/shake-bottle-aloha-agilex
+    官方预算：700
+    原始指令：Shake the bottle with proper arm while holding it well clear of the table
+46. [待复现] 水平摇晃瓶子
+    ID：robotwin/shake-bottle-horizontally-aloha-agilex
+    官方预算：700
+    原始指令：Shake the bottle with proper arm horizontally while holding it well clear of the table
+47. [待复现] 两个积木堆叠
+    ID：robotwin/stack-blocks-two-aloha-agilex
+    官方预算：800
+    原始指令：move the red and green blocks to the center of the table and stack the green block centrally on the red block, leaving both grippers open
+48. [待复现] 两个碗套叠
+    ID：robotwin/stack-bowls-two-aloha-agilex
+    官方预算：900
+    原始指令：nest the two bowls on the table, leaving both grippers open
+49. [待复现] 盖章
+    ID：robotwin/stamp-seal-aloha-agilex
+    官方预算：400
+    原始指令：Grab the stamp and stamp onto the center of the colored mat, leaving the stamp there and both grippers open
+50. [待复现] 拨动开关
+    ID：robotwin/turn-switch-aloha-agilex
+    官方预算：400
+    原始指令：press the switch fully down
+
+【ROBODOJO：42项】
+01. [待复现] 制作吐司
+    ID：robodojo/make-toast
+    官方预算：1875
+    原始指令：Pick up two slices of bread, place them into the toaster, and press the lever down. Return both arms to their starting poses.
+02. [待复现] 按语言类别分类物体
+    ID：robodojo/classify-objects-by-language
+    官方预算：1875
+    原始指令：Put {cat0} objects into the left basket, {cat1} objects into the middle basket, and {cat2} objects into the right basket, then reset the robot arm.
+03. [待复现] 收纳笔记本电脑和耳机
+    ID：robodojo/store-laptop-and-headphones
+    官方预算：1875
+    原始指令：Hang the headphones on the headphone stand, close the laptop, then place it into the vertical laptop stand. Return both arms to their starting poses.
+04. [待复现] 遮盖并按颜色顺序揭开积木
+    ID：robodojo/cover-blocks
+    官方预算：1875
+    原始指令：Cover the blocks from left to right, remember their colors, then uncover them in the order: red, green, and blue. Keep the cups upside down and the blocks in place. Return both arms to their starting poses.
+05. [待复现] 敲木琴
+    ID：robodojo/play-xylophone
+    官方预算：1875
+    原始指令：Pick up the mallet and strike all xylophone keys from left to right.
+06. [待复现] 工具放入工具箱
+    ID：robodojo/store-tools-in-toolbox
+    官方预算：1875
+    原始指令：Place each tool flat in its matching shaped recess, aligned with the outline and fully below the toolbox rim. Release all tools and return both arms to their starting poses.
+07. [待复现] 插入管子
+    ID：robodojo/insert-tubes
+    官方预算：1875
+    原始指令：Insert the three tubes fully into the rack one by one, pointed ends down. Return both arms to their starting poses.
+08. [待复现] 投硬币
+    ID：robodojo/deposit-coin
+    官方预算：1875
+    原始指令：Pick up the coin from the holder and deposit it fully inside the coin bank. Return both arms to their starting poses.
+09. [待复现] 将螺母装到同色螺栓
+    ID：robodojo/fasten-screws
+    官方预算：1875
+    原始指令：Seat each nut upright on the bolt of the same color. Fully open both grippers and return both arms to their starting poses.
+10. [待复现] 套柱堆叠玩具
+    ID：robodojo/play-stacking-toy
+    官方预算：1875
+    原始指令：Place all stacking toy pieces onto the correct pegs. Return both arms to their starting poses.
+11. [待复现] 用三角尺对齐积木
+    ID：robodojo/align-blocks
+    官方预算：1875
+    原始指令：Use the set square to push the three blocks into a straight, aligned row. Keep all three blocks on the table, then return both arms to their starting poses.
+12. [待复现] 数字排列成最大数
+    ID：robodojo/arrange-largest-number
+    官方预算：1875
+    原始指令：Arrange the numbers on the pads from left to right to form the largest possible number, readable from the robot's side. Return both arms to their starting poses.
+13. [待复现] 搭建高塔
+    ID：robodojo/build-tower
+    官方预算：1875
+    原始指令：Build a tower using all the wooden blocks and boards, with the green roof on top and its ridge perpendicular to the plank's long edges. Return both arms to their starting poses.
+14. [待复现] 物体分类
+    ID：robodojo/classify-objects
+    官方预算：1875
+    原始指令：Sort the objects by category into the three baskets, with one category per basket. Return both arms to their starting poses.
+15. [待复现] 鸡蛋放入蛋架
+    ID：robodojo/fill-egg-holder
+    官方预算：1875
+    原始指令：Place the four eggs from the basket into the egg holder, then close the lid. Return both arms to their starting poses.
+16. [待复现] 笔放入笔筒
+    ID：robodojo/fill-pen-holder
+    官方预算：1875
+    原始指令：Hold the pen holder with one hand, place all pens into it with the other hand, writing ends down, then put it back down upright. Return both arms to their starting poses.
+17. [待复现] 叠衣服
+    ID：robodojo/fold-clothes
+    官方预算：1875
+    原始指令：Fold the clothes neatly into a compact rectangle, then release them and return both arms to their starting poses.
+18. [待复现] 通用抓取
+    ID：robodojo/general-pickup
+    官方预算：1875
+    原始指令：Pick up the {target} by 10 cm.
+19. [待复现] 挂杯子
+    ID：robodojo/hang-mugs
+    官方预算：1875
+    原始指令：Hang all three mugs by their handles on the mug rack, with the mug hanging clear of the table. Release all mugs and return both arms to their starting poses.
+20. [待复现] 模仿分类顺序
+    ID：robodojo/imitate-sorting-sequence
+    官方预算：1875
+    原始指令：Observe the object placement order with both arms at their starting poses, then place the corresponding objects into the empty basket in the same order. Return both arms to their starting poses.
+21. [待复现] 插钥匙
+    ID：robodojo/insert-key
+    官方预算：1875
+    原始指令：Pick up the key, hand it over to the other hand, insert it fully into the keyhole, then turn it clockwise.
+22. [待复现] 麻将明杠并补牌
+    ID：robodojo/make-kong
+    官方预算：1875
+    原始指令：Wait for the opponent to discard a tile, then declare a kong with the matching tiles and add the replacement tile to the right end of your hand. Keep both arms at their starting poses during the opponent's turn.
+23. [待复现] 传送带匹配并抓取
+    ID：robodojo/match-and-pick-from-conveyor
+    官方预算：1875
+    原始指令：Remember the first object on the conveyor, then pick up the matching object when it appears again and lift it well above its starting height.
+24. [待复现] 整理桌面
+    ID：robodojo/organize-table
+    官方预算：1875
+    原始指令：Place the alarm clock upright on the drawer, put the figurine upright on the stand, place the mouse on the mouse pad facing the monitor, and push the keyboard into the frame facing the robot. Return both arms to their starting poses.
+25. [待复现] 物体装箱
+    ID：robodojo/pack-objects-into-box
+    官方预算：1875
+    原始指令：Place all the objects into the box with their front sides facing left. Keep the box upright with its long sides running left to right. Return both arms to their starting poses.
+26. [待复现] 按图像从传送带抓取
+    ID：robodojo/pick-from-conveyor-by-image
+    官方预算：1875
+    原始指令：Lift the basket more than 8 cm, identify the target object on the conveyor according to the image on the board, pick it up, and place it into the basket. Keep the basket raised with the object resting inside.
+27. [待复现] 井字棋
+    ID：robodojo/play-tic-tac-toe
+    官方预算：1875
+    原始指令：Play tic-tac-toe as the first player and fill the board with the opponent. Return both arms to their starting poses after each move and wait there during the opponent's turn.
+28. [待复现] 插入充电器
+    ID：robodojo/plug-in-charger
+    官方预算：1875
+    原始指令：Plug the charger into the power strip. Return both arms to their starting poses.
+29. [待复现] 小球倒入花瓶
+    ID：robodojo/pour-balls-into-vase
+    官方预算：1875
+    原始指令：Pour all the balls from the cup into the vase. Leave the cup upright. Return both arms to their starting poses.
+30. [待复现] 按语言要求倾倒
+    ID：robodojo/pour-by-language
+    官方预算：1875
+    原始指令：Pour the liquid from the first {bottle_color_0} bottle into the first {bowl_color_3} bowl, from the second {bottle_color_1} bottle into the second {bowl_color_4} bowl, and from the third {bottle_color_2} bottle into the third {bowl_color_5} bowl. Then reset the robot arm.
+31. [待复现] 液体倒入杯子
+    ID：robodojo/pour-liquid-into-cup
+    官方预算：1875
+    原始指令：Pour the liquid from the bottle into the cup with minimal spillage, leaving the bottle nearly empty and upright.
+32. [待复现] 按数量计数并按键
+    ID：robodojo/press-by-number
+    官方预算：1875
+    原始指令：Press the red buttons from left to right the number of times shown on their cards, pressing the blue button to confirm each count. Return both arms to their starting poses.
+33. [待复现] 推动T形块对齐
+    ID：robodojo/push-t
+    官方预算：1875
+    原始指令：Push the T-shaped block to align it precisely with the gray T-shaped pad. Return both arms to their starting poses.
+34. [待复现] 瓶子放入垃圾桶
+    ID：robodojo/put-bottles-into-dustbin
+    官方预算：1875
+    原始指令：Pick up the bottles and throw them into the dustbin, using handover when needed. Return both arms to their starting poses.
+35. [待复现] 补全算式
+    ID：robodojo/solve-equation
+    官方预算：1875
+    原始指令：Complete the equation by selecting the correct missing number or operator and placing it flat in the center of the empty pad, readable from the robot's side. Return both arms to their starting poses.
+36. [待复现] 套娃按大小排序
+    ID：robodojo/sort-nesting-dolls-by-size
+    官方预算：1875
+    原始指令：Arrange the five nesting dolls upright in a row from left to right, from smallest to largest. Return both arms to their starting poses.
+37. [待复现] 积木堆叠
+    ID：robodojo/stack-blocks
+    官方预算：1875
+    原始指令：Stack all three differently textured blocks in a single vertical tower. Center each block over the one below, release the completed stack, and return both arms to their starting poses.
+38. [待复现] 按语言顺序堆积木
+    ID：robodojo/stack-blocks-by-language
+    官方预算：1875
+    原始指令：stack the blocks from bottom to top in the order of {color_0}, {color_1}, and {color_2}, centering each block over the one below. Release the completed stack and return both arms to their starting poses.
+39. [已成功（功能回合）] 三个碗套叠
+    ID：robodojo/stack-bowls
+    官方预算：1875
+    原始指令：Stack the three bowls into one centered, nested stack with their openings facing up. Return both arms to their starting poses.
+40. [待复现] 交换T形块位置和方向
+    ID：robodojo/swap-t
+    官方预算：1875
+    原始指令：Swap the positions and orientations of the two T-shaped blocks. Return both arms to their starting poses.
+41. [待复现] 借助空垫交换积木
+    ID：robodojo/swap-blocks
+    官方预算：1875
+    原始指令：Swap the two blocks using the empty mat, pressing the button after each move. Return both arms to their starting poses.
+42. [待复现] 扫积木入簸箕
+    ID：robodojo/sweep-blocks
+    官方预算：1875
+    原始指令：Pick up the broom, hand it over to the right hand, and sweep all the objects into the dustpan. Leave the dustpan flat on the table to the left of the broom. Return both arms to their starting poses.
+
+其他可研究方向：固定预算/控制协议对齐、多随机种子稳定性、三种接口消融、设备/工具/技能模块消融；这些是实验方案，不另外计入132个原始任务。
+框架也可扩展到RoboCasa、BEHAVIOR、Isaac Lab、SIMPLE等后端及真实机器人；这些不属于当前132项发布基准，不能只因适配器存在就认定任务已跑通。
+
+来源：official-task-plan.json；https://huggingface.co/datasets/stacx-lab/kinex-benchmark-release

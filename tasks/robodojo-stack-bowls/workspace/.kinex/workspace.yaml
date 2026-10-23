@@ -1,0 +1,25 @@
+identity:
+  source: user
+  id: robodojo-arx-x5
+  name: robodojo-arx-x5
+  platform: sim
+  kind: other
+  model: robodojo-arx-x5
+sim:
+  source: user
+  simulator: robodojo
+devices:
+  source: user
+safety:
+  source: user
+  max_cartesian_velocity: null
+  max_joint_velocity: null
+  keep_out_zones: []
+  notes: Only upstream ARX X5 is supported. Native arm actuators enforce 5 rad/s velocity
+    and 100 N m effort limits. Physical joint constraints and native gripper clipping
+    and interpolation apply; no added arm target-range rejection. Gripper profiles
+    reject commands outside [0, 1]. Stop affects only its device; the world owns simulation
+    time.
+meta:
+  created_at: '2026-09-09T00:00:00Z'
+  updated_at: '2026-09-09T00:00:00Z'

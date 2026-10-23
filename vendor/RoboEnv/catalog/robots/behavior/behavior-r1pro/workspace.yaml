@@ -1,0 +1,26 @@
+identity:
+  source: user
+  id: behavior-r1pro
+  name: behavior-r1pro
+  platform: sim
+  kind: mobile
+  model: behavior-r1pro
+sim:
+  source: user
+  simulator: behavior
+devices:
+  source: user
+safety:
+  source: user
+  max_cartesian_velocity: null
+  max_joint_velocity: null
+  keep_out_zones: []
+  notes: Native base-joint velocity targets clip to +/-1.5 m/s for translation and
+    +/-pi rad/s for yaw after conversion from body to native joint coordinates. These
+    are actuator-coordinate limits, not independent body-frame command bounds. Native
+    position controllers clip joint targets to model ranges. URDF-only velocity/effort
+    ratings are unspecified. Gripper profiles reject commands outside [0, 1]. Stop
+    affects only its device; the world owns simulation time.
+meta:
+  created_at: '2026-09-09T00:00:00Z'
+  updated_at: '2026-09-09T00:00:00Z'

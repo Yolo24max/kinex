@@ -1,0 +1,33 @@
+{
+  "key": "robodojo-stack-bowls",
+  "title": "三个碗套叠并让双臂返回起始位置",
+  "native_id": "robodojo/stack-bowls",
+  "robot": "robodojo/robodojo-arx-x5",
+  "port": 8125,
+  "frames": 13295,
+  "raw_score": 100.0,
+  "prompt": "Stack the three bowls into one centered, nested stack with their openings facing up. Return both arms to their starting poses.",
+  "seed": 0,
+  "model": "gpt-6.1-sol",
+  "provider": "openai-codex",
+  "thinking": "high",
+  "success": true,
+  "reward": 1.0,
+  "control_budget_max": null,
+  "mode": "practice/realtime",
+  "strict_official_benchmark": false,
+  "tool_calls": 60,
+  "python_steps": 38,
+  "last_assistant": {
+    "provider": "openai-codex",
+    "model": "gpt-6.1-sol",
+    "stopReason": "stop",
+    "errorMessage": null
+  },
+  "source_log_sha256": "40b554e19f97764390232f17cd1f5d3c7852fa2c469aab0a7dbc60176caa2105",
+  "terminal_sha256": "fa0b7591cce4a1dfc5d6fae16a42e77f7917bc993bc9552f7a4b3ef99804483b",
+  "known_limits": [
+    "diagnostics_complete=false",
+    "Native return-to-origin tolerances do not imply exact joint zeroing."
+  ]
+}

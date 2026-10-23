@@ -1,0 +1,51 @@
+{
+  "evidence": {
+    "complete": true,
+    "files": {
+      "final-observation.json": {
+        "complete": true,
+        "path": "final-observation.json",
+        "sha256": "8226ee155d134adb501b81e186ffd270b515c4bb4ee1ceab7b2a205af9561fae"
+      }
+    },
+    "schema": "roboenv/terminal-evidence/1"
+  },
+  "seed": 0,
+  "status": {
+    "budget": {
+      "max": null,
+      "unit": "action_frames",
+      "used": 9339
+    },
+    "capabilities": {
+      "bounded_episodes": true,
+      "terminal_feedback": true
+    },
+    "generation": 0,
+    "reason": "success",
+    "schema": "roboenv/simulation-status/1",
+    "session": "12c7bd5816002020",
+    "simulation_time_s": null,
+    "state": "terminal",
+    "success": true,
+    "terminal": true
+  },
+  "task": "libero/libero-spatial-03",
+  "verdict": {
+    "budget": {
+      "max": null,
+      "unit": "action_frames",
+      "used": 9339
+    },
+    "completed": true,
+    "detail": {
+      "control_protocol": "absolute_joint_position",
+      "native_osc_equivalence": false
+    },
+    "latched": true,
+    "raw_score": 1.0,
+    "reward": 1.0,
+    "submitted": true,
+    "tier": 0
+  }
+}

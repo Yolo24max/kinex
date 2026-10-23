@@ -1,0 +1,226 @@
+{
+  "schema": "roboenv/upstreams/1",
+  "backends": [
+    "libero",
+    "robocasa",
+    "robodojo",
+    "robotwin",
+    "behavior",
+    "isaaclab",
+    "simple",
+    "abc"
+  ],
+  "sources": {
+    "robocasa": {
+      "path": "third_party/robocasa",
+      "url": "https://github.com/robocasa/robocasa.git",
+      "revision": "456174f62b89b8fca99eaaf33949c29fec9cfc2a",
+      "backends": [
+        "robocasa"
+      ],
+      "patches": [
+        {
+          "path": "third_party/patches/robocasa-readonly-assets.patch",
+          "sha256": "1ca1dee4eff91bf951d11f7d0759be643cf9f68dce3faa16e241e001290518cb"
+        },
+        {
+          "path": "third_party/patches/robocasa-deterministic-counter-regions.patch",
+          "sha256": "d5fb879b99da3eb7630975be8ee9d6290b9279a37cec929e128a8b2decae7174"
+        }
+      ]
+    },
+    "robosuite": {
+      "path": "third_party/robosuite",
+      "url": "https://github.com/ARISE-Initiative/robosuite",
+      "revision": "5ce6643f3092639d08f7b0f90ed1c6a84f50552c",
+      "backends": [
+        "robocasa"
+      ],
+      "patches": [
+        {
+          "path": "third_party/patches/robosuite-egl-device-check.patch",
+          "sha256": "e50ae5e6ebfab25da895c387b8ffdbf318a1a0db0e27403dab29247a92a62051"
+        }
+      ]
+    },
+    "robodojo": {
+      "path": "third_party/RoboDojo",
+      "url": "https://github.com/RoboDojo-Benchmark/RoboDojo.git",
+      "revision": "cb2a37d58dbbeb2777b0c2b30e97ecb8ab91095c",
+      "backends": [
+        "robodojo"
+      ],
+      "patches": [
+        {
+          "path": "third_party/patches/robodojo-success-policy.patch",
+          "sha256": "678cb63e1e900b2e4e4b41d743d5385f16cb44d9cee68b3dd9aef7a6f912fde2"
+        },
+        {
+          "path": "third_party/patches/robodojo-optional-policy-client.patch",
+          "sha256": "edfd16f3d1f7d6d4407699e85ab0e8c1056a0f8bd521da9999cdfbbb4b47aecc"
+        },
+        {
+          "path": "third_party/patches/robodojo-predicate-diagnostics.patch",
+          "sha256": "77d38cf3d352bed300b8b8a84c57185915bbcb59dc8b7feb65676f347198ec66"
+        }
+      ]
+    },
+    "isaaclab": {
+      "path": "third_party/RoboDojo/third_party/IsaacLab",
+      "parent": "robodojo",
+      "url": "https://github.com/yuechen0614/IsaacLab.git",
+      "revision": "afca7b09d60d8beb9c1cb28b43066499940b969b",
+      "backends": [
+        "robodojo"
+      ],
+      "patches": [
+        {
+          "path": "third_party/patches/robodojo-isaaclab-optional-streaming.patch",
+          "sha256": "72224359f5b515b74d0a47739696e08e007ac219e62d386051817a2937d20bd1"
+        }
+      ]
+    },
+    "curobo": {
+      "path": "third_party/RoboDojo/third_party/curobo",
+      "parent": "robodojo",
+      "url": "https://github.com/yuechen0614/curobo.git",
+      "revision": "895c6517243f8cb091c73c018c8167192d39599a",
+      "backends": [
+        "robodojo"
+      ]
+    },
+    "robotwin": {
+      "path": "third_party/RoboTwin",
+      "url": "https://github.com/RoboTwin-Platform/RoboTwin.git",
+      "revision": "ea8b21121ebb3cd201ff5b3fe361944ac94eda3f",
+      "backends": [
+        "robotwin"
+      ],
+      "patches": [
+        {
+          "path": "third_party/patches/robotwin-runtime.patch",
+          "sha256": "9bfe4a9ad9854fa62ccb17c1a25289710e3c9e910b48efdf70518dbeca4f43b1"
+        }
+      ]
+    },
+    "behavior": {
+      "path": "third_party/BEHAVIOR-1K",
+      "url": "https://github.com/StanfordVL/BEHAVIOR-1K.git",
+      "revision": "a8247a8cc1633fe1ca0cc66aa07243d46c64f155",
+      "backends": [
+        "behavior"
+      ],
+      "patches": [
+        {
+          "path": "third_party/patches/behavior-optional-workflows.patch",
+          "sha256": "9b91c1d8a1f7fcb000ebd96fe520c9636f9b888d83a48172203ac00cf3ce3871"
+        },
+        {
+          "path": "third_party/patches/behavior-gpu-selection.patch",
+          "sha256": "fb006f05f8d7b14bed8cf9233a9bab0c75a40400fa88d56ccb6d93eb6bf448e6"
+        }
+      ]
+    },
+    "isaaclab_native": {
+      "path": "third_party/IsaacLab",
+      "url": "https://github.com/isaac-sim/IsaacLab.git",
+      "revision": "99f1423e5d4a26216c0eedeb2aa78099a8c3a7d1",
+      "backends": [
+        "isaaclab"
+      ],
+      "patches": [
+        {
+          "path": "third_party/patches/isaaclab-install.patch",
+          "sha256": "3e4dfccc8e8f3b496c6f8f46b3a388afa4caf1557c3c2a33489df0e394f6492b"
+        },
+        {
+          "path": "third_party/patches/isaaclab-optional-cloudxr.patch",
+          "sha256": "c6fd5fd7adc502da9fd8010964766bf7da8d7a5886ad7da4c4414749a261c5d9"
+        }
+      ]
+    },
+    "libero": {
+      "path": "third_party/LIBERO",
+      "url": "https://github.com/Lifelong-Robot-Learning/LIBERO.git",
+      "revision": "8f1084e3132a39270c3a13ebe37270a43ece2a01",
+      "backends": [
+        "libero"
+      ],
+      "patches": [
+        {
+          "path": "third_party/patches/libero-namespace-packaging.patch",
+          "sha256": "4b82c2465305acf5a2c067053d626a4531002fa54ce1578ab2c8b6fcd0973b47"
+        }
+      ]
+    },
+    "simple": {
+      "path": "third_party/SIMPLE",
+      "url": "https://github.com/physical-superintelligence-lab/SIMPLE.git",
+      "revision": "6d10628794d9c7de4596b4f2afb2c054a637c2bc",
+      "backends": [
+        "simple"
+      ],
+      "patches": [
+        {
+          "path": "third_party/patches/simple-device-runtime.patch",
+          "sha256": "cf825c78ef5ac41c991de669daa62a1e66245a1d511108b597ae67fc4eeb51a0"
+        },
+        {
+          "path": "third_party/patches/simple-arm-gravity-compensation.patch",
+          "sha256": "be2e7f1fa1cf9f5238ea384b6599de490d394adcfc2895bb36589b80b08b9556"
+        }
+      ]
+    },
+    "simple_decoupled_wbc": {
+      "path": "third_party/SIMPLE/third_party/decoupled_wbc",
+      "parent": "simple",
+      "url": "https://github.com/songlin/decoupled_wbc.git",
+      "revision": "5b304e4d643fe89cd000068dcbba7e7519539caa",
+      "backends": [
+        "simple"
+      ],
+      "patches": [
+        {
+          "path": "third_party/patches/simple-decoupled-control.patch",
+          "sha256": "da10d28951f61010f3c490b635d6e163bd1cd675e0a6b736ad47d5a948c99ca0"
+        }
+      ]
+    },
+    "simple_gear_sonic": {
+      "path": "third_party/SIMPLE/third_party/gear_sonic",
+      "parent": "simple",
+      "url": "https://github.com/songlin/gear_sonic.git",
+      "revision": "d9bfffbd69a0b8c1d94a8a1b6113a589038d345a",
+      "backends": [
+        "simple"
+      ]
+    },
+    "simple_unitree_sdk2_python": {
+      "path": "third_party/SIMPLE/third_party/unitree_sdk2_python",
+      "parent": "simple",
+      "url": "https://github.com/songlin/unitree_sdk2_python.git",
+      "revision": "cf26ccef0e615c9509140322bec154adc391c052",
+      "backends": [
+        "simple"
+      ]
+    },
+    "abc": {
+      "path": "third_party/abc",
+      "url": "https://github.com/amazon-far/abc.git",
+      "revision": "d0832d12651d1b260a652861a14648dc5f3660c7",
+      "backends": [
+        "abc"
+      ],
+      "patches": [
+        {
+          "path": "third_party/patches/abc-unified-arm-mounts.patch",
+          "sha256": "5ea387963ce29844ca70daaa26de93d4d15368df5417307179ba94433ec25d7f"
+        },
+        {
+          "path": "third_party/patches/abc-blender-live.patch",
+          "sha256": "f5a1fb66d8ec9106363e01a589703cf53437ff52348a49086d48681bf923a420"
+        }
+      ]
+    }
+  }
+}

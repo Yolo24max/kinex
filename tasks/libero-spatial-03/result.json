@@ -1,0 +1,29 @@
+{
+  "key": "libero-spatial-03",
+  "title": "黑碗放到盘子中央",
+  "native_id": "libero/libero-spatial-03",
+  "robot": "libero/libero-panda-tabletop",
+  "port": 8123,
+  "frames": 9339,
+  "raw_score": 1.0,
+  "prompt": "Pick the akita black bowl from table center and place it in the center of the plate.",
+  "seed": 0,
+  "model": "gpt-6.1-sol",
+  "provider": "openai-codex",
+  "thinking": "high",
+  "success": true,
+  "reward": 1.0,
+  "control_budget_max": null,
+  "mode": "practice/realtime",
+  "strict_official_benchmark": false,
+  "tool_calls": 17,
+  "python_steps": 11,
+  "last_assistant": {
+    "provider": "openai-codex",
+    "model": "gpt-6.1-sol",
+    "stopReason": "stop",
+    "errorMessage": null
+  },
+  "source_log_sha256": "8fa580d73bcf1ae8744e1cf3caac528178238f844ad8f784f1823cdf2ff108bf",
+  "terminal_sha256": "b860878f8262f627811e15583786686cf135b2fed5428ae4823873e943eb816b"
+}

@@ -1,0 +1,199 @@
+{
+  "source_log_sha256": "8fa580d73bcf1ae8744e1cf3caac528178238f844ad8f784f1823cdf2ff108bf",
+  "method": "Only assistant toolCall arguments from message_end events; no hidden thinking, stream deltas, or image payloads.",
+  "calls": [
+    {
+      "sequence": 1,
+      "name": "ls",
+      "arguments": {
+        "path": ".kinex/devices"
+      }
+    },
+    {
+      "sequence": 2,
+      "name": "exec",
+      "arguments": {
+        "python": "from kinex import profile\nprint(profile())",
+        "description": "inspect available device profiles"
+      }
+    },
+    {
+      "sequence": 3,
+      "name": "devices",
+      "arguments": {
+        "calls": [
+          {
+            "deviceID": "world",
+            "action": "status"
+          },
+          {
+            "deviceID": "arm",
+            "action": "status"
+          },
+          {
+            "deviceID": "gripper",
+            "action": "status"
+          },
+          {
+            "deviceID": "camera",
+            "action": "status"
+          },
+          {
+            "deviceID": "camera_wrist",
+            "action": "status"
+          }
+        ]
+      }
+    },
+    {
+      "sequence": 4,
+      "name": "exec",
+      "arguments": {
+        "python": "from kinex import profile\nfor name in ['world','arm','gripper','camera','camera_wrist']:\n print(name, profile(name))",
+        "description": "read control and camera profiles"
+      }
+    },
+    {
+      "sequence": 5,
+      "name": "devices",
+      "arguments": {
+        "calls": [
+          {
+            "deviceID": "arm"
+          },
+          {
+            "deviceID": "gripper"
+          },
+          {
+            "deviceID": "world"
+          },
+          {
+            "deviceID": "camera"
+          },
+          {
+            "deviceID": "camera_wrist"
+          }
+        ]
+      }
+    },
+    {
+      "sequence": 6,
+      "name": "exec",
+      "arguments": {
+        "python": "from kinex import call, device\nprint(call('relative_pose',child={'frame':'camera'},parent={'frame':'world'}))\nprint(call('relative_pose',child={'frame':'camera_wrist'},parent={'frame':'world'}))\na=device('arm'); print(device('arm','fk',{'joints':a['positions']}))",
+        "description": "resolve optical frames and end effector pose"
+      }
+    },
+    {
+      "sequence": 7,
+      "name": "exec",
+      "arguments": {
+        "python": "import numpy as np\nfrom scipy.spatial.transform import Rotation as R\nfrom kinex import call\np1=call('relative_pose',child={'frame':'camera'},parent={'frame':'world'})['pose'];p2=call('relative_pose',child={'frame':'camera_wrist'},parent={'frame':'world'})['pose']\ndef tri(uv1,uv2):\n d1=R.from_quat(p1[3:]).apply([(uv1[0]-127.5)/309.0193,(uv1[1]-127.5)/309.0193,1]); d2=R.from_quat(p2[3:]).apply([(uv2[0]-127.5)/166.81285,(uv2[1]-127.5)/166.81285,1]); a=np.array(p1[:3]);b=np.array(p2[:3]); ts=np.linalg.lstsq(np.column_stack([d1,-d2]),b-a,rcond=None)[0]; print((a+ts[0]*d1+b+ts[1]*d2)/2,'ray error',np.linalg.norm(a+ts[0]*d1-b-ts[1]*d2))\ntri((132,146),(114,79));tri((198,189),(27,10));tri((180,126),(32,141))",
+        "description": "triangulate bowl and plate from camera views"
+      }
+    },
+    {
+      "sequence": 8,
+      "name": "exec",
+      "arguments": {
+        "python": "from kinex import call\np1=call('relative_pose',child={'frame':'camera'},parent={'frame':'world'})['pose'];p2=call('relative_pose',child={'frame':'camera_wrist'},parent={'frame':'world'})['pose']\ndef dot(a,b): return sum(x*y for x,y in zip(a,b))\ndef rot(q,v):\n x,y,z,w=q;u=[x,y,z];c=[y*v[2]-z*v[1],z*v[0]-x*v[2],x*v[1]-y*v[0]]\n return [2*dot(u,v)*u[i]+(w*w-dot(u,u))*v[i]+2*w*c[i] for i in range(3)]\ndef tri(uv1,uv2):\n d=rot(p1[3:],[(uv1[0]-127.5)/309.0193,(uv1[1]-127.5)/309.0193,1]);e=rot(p2[3:],[(uv2[0]-127.5)/166.81285,(uv2[1]-127.5)/166.81285,1]);v=[p2[i]-p1[i] for i in range(3)];aa=dot(d,d);bb=dot(d,e);cc=dot(e,e);dd=dot(d,v);ee=dot(e,v); t=(dd*cc-bb*ee)/(aa*cc-bb*bb);s=(bb*dd-aa*ee)/(aa*cc-bb*bb);a=[p1[i]+t*d[i] for i in range(3)];b=[p2[i]+s*e[i] for i in range(3)];print('xyz',[(a[i]+b[i])/2 for i in range(3)],'error',sum((a[i]-b[i])**2 for i in range(3))**0.5)\ntri((132,146),(114,79));tri((198,189),(27,10));tri((180,126),(32,141))",
+        "description": "estimate object coordinates with optical ray intersection"
+      }
+    },
+    {
+      "sequence": 9,
+      "name": "exec",
+      "arguments": {
+        "python": "from kinex import device, call\nprint(device('gripper','write',{'actions':[-1.0],'duration_s':0.5}))\nprint(call('servo',device='arm',pose=[-0.073,-0.030,1.145,1,0,0,0],frame='world',speedFraction=0.35))\na=device('arm');print(a);print(device('arm','fk',{'joints':a['positions']}));print(device('gripper'))\nr=device('camera_wrist','read',{'output':'file'});finish(file=r['file'])",
+        "description": "open gripper and approach bowl rim"
+      }
+    },
+    {
+      "sequence": 10,
+      "name": "devices",
+      "arguments": {
+        "calls": [
+          {
+            "deviceID": "arm"
+          },
+          {
+            "deviceID": "camera_wrist"
+          },
+          {
+            "deviceID": "camera"
+          }
+        ]
+      }
+    },
+    {
+      "sequence": 11,
+      "name": "exec",
+      "arguments": {
+        "python": "from kinex import device, call, finish\nprint(call('servo',device='arm',pose=[-0.073,-0.030,1.044,1,0,0,0],frame='world',speedFraction=0.2))\nprint(device('world','wait',{'duration_s':0.25}))\na=device('arm');print(a);print(device('arm','fk',{'joints':a['positions']}))\nr=device('camera_wrist','read',{'output':'file'});finish({},file=r['file'])",
+        "description": "lower open fingers toward near rim"
+      }
+    },
+    {
+      "sequence": 12,
+      "name": "exec",
+      "arguments": {
+        "python": "from kinex import device, finish\nprint(device('gripper','write',{'actions':[1.0],'duration_s':0.7}));print(device('world','wait',{'duration_s':0.8}));print(device('gripper')); print(device('arm'))\nr=device('camera','read',{'output':'file'});finish({},file=r['file'])",
+        "description": "close fingers on bowl rim and inspect"
+      }
+    },
+    {
+      "sequence": 13,
+      "name": "exec",
+      "arguments": {
+        "python": "from kinex import device, call, finish\nprint(call('servo',device='arm',pose=[-0.073,-0.030,1.125,1,0,0,0],frame='world',speedFraction=0.2));device('world','wait',{'duration_s':0.3});print(device('arm')); print(device('gripper'))\nr=device('camera','read',{'output':'file'});s=device('camera_wrist','read',{'output':'file'});finish({},file=[r['file'],s['file']])",
+        "description": "test grasp with a short vertical lift"
+      }
+    },
+    {
+      "sequence": 14,
+      "name": "exec",
+      "arguments": {
+        "python": "from kinex import call, device, finish\nprint(call('servo',device='arm',pose=[-0.073,-0.030,1.19,1,0,0,0],frame='world',speedFraction=0.25));device('world','wait',{'duration_s':0.2});print(device('arm'))\nprint(call('servo',device='arm',pose=[0.077,0.157,1.19,1,0,0,0],frame='world',speedFraction=0.25));device('world','wait',{'duration_s':0.3});a=device('arm');print(a);print(device('arm','fk',{'joints':a['positions']}));print(device('gripper'))\nr=device('camera','read',{'output':'file'});s=device('camera_wrist','read',{'output':'file'});finish({},file=[r['file'],s['file']])",
+        "description": "carry grasped bowl above plate"
+      }
+    },
+    {
+      "sequence": 15,
+      "name": "exec",
+      "arguments": {
+        "python": "from kinex import call, device, finish\nprint(call('servo',device='arm',pose=[0.077,0.157,1.070,1,0,0,0],frame='world',speedFraction=0.18));device('world','wait',{'duration_s':0.3});a=device('arm');print(a);print(device('arm','fk',{'joints':a['positions']}));print(device('gripper'))\nr=device('camera','read',{'output':'file'});s=device('camera_wrist','read',{'output':'file'});finish({},file=[r['file'],s['file']])",
+        "description": "lower bowl just above plate and inspect alignment"
+      }
+    },
+    {
+      "sequence": 16,
+      "name": "devices",
+      "arguments": {
+        "calls": [
+          {
+            "deviceID": "camera"
+          },
+          {
+            "deviceID": "camera_wrist"
+          },
+          {
+            "deviceID": "arm"
+          },
+          {
+            "deviceID": "gripper"
+          },
+          {
+            "deviceID": "world"
+          }
+        ]
+      }
+    },
+    {
+      "sequence": 17,
+      "name": "device_stop",
+      "arguments": {
+        "reason": "Simulator entered terminal state while lowering the bowl onto the plate; clear remaining motion."
+      }
+    }
+  ]
+}

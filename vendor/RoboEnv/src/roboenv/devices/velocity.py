@@ -1,0 +1,84 @@
+"""Velocity/posture commands, independent of simulators and agent harnesses."""
+
+import math
+
+
+def command(control, args):
+    if control.get("mode") != "motion":
+        raise ValueError("Expected motion control")
+    if not isinstance(args, dict) or set(args) - {"mode", "velocity", "posture"}:
+        raise ValueError("Expected mode with velocity and/or posture")
+    name = args.get("mode")
+    if not isinstance(name, str) or name not in control["modes"]:
+        raise ValueError("Unsupported velocity controller mode")
+    mode = control["modes"][name]
+    result = {"mode": name}
+    for channel in ("velocity", "posture"):
+        capability = mode[channel]
+        if capability is None:
+            if channel in args:
+                raise ValueError(f"{channel} is unsupported in this mode")
+            continue
+        target = args.get(channel)
+        axes = {c["axis"] for c in capability["components"]}
+        if not isinstance(target, dict) or set(target) != axes:
+            example = {c["axis"]: 0 for c in capability["components"]}
+            raise ValueError(
+                f"{channel} requires named axes, for example {example}; arrays are unsupported"
+            )
+        result[channel] = {}
+        for component in capability["components"]:
+            axis, bounds = component["axis"], component["bounds"]
+            value = target[axis]
+            if (
+                isinstance(value, bool)
+                or not isinstance(value, (int, float))
+                or not math.isfinite(value)
+                or (
+                    control.get("limit_handling") != "native"
+                    and bounds is not None
+                    and not bounds["min"] <= value <= bounds["max"]
+                )
+            ):
+                raise ValueError(f"{channel}.{axis} exceeds bounds")
+            result[channel][axis] = value
+    return result
+
+
+def command_schema(control):
+    variants = []
+    for name, mode in control["modes"].items():
+        properties = {"mode": {"const": name}}
+        required = ["mode"]
+        for channel in ("velocity", "posture"):
+            capability = mode[channel]
+            if capability is None:
+                continue
+            components = capability["components"]
+            axes = {
+                c["axis"]: {
+                    "type": "number",
+                    **(
+                        {"minimum": c["bounds"]["min"], "maximum": c["bounds"]["max"]}
+                        if c["bounds"] is not None and control.get("limit_handling") != "native"
+                        else {}
+                    ),
+                }
+                for c in components
+            }
+            properties[channel] = {
+                "type": "object",
+                "properties": axes,
+                "required": [c["axis"] for c in components],
+                "additionalProperties": False,
+            }
+            required.append(channel)
+        variants.append(
+            {
+                "type": "object",
+                "properties": properties,
+                "required": required,
+                "additionalProperties": False,
+            }
+        )
+    return {"oneOf": variants}

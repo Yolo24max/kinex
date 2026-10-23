@@ -1,0 +1,140 @@
+"""The migrated catalog camera adapts RoboEnv transport to the Kinex contract."""
+
+import importlib.util
+import json
+import re
+import struct
+import zlib
+from pathlib import Path
+
+import pytest
+import yaml
+
+ROOT = Path(__file__).resolve().parents[1]
+CAMERA = ROOT / "catalog/robots/robocasa/robocasa-panda-omron/devices/camera_left"
+
+
+@pytest.fixture
+def camera(tmp_path, monkeypatch):
+    monkeypatch.syspath_prepend(str(CAMERA))
+    spec = importlib.util.spec_from_file_location("catalog_camera", CAMERA / "driver.py")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    module.__file__ = str(tmp_path / "driver.py")
+    module.transport.directory = tmp_path
+    profile = yaml.safe_load((CAMERA / "profile.yaml").read_text())
+    for stream in ("color", "depth"):
+        profile["intrinsics"][stream].update(width=2, height=1)
+    profile["access"]["connection"].update(url="http://test-camera:8123", camera="remote-camera")
+    (tmp_path / "profile.yaml").write_text(yaml.safe_dump(profile))
+    (tmp_path / "connection.json").write_text(
+        json.dumps(
+            {
+                "endpoint": "http://test-camera:8123",
+                "session": "test",
+                "generation": 1,
+            }
+        )
+    )
+
+    def chunk(kind, data):
+        return (
+            struct.pack(">I", len(data)) + kind + data + struct.pack(">I", zlib.crc32(kind + data))
+        )
+
+    png = b"\x89PNG\r\n\x1a\n" + chunk(b"IHDR", struct.pack(">IIBBBBB", 2, 1, 8, 2, 0, 0, 0))
+    png += chunk(b"IDAT", zlib.compress(b"\0\xff\0\0\0\xff\0")) + chunk(b"IEND", b"")
+    pgm = b"P5\n2 1\n65535\n" + struct.pack(">HH", 1000, 0)
+    calls = []
+
+    def exchange(endpoint, method, path="/", body=None, destination=None):
+        calls.append((endpoint, method, path))
+        if destination:
+            destination.write_bytes(pgm if destination.suffix == ".pgm" else png)
+            return None
+        request = json.loads(body)
+        assert request["args"]["device"] == "remote-camera"
+        assert re.fullmatch("driver-[0-9a-f]{16}", request["request_id"])
+        response = {
+            key: request[key] for key in ("protocol", "session", "generation", "request_id")
+        }
+        data = {
+            "file": "/server/color.png",
+            "depth_file": "/server/depth.pgm",
+            "timestamp": 1.25,
+        }
+        return (json.dumps({**response, "ok": True, "result": {"data": data}}) + "\n").encode()
+
+    monkeypatch.setattr(module.transport, "exchange", exchange)
+    return module, calls
+
+
+def test_catalog_camera_uses_profile_target_and_returns_calibrated_files(camera):
+    module, calls = camera
+    reading = module.handle("read", {})
+    assert reading["ok"], reading
+    assert set(reading) == {"ok", "file", "depth_file", "timestamp"}
+    assert reading["timestamp"] == 1.25
+    assert {key for key in reading if "time" in key} == {"timestamp"}
+    assert "depth_scale" not in reading
+    assert Path(reading["file"]).is_file()
+    assert Path(reading["file"]).parent != module.transport.directory
+    assert all(endpoint == "http://test-camera:8123" for endpoint, _, _ in calls)
+    assert len(calls) == 3
+
+
+@pytest.mark.parametrize("change", [
+    "depth_dimensions", "dimensions", "registration",
+])
+def test_catalog_camera_rejects_profile_mismatch(camera, change):
+    module, _ = camera
+    profile = module.settings()
+    if change == "depth_dimensions":
+        profile["intrinsics"]["depth"]["width"] = 4
+    elif change == "dimensions":
+        profile["intrinsics"]["color"]["width"] = 4
+    elif change == "registration":
+        profile["intrinsics"]["depth"]["registration"] = "native"
+    Path(module.__file__).with_name("profile.yaml").write_text(yaml.safe_dump(profile))
+    assert module.handle("read", {})["ok"] is False
+
+
+@pytest.mark.parametrize("change", ["focal", "mount", "depth_scale"])
+def test_catalog_camera_does_not_compare_calibration(camera, change):
+    module, _ = camera
+    profile = module.settings()
+    if change == "focal":
+        profile["intrinsics"]["color"]["projection"]["fx"] *= 1.2
+    elif change == "mount":
+        profile["extrinsics"]["mount"]["translation_m"][0] += 0.1
+    else:
+        profile["intrinsics"]["depth"]["scale_m_per_unit"] *= 2
+    Path(module.__file__).with_name("profile.yaml").write_text(yaml.safe_dump(profile))
+    assert module.handle("read", {})["ok"]
+
+
+def test_catalog_camera_rejects_actuator_commands_before_transport(camera):
+    module, calls = camera
+    for action in ("write", "stop", "ik", "fk"):
+        assert module.handle(action, {})["ok"] is False
+    assert not module.handle("read", {"extra": True})["ok"]
+    assert calls == []
+
+
+def test_catalog_camera_rejects_mismatched_response(camera, monkeypatch):
+    module, _ = camera
+    monkeypatch.setattr(module.transport, "exchange", lambda *args, **kwargs: b'{"ok":true}\n')
+    reading = module.handle("read", {})
+    assert reading["ok"] is False and reading["code"] == "outcome_unknown"
+
+
+@pytest.mark.parametrize("timestamp", [True, float("nan"), None])
+def test_catalog_camera_rejects_invalid_acquisition_time(camera, monkeypatch, timestamp):
+    module, _ = camera
+    remote = module.remote
+
+    def read(action, args):
+        return {**remote(action, args), "timestamp": timestamp}
+
+    monkeypatch.setattr(module, "remote", read)
+    assert not module.handle("read", {})["ok"]

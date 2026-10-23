@@ -1,0 +1,29 @@
+[submodule "behavior"]
+	path = third_party/BEHAVIOR-1K
+	url = https://github.com/StanfordVL/BEHAVIOR-1K.git
+[submodule "robodojo"]
+	path = third_party/RoboDojo
+	url = https://github.com/RoboDojo-Benchmark/RoboDojo.git
+[submodule "robocasa"]
+	path = third_party/robocasa
+	url = https://github.com/robocasa/robocasa.git
+	branch = main
+[submodule "robosuite"]
+	path = third_party/robosuite
+	url = https://github.com/ARISE-Initiative/robosuite
+[submodule "robotwin"]
+	path = third_party/RoboTwin
+	url = https://github.com/RoboTwin-Platform/RoboTwin.git
+[submodule "isaaclab"]
+	path = third_party/IsaacLab
+	url = https://github.com/isaac-sim/IsaacLab.git
+[submodule "libero"]
+	path = third_party/LIBERO
+	url = https://github.com/Lifelong-Robot-Learning/LIBERO.git
+
+[submodule "third_party/SIMPLE"]
+	path = third_party/SIMPLE
+	url = https://github.com/physical-superintelligence-lab/SIMPLE.git
+[submodule "abc"]
+	path = third_party/abc
+	url = https://github.com/amazon-far/abc.git

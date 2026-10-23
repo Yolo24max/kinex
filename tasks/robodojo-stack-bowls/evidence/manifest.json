@@ -1,0 +1,43 @@
+{
+  "accepted_samples": 5319,
+  "captured_samples": 5319,
+  "clock": "simulation",
+  "dropped_samples": 0,
+  "encoded_frames": 5319,
+  "end_time_s": 531.8000000000962,
+  "error": null,
+  "experimental": true,
+  "fps": 10,
+  "overflow_policy": "drop",
+  "received_samples": 5319,
+  "represented_samples": 5319,
+  "schema": "roboenv/recording/1",
+  "state": "closed",
+  "status": "complete",
+  "views": [
+    {
+      "fov_y": 45.0,
+      "height": 720,
+      "name": "third_person",
+      "pose": null,
+      "source": "third_person",
+      "width": 960
+    },
+    {
+      "fov_y": 45.0,
+      "height": 720,
+      "name": "left_wrist",
+      "pose": null,
+      "source": "left_wrist",
+      "width": 960
+    },
+    {
+      "fov_y": 45.0,
+      "height": 720,
+      "name": "right_wrist",
+      "pose": null,
+      "source": "right_wrist",
+      "width": 960
+    }
+  ]
+}

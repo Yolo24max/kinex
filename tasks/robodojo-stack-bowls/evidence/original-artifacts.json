@@ -1,0 +1,126 @@
+{
+  "local_archive_key": "robodojo-stack-bowls-recovery10",
+  "files": [
+    {
+      "path": "evidence-manifest.json",
+      "bytes": 3283,
+      "sha256": "e7eb9588ff7e1647a30c4d685173d0a1d4c2769822b470a98033d486b3f74580"
+    },
+    {
+      "path": "runtime-libs-provenance.json",
+      "bytes": 1514,
+      "sha256": "6ba926f4b32cf04edf05aa30cb730b3fc6ca614738708d7b54192e31d5d70d7a"
+    },
+    {
+      "path": "verification.json",
+      "bytes": 2120,
+      "sha256": "7d34b083e10a6efed7b7af2838187790fa42ac0185f54f164cafb4a3371eb560"
+    },
+    {
+      "path": "logs/robodojo-stack-bowls-recovery10-20261022T030720Z-kinex.jsonl",
+      "bytes": 176225667,
+      "sha256": "40b554e19f97764390232f17cd1f5d3c7852fa2c469aab0a7dbc60176caa2105"
+    },
+    {
+      "path": "logs/robodojo-stack-bowls-recovery10-20261022T030720Z-kinex.outcome.json",
+      "bytes": 214,
+      "sha256": "4f8cec0f327f94fd65cd8473f29e5a35ac6141b8efc0347c7fba015aa8948261"
+    },
+    {
+      "path": "logs/robodojo-stack-bowls-recovery10-20261022T030720Z-launch.json",
+      "bytes": 739,
+      "sha256": "2fd992e7dc3ec94901135c68f930a438230677ee83627cb5aac30638a9882fca"
+    },
+    {
+      "path": "logs/robodojo-stack-bowls-recovery10-20261022T030720Z-run.log",
+      "bytes": 44799,
+      "sha256": "6822469113c1505526045762695f4a0a46be71f84769e705821f321dab1455f4"
+    },
+    {
+      "path": "logs/robodojo-stack-bowls-recovery10-20261022T030720Z-stopped.json",
+      "bytes": 420,
+      "sha256": "bf8a2a26bee19388ae8d5d223137315909b26ed3027faf36070f0484e21973e0"
+    },
+    {
+      "path": "native/native-diagnostics.json",
+      "bytes": 49576,
+      "sha256": "85a8de68dff1947d3a2dab42722f2938baa72755f605d7d2e8545b286cf93150"
+    },
+    {
+      "path": "native/native-episode.json",
+      "bytes": 652474,
+      "sha256": "7012b92f5e50a1755dfd68d4532aac314779c223a44adddf15fa8fa91415dc5b"
+    },
+    {
+      "path": "native/stopped.json",
+      "bytes": 410,
+      "sha256": "057c73a24a4fd48d88fa13254f7087c6d55c9ed454ef617bc4f98d5df9b16cce"
+    },
+    {
+      "path": "native/terminal.json",
+      "bytes": 1367,
+      "sha256": "fa0b7591cce4a1dfc5d6fae16a42e77f7917bc993bc9552f7a4b3ef99804483b"
+    },
+    {
+      "path": "recordings/encoder.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "recordings/final-frame.jpg",
+      "bytes": 85288,
+      "sha256": "3d97d922b3633393c6dcbbd2f011a7a546d24edd4aebb9f596b5ff9ea7da400e"
+    },
+    {
+      "path": "recordings/frames.jsonl",
+      "bytes": 414776,
+      "sha256": "24fcc4a25619ae81fdbd1467af96d73917f16a483f6c2ef759fb1fa3822cfcf7"
+    },
+    {
+      "path": "recordings/left_wrist.mp4",
+      "bytes": 30163096,
+      "sha256": "61ef0d00ac4209648c77f13c6f27dd3aa99f4644a31db664aa33fa9fc911dc60"
+    },
+    {
+      "path": "recordings/manifest.json",
+      "bytes": 870,
+      "sha256": "1169d51849dacc5fa5ab52260fa5b64b197c665e64d0c0b5d82234d740a50687"
+    },
+    {
+      "path": "recordings/right_wrist.mp4",
+      "bytes": 27411633,
+      "sha256": "4cf4f9c98da0a22654a6c0ef3c3f7f662ccd5fe1aadd9c42f6d05306e1afab44"
+    },
+    {
+      "path": "recordings/third_person.mp4",
+      "bytes": 19151516,
+      "sha256": "4387d787ad28b20e8527ea72bd025227789437f1563900f7df18970c20e735f7"
+    },
+    {
+      "path": "scripts/run_robodojo_recovery10_direct.sh",
+      "bytes": 2815,
+      "sha256": "f2794178c113500ad3f0cc706860b5cc8c8b641685e1dd91cd81bed691e39208"
+    },
+    {
+      "path": "scripts/run_robodojo_stack_bowls_recovery10-20261022T030720Z.sh",
+      "bytes": 4248,
+      "sha256": "7b1649c3ffcadc4af52b80b894053a14aa9b8b8d583fa07f6cab9daa8d8c146d"
+    },
+    {
+      "path": "native/journal/actions.jsonl",
+      "bytes": 3833116,
+      "sha256": "31eb0b248a68f07862d4375ee20ed9a94548412a4913c4f104cccb298b1557e7"
+    },
+    {
+      "path": "native/logs/worker.log",
+      "bytes": 459092,
+      "sha256": "be7052f1b0fb7ea462c28e9e4200c4ac1a91f9fbdfdf20c687e1c5da00216e68"
+    },
+    {
+      "path": "native/state/supervisor.json",
+      "bytes": 668,
+      "sha256": "bd6bb5fcf239ada9202d5a33dea5067a26ae031f4986776732cfee544426da44"
+    }
+  ],
+  "availability": "Full original evidence is retained in the owner local backup; hashes are not download links."
+}

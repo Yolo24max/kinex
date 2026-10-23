@@ -1,0 +1,11 @@
+--- a/src/roboenv/provisioning/robodojo_assets.py
++++ b/src/roboenv/provisioning/robodojo_assets.py
+@@ -85,7 +85,7 @@
+     url = f"https://huggingface.co/datasets/{REPOSITORY}/resolve/{REVISION}/{quote(entry['rfilename'])}"
+     pacer = pacer or ResolverPacer()
+     failures = 0
+-    deadline = time.monotonic() + 1800
++    deadline = time.monotonic() + 21600
+     while time.monotonic() < deadline:
+         pacer.wait()
+         try:

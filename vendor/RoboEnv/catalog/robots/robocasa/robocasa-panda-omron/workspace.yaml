@@ -1,0 +1,26 @@
+identity:
+  source: user
+  id: robocasa-panda-omron
+  name: robocasa-panda-omron
+  platform: sim
+  kind: mobile
+  model: Franka Panda on an Omron mobile base
+sim:
+  source: user
+  simulator: robocasa
+devices:
+  source: user
+safety:
+  source: user
+  max_cartesian_velocity: null
+  max_joint_velocity: null
+  keep_out_zones: []
+  notes: Native Omron actuators clamp translation control to +/-1 m/s and yaw to +/-1.5
+    rad/s after rotation and scaling of normalized body commands; actuator force is
+    limited to +/-600 N (translation) and N m (yaw). These are actuator controls,
+    not measured-speed or independent body-frame command limits. Gripper direction
+    commands must be in [-1, 1] and use their sign. Arm/torso target ranges are governed
+    by native dynamics. Stop affects only its device; the world owns simulation time.
+meta:
+  created_at: '2026-08-31T03:30:00Z'
+  updated_at: '2026-08-31T03:30:00Z'

@@ -1,0 +1,445 @@
+{
+  "source_log_sha256": "f23a8d06a456e11d27d998afc7af434660bf2d45dd1f5653d11ad1fbed3f92d1",
+  "method": "Only assistant toolCall arguments from message_end events; no hidden thinking, stream deltas, or image payloads.",
+  "calls": [
+    {
+      "sequence": 1,
+      "name": "exec",
+      "arguments": {
+        "description": "inspect available profiles",
+        "python": "from kinex import profile\nprint(profile())"
+      }
+    },
+    {
+      "sequence": 2,
+      "name": "exec",
+      "arguments": {
+        "description": "inspect device readiness and profiles",
+        "python": "from kinex import profile, devices\nnames=['world','left_arm','right_arm','left_gripper','right_gripper','head_camera','left_camera','right_camera']\nfor n in names:\n print(n,profile(n))\nprint(devices([{'deviceID':n,'action':'status'} for n in names]))"
+      }
+    },
+    {
+      "sequence": 3,
+      "name": "devices",
+      "arguments": {
+        "calls": [
+          {
+            "deviceID": "world"
+          },
+          {
+            "deviceID": "left_arm"
+          },
+          {
+            "deviceID": "right_arm"
+          },
+          {
+            "deviceID": "left_gripper"
+          },
+          {
+            "deviceID": "right_gripper"
+          },
+          {
+            "deviceID": "head_camera"
+          },
+          {
+            "deviceID": "left_camera"
+          },
+          {
+            "deviceID": "right_camera"
+          }
+        ]
+      }
+    },
+    {
+      "sequence": 4,
+      "name": "exec",
+      "arguments": {
+        "description": "inspect world and arm geometry",
+        "python": "from kinex import profile, call\nfor n in ['world','left_arm']:\n p=profile(n)\n print(n,{k:v for k,v in p.items() if k not in ['resolved_model','access','meta']})\nfor n in ['left_gripper:tcp','right_gripper:tcp']:\n print(n,call('relative_pose',child={'frame':n},parent={'frame':'world'}))"
+      }
+    },
+    {
+      "sequence": 5,
+      "name": "exec",
+      "arguments": {
+        "description": "measure visible block and pad surfaces",
+        "python": "from kinex import device, profile, call\nimport numpy as np\nfrom scipy.spatial.transform import Rotation\nfor cam in ['head_camera','left_camera','right_camera']:\n d=device(cam); c=np.asarray(d['color']); raw=np.asarray(d['depth']); p=profile(cam)['intrinsics']; print(cam,c.shape,raw.shape)\n # color-registered optical Z in profile units\n z=raw*p['depth']['scale_m_per_unit']; v,u=np.indices(z.shape); k=p['color']['projection']; pts=np.stack(((u-k['cx'])*z/k['fx'],(v-k['cy'])*z/k['fy'],z),-1)\n tf=call('relative_pose',child={'frame':cam},parent={'frame':'world'})['pose']; pts=Rotation.from_quat(tf[3:]).apply(pts.reshape(-1,3)).reshape(pts.shape)+tf[:3]\n for label,m in [('red',(c[:,:,0]>150)&(c[:,:,1]<90)&(c[:,:,2]<90)),('blue',(c[:,:,2]>140)&(c[:,:,0]<90)&(c[:,:,1]<100)),('table',(c.min(axis=2)>190))]:\n  m=m&(raw>0)\n  a=pts[m]\n  if len(a): print(label,len(a),'bounds',np.min(a,0),np.max(a,0),'median',np.median(a,0),'percentiles',np.percentile(a,[5,95],axis=0))"
+      }
+    },
+    {
+      "sequence": 6,
+      "name": "exec",
+      "arguments": {
+        "description": "inspect encoded depth format",
+        "python": "from kinex import device\nx=device('head_camera',args={'output':'base64'})\nfor k,v in x.items(): print(k,type(v).__name__,str(v)[:150])"
+      }
+    },
+    {
+      "sequence": 7,
+      "name": "exec",
+      "arguments": {
+        "description": "decode rgbd observations with standard library",
+        "python": "from kinex import device, profile, call\nimport base64,zlib,struct,statistics\nsource='''import base64,zlib,struct,statistics\nfrom kinex import device,profile,call\n\ndef rgbdecode(s):\n b=base64.b64decode(s); off=8; data=b''\n while off<len(b):\n  n=struct.unpack('>I',b[off:off+4])[0]; typ=b[off+4:off+8]; chunk=b[off+8:off+8+n]; off+=12+n\n  if typ==b'IHDR': w,h,bd,ct,*_=struct.unpack('>IIBBBBB',chunk)\n  if typ==b'IDAT': data+=chunk\n assert bd==8 and ct==2\n raw=zlib.decompress(data); stride=w*3; rows=[]; prev=bytearray(stride)\n for y in range(h):\n  f=raw[y*(stride+1)]; row=bytearray(raw[y*(stride+1)+1:(y+1)*(stride+1)])\n  for i in range(stride):\n   a=row[i-3] if i>=3 else 0; b=prev[i]; c=prev[i-3] if i>=3 else 0\n   if f==1: v=a\n   elif f==2: v=b\n   elif f==3: v=(a+b)//2\n   elif f==4:\n    p=a+b-c; ds=[abs(p-a),abs(p-b),abs(p-c)]; v=[a,b,c][ds.index(min(ds))]\n   else: v=0\n   row[i]=(row[i]+v)&255\n  rows.append(row); prev=row\n return w,h,rows\n\ndef rot(q,v):\n x,y,z,w=q; a,b,c=v\n t=[2*(y*c-z*b),2*(z*a-x*c),2*(x*b-y*a)]\n return [a+w*t[0]+y*t[2]-z*t[1],b+w*t[1]+z*t[0]-x*t[2],c+w*t[2]+x*t[1]-y*t[0]]\n\ndef measure(cam):\n d=device(cam,args={'output':'base64'}); w,h,rows=rgbdecode(d['color']); db=base64.b64decode(d['depth']).split(b'\\\\n',3)[3]; dep=struct.unpack('>'+str(w*h)+'H',db)\n p=profile(cam)['intrinsics']; k=p['color']['projection']; tf=call('relative_pose',child={'frame':cam},parent={'frame':'world'})['pose']; sets={'red':[],'blue':[],'table':[]}\n for v,row in enumerate(rows):\n  for u in range(w):\n   r,g,b=row[u*3:u*3+3]; raw=dep[v*w+u]; label='red' if r>150 and g<90 and b<90 else 'blue' if b>140 and r<90 and g<100 else 'table' if min(r,g,b)>190 else None\n   if label and raw:\n    z=raw*p['depth']['scale_m_per_unit']; xyz=rot(tf[3:],[(u-k['cx'])*z/k['fx'],(v-k['cy'])*z/k['fy'],z]); xyz=[a+b for a,b in zip(xyz,tf[:3])]; sets[label].append(xyz)\n return sets\n\ndef report(sets):\n for key,a in sets.items():\n  if a:\n   cols=list(zip(*a)); print(key,len(a),'bounds',[min(x) for x in cols],[max(x) for x in cols],'median',[statistics.median(x) for x in cols])\n'''\nopen('/tmp/kinex_handover_vision.py','w').write(source)\nexec(source)\nfor cam in ['head_camera','left_camera','right_camera']:\n print(cam); report(measure(cam))"
+      }
+    },
+    {
+      "sequence": 8,
+      "name": "exec",
+      "arguments": {
+        "description": "plan left side grasp",
+        "python": "from kinex import device, call\nq=[0,0,2**-0.5,2**-0.5]\nfor name,tcp in [('pregrasp',[-0.174,0.065,0.805]),('grasp',[-0.174,0.195,0.805]),('lift',[-0.174,0.195,0.915])]:\n flange=[tcp[0],tcp[1]-.12,tcp[2]]+q\n p=call('relative_pose',child={'frame':'world','pose':flange},parent={'frame':'left_arm'})['pose']\n print(name,device('left_arm','ik',{'pose':p}))"
+      }
+    },
+    {
+      "sequence": 9,
+      "name": "exec",
+      "arguments": {
+        "description": "choose elbow-up collision-clear grasp configurations",
+        "python": "from kinex import device,call\nq=[0,0,2**-0.5,2**-0.5]\nseed=[-.38,1.5,1.4,0,-.34,0]\nfor name,tcp in [('pregrasp',[-.174,.065,.805]),('grasp',[-.174,.195,.805]),('lift',[-.174,.195,.915])]:\n p=call('relative_pose',child={'frame':'world','pose':[tcp[0],tcp[1]-.12,tcp[2]]+q},parent={'frame':'left_arm'})['pose']\n r=device('left_arm','ik',{'pose':p,'seed':seed}); print(name,r); seed=r['joints']"
+      }
+    },
+    {
+      "sequence": 10,
+      "name": "exec",
+      "arguments": {
+        "description": "move left gripper to pregrasp",
+        "python": "from kinex import call,device\nprint(call('servo',device='left_arm',joints=[-.3813530798741461,2.4478325522071054,.8760841197071656,1.575515965128619,-.3331548945905014,.010839666338089807],speedFraction=.5))\nprint(device('left_arm'))\nx=device('head_camera',args={'output':'file'}); y=device('left_camera',args={'output':'file'})\nfinish({},file=[x['file'],y['file']])"
+      }
+    },
+    {
+      "sequence": 11,
+      "name": "devices",
+      "arguments": {
+        "calls": [
+          {
+            "deviceID": "head_camera"
+          },
+          {
+            "deviceID": "left_camera"
+          },
+          {
+            "deviceID": "left_arm"
+          }
+        ]
+      }
+    },
+    {
+      "sequence": 12,
+      "name": "exec",
+      "arguments": {
+        "description": "approach and close left grasp",
+        "python": "from kinex import device,call,finish\nq=[0,0,2**-.5,2**-.5]\nfor y in [.095,.125,.155,.180,.195]:\n state=device('left_arm'); assert not state['faults']\n p=call('relative_pose',child={'frame':'world','pose':[-.174,y-.12,.805]+q},parent={'frame':'left_arm'})['pose']\n sol=device('left_arm','ik',{'pose':p,'seed':state['positions']})['joints']\n call('servo',device='left_arm',joints=sol,speedFraction=.45)\n state=device('left_arm'); assert not state['faults'] and max(abs(a-b) for a,b in zip(sol,state['positions']))<.03\nprint('tcp',call('relative_pose',child={'frame':'left_gripper:tcp'},parent={'frame':'world'}))\nprint(device('left_gripper','write',{'actions':[0],'duration_s':1.0}))\ndevice('world','wait',{'duration_s':1.0})\nprint(device('left_gripper'))\nx=device('head_camera',args={'output':'file'}); finish({},file=x['file'])"
+      }
+    },
+    {
+      "sequence": 13,
+      "name": "exec",
+      "arguments": {
+        "description": "lift block and verify left grasp",
+        "python": "from kinex import device,call,finish\nq=[0,0,2**-.5,2**-.5]\nfor z in [.835,.875,.915]:\n s=device('left_arm'); assert not s['faults']\n p=call('relative_pose',child={'frame':'world','pose':[-.174,.075,z]+q},parent={'frame':'left_arm'})['pose']\n js=device('left_arm','ik',{'pose':p,'seed':s['positions']})['joints']; call('servo',device='left_arm',joints=js,speedFraction=.45)\n s=device('left_arm'); assert not s['faults'] and max(abs(a-b) for a,b in zip(js,s['positions']))<.03\nprint(device('left_gripper'))\nimport sys;sys.path.insert(0,'/tmp');from kinex_handover_vision import measure,report\nreport(measure('head_camera'))\nx=device('head_camera',args={'output':'file'}); y=device('right_camera',args={'output':'file'});finish({},file=[x['file'],y['file']])"
+      }
+    },
+    {
+      "sequence": 14,
+      "name": "exec",
+      "arguments": {
+        "description": "move held block into handover workspace",
+        "python": "from kinex import device,call,finish\nq=[0,0,2**-.5,2**-.5]\nfor x,y,z in [(-.14,.15,.915),(-.09,.10,.90),(-.045,.05,.88),(-.02,0,.875)]:\n s=device('left_arm'); assert not s['faults']\n p=call('relative_pose',child={'frame':'world','pose':[x,y-.12,z]+q},parent={'frame':'left_arm'})['pose']\n js=device('left_arm','ik',{'pose':p,'seed':s['positions']})['joints']; call('servo',device='left_arm',joints=js,speedFraction=.45)\n s=device('left_arm'); assert not s['faults'] and max(abs(a-b) for a,b in zip(js,s['positions']))<.03\nprint('left tcp',call('relative_pose',child={'frame':'left_gripper:tcp'},parent={'frame':'world'}))\nx=device('head_camera',args={'output':'file'}); finish({},file=x['file'])"
+      }
+    },
+    {
+      "sequence": 15,
+      "name": "device_stop",
+      "arguments": {
+        "reason": "World wait timed out during handover positioning; stop and inspect."
+      }
+    },
+    {
+      "sequence": 16,
+      "name": "devices",
+      "arguments": {
+        "calls": [
+          {
+            "deviceID": "world"
+          },
+          {
+            "deviceID": "left_arm"
+          },
+          {
+            "deviceID": "right_arm"
+          },
+          {
+            "deviceID": "left_gripper"
+          },
+          {
+            "deviceID": "head_camera"
+          }
+        ]
+      }
+    },
+    {
+      "sequence": 17,
+      "name": "exec",
+      "arguments": {
+        "description": "inspect held block after clock timeout",
+        "python": "from kinex import call,device\nprint(call('relative_pose',child={'frame':'left_gripper:tcp'},parent={'frame':'world'}))\nprint(device('world','wait',{'duration_s':.2}))\nimport sys;sys.path.insert(0,'/tmp');from kinex_handover_vision import measure,report\nreport(measure('head_camera'))"
+      }
+    },
+    {
+      "sequence": 18,
+      "name": "exec",
+      "arguments": {
+        "description": "plan right upper-section handover grasp",
+        "python": "from kinex import device,call\nseed=[.3,1.5,1.2,1,1,0]\nfor label,x in [('pre',.09),('grasp',-.048)]:\n p=call('relative_pose',child={'frame':'world','pose':[x+.12,.052,.975,0,0,1,0]},parent={'frame':'right_arm'})['pose']\n r=device('right_arm','ik',{'pose':p,'seed':seed}); print(label,r);seed=r['joints']"
+      }
+    },
+    {
+      "sequence": 19,
+      "name": "exec",
+      "arguments": {
+        "description": "position right gripper for handover",
+        "python": "from kinex import device,call,finish\nr=call('servo',device='right_arm',joints=[.11717215165995624,2.2241471831040407,1.483004140598411,.832775335990074,-1.4174278581452988,.09244529132009907],speedFraction=.5,block=False)\nremaining=r['duration_s']\nwhile remaining>0:\n dt=min(.5,remaining);device('world','wait',{'duration_s':dt});remaining-=dt\ns=device('right_arm');print(s);assert not s['faults']\nprint(call('relative_pose',child={'frame':'right_gripper:tcp'},parent={'frame':'world'}))\nx=device('head_camera',args={'output':'file'});finish({},file=x['file'])",
+        "timeout_s": 300
+      }
+    },
+    {
+      "sequence": 20,
+      "name": "device_stop",
+      "arguments": {
+        "reason": "Second simulator world wait timeout; stopping to inspect measured right-arm progress."
+      }
+    },
+    {
+      "sequence": 21,
+      "name": "devices",
+      "arguments": {
+        "calls": [
+          {
+            "deviceID": "right_arm"
+          },
+          {
+            "deviceID": "head_camera"
+          },
+          {
+            "deviceID": "world"
+          }
+        ]
+      }
+    },
+    {
+      "sequence": 22,
+      "name": "exec",
+      "arguments": {
+        "description": "approach block with right gripper",
+        "python": "from kinex import device,call,finish\nimport math\nfor x in [.06,.03,0,-.025,-.048]:\n s=device('right_arm'); assert not s['faults']\n p=call('relative_pose',child={'frame':'world','pose':[x+.12,.052,.975,0,0,1,0]},parent={'frame':'right_arm'})['pose']\n js=device('right_arm','ik',{'pose':p,'seed':s['positions']})['joints']\n r=call('servo',device='right_arm',joints=js,speedFraction=.4,block=False)\n for _ in range(math.ceil(r['duration_s']/.4)+1): device('world','wait',{'duration_s':.4})\n s=device('right_arm');assert not s['faults'] and max(abs(a-b) for a,b in zip(js,s['positions']))<.03\nprint('tcp',call('relative_pose',child={'frame':'right_gripper:tcp'},parent={'frame':'world'}))\nx=device('head_camera',args={'output':'file'});finish({},file=x['file'])",
+        "timeout_s": 300
+      }
+    },
+    {
+      "sequence": 23,
+      "name": "device_stop",
+      "arguments": {
+        "reason": "Clock wait timed out on short right-arm approach; inspect before further motion."
+      }
+    },
+    {
+      "sequence": 24,
+      "name": "exec",
+      "arguments": {
+        "description": "check actual right approach pose",
+        "python": "from kinex import device,call\nprint(device('right_arm'));print(call('relative_pose',child={'frame':'right_gripper:tcp'},parent={'frame':'world'}));print(device('world'))"
+      }
+    },
+    {
+      "sequence": 25,
+      "name": "exec",
+      "arguments": {
+        "description": "finish right approach using measured arrival feedback",
+        "python": "from kinex import device,call,finish\nfor x in [0,-.025,-.048]:\n s=device('right_arm'); assert not s['faults']\n p=call('relative_pose',child={'frame':'world','pose':[x+.12,.052,.975,0,0,1,0]},parent={'frame':'right_arm'})['pose']\n js=device('right_arm','ik',{'pose':p,'seed':s['positions']})['joints']\n call('servo',device='right_arm',joints=js,speedFraction=.4,block=False)\n stable=0;last=-1\n for i in range(400):\n  s=device('right_arm');assert not s['faults']\n  if s['timestamp']>last:\n   stable=stable+1 if max(abs(a-b) for a,b in zip(js,s['positions']))<.01 and max(abs(v) for v in s['velocities'])<.01 else 0\n   last=s['timestamp']\n  if stable>=3: break\n else: raise RuntimeError('right approach did not settle')\n print('arrived',x,s['timestamp'])\nprint(call('relative_pose',child={'frame':'right_gripper:tcp'},parent={'frame':'world'}))\nx=device('head_camera',args={'output':'file'});finish({},file=x['file'])",
+        "timeout_s": 300
+      }
+    },
+    {
+      "sequence": 26,
+      "name": "device_stop",
+      "arguments": {
+        "reason": "Right approach failed bounded settling check; inspect feedback and clearance."
+      }
+    },
+    {
+      "sequence": 27,
+      "name": "devices",
+      "arguments": {
+        "calls": [
+          {
+            "deviceID": "right_arm"
+          },
+          {
+            "deviceID": "left_arm"
+          },
+          {
+            "deviceID": "head_camera"
+          },
+          {
+            "deviceID": "right_camera"
+          },
+          {
+            "deviceID": "world"
+          }
+        ]
+      }
+    },
+    {
+      "sequence": 28,
+      "name": "exec",
+      "arguments": {
+        "description": "measure handover alignment",
+        "python": "from kinex import device,call\nfor n in ['left_gripper:tcp','right_gripper:tcp']:\n print(n,call('relative_pose',child={'frame':n},parent={'frame':'world'}))\ns=device('right_arm');p=call('relative_pose',child={'frame':'world','pose':[.095,.052,.975,0,0,1,0]},parent={'frame':'right_arm'})['pose']; js=device('right_arm','ik',{'pose':p,'seed':s['positions']})['joints']; print('target',js,'error',[a-b for a,b in zip(js,s['positions'])])"
+      }
+    },
+    {
+      "sequence": 29,
+      "name": "exec",
+      "arguments": {
+        "description": "inspect upper grasp clearance",
+        "python": "import sys;sys.path.insert(0,'/tmp')\nfrom kinex_handover_vision import measure,report\ns=measure('head_camera');s['red']=[p for p in s['red'] if -.12<p[0]<.03 and -.02<p[1]<.12];report(s)\nfrom kinex import device\nprint(device('right_gripper'))"
+      }
+    },
+    {
+      "sequence": 30,
+      "name": "exec",
+      "arguments": {
+        "description": "increase vertical clearance for right grasp",
+        "python": "from kinex import device,call,finish\ns=device('right_arm');p=call('relative_pose',child={'frame':'world','pose':[.095,.052,1.005,0,0,1,0]},parent={'frame':'right_arm'})['pose'];js=device('right_arm','ik',{'pose':p,'seed':s['positions']})['joints']\nprint(call('servo',device='right_arm',joints=js,speedFraction=.35))\nprint(device('right_arm'));print(call('relative_pose',child={'frame':'right_gripper:tcp'},parent={'frame':'world'}))\nx=device('head_camera',args={'output':'file'});finish({},file=x['file'])",
+        "timeout_s": 300
+      }
+    },
+    {
+      "sequence": 31,
+      "name": "exec",
+      "arguments": {
+        "description": "align and close right gripper on block",
+        "python": "from kinex import device,call,finish\ns=device('right_arm');p=call('relative_pose',child={'frame':'world','pose':[.070,.052,1.005,0,0,1,0]},parent={'frame':'right_arm'})['pose'];js=device('right_arm','ik',{'pose':p,'seed':s['positions']})['joints']\nprint(call('servo',device='right_arm',joints=js,speedFraction=.3))\nprint(device('world','wait',{'duration_s':1}))\nprint('tcp',call('relative_pose',child={'frame':'right_gripper:tcp'},parent={'frame':'world'}))\nprint(device('right_gripper','write',{'actions':[0],'duration_s':1}))\nprint(device('world','wait',{'duration_s':1}))\nprint(device('right_gripper'))\nx=device('head_camera',args={'output':'file'});finish({},file=x['file'])",
+        "timeout_s": 300
+      }
+    },
+    {
+      "sequence": 32,
+      "name": "exec",
+      "arguments": {
+        "description": "transfer support to right gripper",
+        "python": "from kinex import device,finish\nprint(device('left_gripper','write',{'actions':[1],'duration_s':1}))\nprint(device('world','wait',{'duration_s':1}))\nprint(device('left_gripper'));print(device('right_gripper'))\nx=device('head_camera',args={'output':'file'});finish({},file=x['file'])",
+        "timeout_s": 300
+      }
+    },
+    {
+      "sequence": 33,
+      "name": "exec",
+      "arguments": {
+        "description": "withdraw left arm and verify right-only hold",
+        "python": "from kinex import device,call,finish\nfor y in [.015,-.025,-.075]:\n s=device('left_arm');assert not s['faults']\n p=call('relative_pose',child={'frame':'world','pose':[-.049,y-.12,.879,0,0,2**-.5,2**-.5]},parent={'frame':'left_arm'})['pose'];js=device('left_arm','ik',{'pose':p,'seed':s['positions']})['joints']\n call('servo',device='left_arm',joints=js,speedFraction=.4)\nprint(device('world','wait',{'duration_s':1}))\nprint(device('left_arm'));print(device('right_gripper'))\nimport sys;sys.path.insert(0,'/tmp');from kinex_handover_vision import measure,report\ns=measure('head_camera');s['red']=[p for p in s['red'] if -.12<p[0]<.03 and -.02<p[1]<.12];report(s)\nx=device('head_camera',args={'output':'file'});finish({},file=x['file'])",
+        "timeout_s": 300
+      }
+    },
+    {
+      "sequence": 34,
+      "name": "device_stop",
+      "arguments": {
+        "reason": "Clock wait timeout during left retreat; stop and verify the transfer."
+      }
+    },
+    {
+      "sequence": 35,
+      "name": "devices",
+      "arguments": {
+        "calls": [
+          {
+            "deviceID": "head_camera"
+          },
+          {
+            "deviceID": "left_arm"
+          },
+          {
+            "deviceID": "right_arm"
+          },
+          {
+            "deviceID": "right_gripper"
+          }
+        ]
+      }
+    },
+    {
+      "sequence": 36,
+      "name": "exec",
+      "arguments": {
+        "description": "measure suspended block for placement",
+        "python": "from kinex import call\nfor n in ['left_gripper:tcp','right_gripper:tcp']: print(n,call('relative_pose',child={'frame':n},parent={'frame':'world'}))\nimport sys;sys.path.insert(0,'/tmp');from kinex_handover_vision import measure,report\ns=measure('head_camera');s['red']=[p for p in s['red'] if -.11<p[0]<.02 and -.02<p[1]<.12];report(s)\nfor lo,hi in [(.80,.83),(.83,.88),(.88,.94),(.94,1.02)]:\n a=[p for p in s['red'] if lo<p[2]<hi];print('height slice',lo,hi);report({'red':a})"
+      }
+    },
+    {
+      "sequence": 37,
+      "name": "exec",
+      "arguments": {
+        "description": "carry block over blue pad",
+        "python": "from kinex import device,call,finish\nimport math\nfor x,y in [(0,.08),(.055,.115),(.115,.151)]:\n s=device('right_arm');assert not s['faults']\n p=call('relative_pose',child={'frame':'world','pose':[x+.12,y,1.005,0,0,1,0]},parent={'frame':'right_arm'})['pose'];js=device('right_arm','ik',{'pose':p,'seed':s['positions']})['joints']\n r=call('servo',device='right_arm',joints=js,speedFraction=.4,block=False)\n device('world','wait',{'duration_s':math.ceil(r['duration_s'])+1})\n s=device('right_arm');print('state',x,y,s);assert not s['faults'] and max(abs(a-b) for a,b in zip(js,s['positions']))<.03\nprint(call('relative_pose',child={'frame':'right_gripper:tcp'},parent={'frame':'world'}))\nx=device('head_camera',args={'output':'file'});finish({},file=x['file'])",
+        "timeout_s": 300
+      }
+    },
+    {
+      "sequence": 38,
+      "name": "exec",
+      "arguments": {
+        "description": "lower block toward pad",
+        "python": "from kinex import device,call,finish\nimport math\nfor z in [.980,.956]:\n s=device('right_arm');assert not s['faults']\n p=call('relative_pose',child={'frame':'world','pose':[.235,.151,z,0,0,1,0]},parent={'frame':'right_arm'})['pose'];js=device('right_arm','ik',{'pose':p,'seed':s['positions']})['joints']\n r=call('servo',device='right_arm',joints=js,speedFraction=.3,block=False);device('world','wait',{'duration_s':math.ceil(r['duration_s'])+1})\n s=device('right_arm');assert not s['faults'] and max(abs(a-b) for a,b in zip(js,s['positions']))<.03\nprint(call('relative_pose',child={'frame':'right_gripper:tcp'},parent={'frame':'world'}))\nimport sys;sys.path.insert(0,'/tmp');from kinex_handover_vision import measure,report\ns=measure('head_camera');s['red']=[p for p in s['red'] if .04<p[0]<.20 and .08<p[1]<.23];report(s)\nx=device('head_camera',args={'output':'file'});finish({},file=x['file'])",
+        "timeout_s": 300
+      }
+    },
+    {
+      "sequence": 39,
+      "name": "exec",
+      "arguments": {
+        "description": "set block on pad and release right gripper",
+        "python": "from kinex import device,call,finish\nimport math\ns=device('right_arm');p=call('relative_pose',child={'frame':'world','pose':[.235,.151,.940,0,0,1,0]},parent={'frame':'right_arm'})['pose'];js=device('right_arm','ik',{'pose':p,'seed':s['positions']})['joints']\nr=call('servo',device='right_arm',joints=js,speedFraction=.25,block=False);device('world','wait',{'duration_s':math.ceil(r['duration_s'])+1})\ns=device('right_arm');assert not s['faults'] and max(abs(a-b) for a,b in zip(js,s['positions']))<.03\nprint('release tcp',call('relative_pose',child={'frame':'right_gripper:tcp'},parent={'frame':'world'}))\nprint(device('right_gripper','write',{'actions':[1],'duration_s':1}))\nprint(device('world','wait',{'duration_s':2}))\nprint(device('right_gripper'))\nx=device('head_camera',args={'output':'file'});finish({},file=x['file'])",
+        "timeout_s": 300
+      }
+    },
+    {
+      "sequence": 40,
+      "name": "device_stop",
+      "arguments": {
+        "reason": "Simulator reported episode finished after placement/release; stop actuators and inspect final observations."
+      }
+    },
+    {
+      "sequence": 41,
+      "name": "devices",
+      "arguments": {
+        "calls": [
+          {
+            "deviceID": "head_camera"
+          },
+          {
+            "deviceID": "right_camera"
+          },
+          {
+            "deviceID": "right_gripper"
+          },
+          {
+            "deviceID": "world"
+          },
+          {
+            "deviceID": "right_arm"
+          }
+        ]
+      }
+    },
+    {
+      "sequence": 42,
+      "name": "exec",
+      "arguments": {
+        "description": "verify final block placement from terminal rgbd observation",
+        "python": "import sys;sys.path.insert(0,'/tmp')\nfrom kinex_handover_vision import measure,report\nfrom kinex import device\ns=measure('head_camera');s['red']=[p for p in s['red'] if .04<p[0]<.20 and .08<p[1]<.23];report(s)\na=[p for p in s['red'] if p[2]<.77];report({'block_base_visible':a})\nprint('final_gripper',device('right_gripper'))"
+      }
+    }
+  ]
+}

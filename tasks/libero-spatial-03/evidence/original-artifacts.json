@@ -1,0 +1,36 @@
+{
+  "local_archive_key": "libero-spatial-03",
+  "files": [
+    {
+      "path": "final-observation.json",
+      "bytes": 69812,
+      "sha256": "8226ee155d134adb501b81e186ffd270b515c4bb4ee1ceab7b2a205af9561fae"
+    },
+    {
+      "path": "recording-manifest.json",
+      "bytes": 707,
+      "sha256": "19a0648ef278fb18633998ea008a77d96fde54163ebe5c9396803d5ddd8ea216"
+    },
+    {
+      "path": "stopped.json",
+      "bytes": 409,
+      "sha256": "5756310c9c622ff27997d08d55d320095b79cdcf7f3116d1a0fcdf40a3bd3a60"
+    },
+    {
+      "path": "terminal.json",
+      "bytes": 1134,
+      "sha256": "b860878f8262f627811e15583786686cf135b2fed5428ae4823873e943eb816b"
+    },
+    {
+      "path": "third_person.mp4",
+      "bytes": 2851989,
+      "sha256": "759693a45d6f7958af7b5a6fbb9dbbc305eec7f9c4320a1f00d7f49f608f2cd3"
+    },
+    {
+      "path": "wrist.mp4",
+      "bytes": 5073157,
+      "sha256": "e3c1cb1e03852c0be6efc80530d5617b61c2b197f2daaf61e8ae9f3ed3ef4765"
+    }
+  ],
+  "availability": "Full original evidence is retained in the owner local backup; hashes are not download links."
+}

@@ -1,0 +1,11 @@
+--- a/src/roboenv/provisioning/setup.py
++++ b/src/roboenv/provisioning/setup.py
+@@ -407,7 +407,7 @@
+                         stdout=log,
+                         stderr=subprocess.STDOUT,
+                         check=True,
+-                        timeout=1800,
++                        timeout=21600,
+                     )
+             except (subprocess.CalledProcessError, subprocess.TimeoutExpired) as error:
+                 raise RuntimeError(

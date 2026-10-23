@@ -1,0 +1,31 @@
+{
+  "components": [
+    {
+      "component": "kinex",
+      "archive_sha256": "ca7701d3e2d2bd7c3c3e55f688d882ff589b967a6e5f5dc09ca18621766bfe9d",
+      "files": 404,
+      "revision": "15207927c6669fe98f1213a3fd05148e0fe938d3",
+      "source": "https://github.com/stacx-lab/kinex"
+    },
+    {
+      "component": "RoboEnv",
+      "archive_sha256": "773155292f0ed841f9ceb65663cf437f00949fd25856abfc997240f85fc30e0a",
+      "files": 996,
+      "revision": "c071a25b6866d3843459ebfd4453dc300243cdc6",
+      "source": "https://github.com/stacx-lab/RoboEnv"
+    }
+  ],
+  "RoboEnv_patches": [
+    {
+      "path": "patches/roboenv/robodojo_assets.patch",
+      "original_sha256": "5220a2c9d72acf9f82b62566c68ce0c7c7e6ca4b683e2ee26ad6af619b5e4cbc",
+      "server_sha256": "d496ae0da57ebcb35314b9d5c8ab26784e98be0a0bd1a2c934432cdc9a41c961"
+    },
+    {
+      "path": "patches/roboenv/setup.patch",
+      "original_sha256": "9ce9d5e4472f9b566022bb0aa1bc7bbde0adaadb745fce0747d5cfd4ca04d43d",
+      "server_sha256": "1f23d19731d06fd4835e0249998e773088e858675503c640280c9b2bda64e784"
+    }
+  ],
+  "note": "Vendor trees are exact pinned upstream snapshots; server changes are separate patches."
+}

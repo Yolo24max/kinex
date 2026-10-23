@@ -1,0 +1,1 @@
+Stack the three bowls into one centered, nested stack with their openings facing up. Return both arms to their starting poses.

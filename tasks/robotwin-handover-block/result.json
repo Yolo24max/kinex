@@ -1,0 +1,29 @@
+{
+  "key": "robotwin-handover-block",
+  "title": "双臂交接木块并放到蓝色垫子",
+  "native_id": "robotwin/handover-block-aloha-agilex",
+  "robot": "robotwin/robotwin-aloha-agilex",
+  "port": 8124,
+  "frames": 6481,
+  "raw_score": 1.0,
+  "prompt": "Use the left arm to grasp the red block on the table, hand it over to the right arm, and set it down in the center of the blue pad. Release it with the right gripper open.",
+  "seed": 0,
+  "model": "gpt-6.1-sol",
+  "provider": "openai-codex",
+  "thinking": "high",
+  "success": true,
+  "reward": 1.0,
+  "control_budget_max": null,
+  "mode": "practice/realtime",
+  "strict_official_benchmark": false,
+  "tool_calls": 42,
+  "python_steps": 29,
+  "last_assistant": {
+    "provider": "openai-codex",
+    "model": "gpt-6.1-sol",
+    "stopReason": "stop",
+    "errorMessage": null
+  },
+  "source_log_sha256": "f23a8d06a456e11d27d998afc7af434660bf2d45dd1f5653d11ad1fbed3f92d1",
+  "terminal_sha256": "9d855ea59cc0ae77e82931c350e8f10e426fd0ed353a5bafe73f069a6606909f"
+}

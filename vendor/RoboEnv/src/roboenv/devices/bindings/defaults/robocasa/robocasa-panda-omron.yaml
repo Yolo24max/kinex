@@ -1,0 +1,50 @@
+schema_version: roboenv/bindings/1
+backend: robocasa
+embodiment: panda_omron
+devices:
+  arm:
+    binding: robocasa.joint/1
+    entity: arm
+    profile: devices/arm/profile.yaml
+    config:
+      part: right
+  base:
+    binding: robocasa.velocity/1
+    entity: base
+    profile: devices/base/profile.yaml
+    config:
+      part: base
+  camera_left:
+    binding: robocasa.camera/1
+    entity: camera
+    profile: devices/camera_left/profile.yaml
+    config:
+      camera: robot0_agentview_left
+  camera_right:
+    binding: robocasa.camera/1
+    entity: camera
+    profile: devices/camera_right/profile.yaml
+    config:
+      camera: robot0_agentview_right
+  camera_wrist:
+    binding: robocasa.camera/1
+    entity: camera
+    profile: devices/camera_wrist/profile.yaml
+    config:
+      camera: robot0_eye_in_hand
+  gripper:
+    binding: robocasa.gripper/1
+    entity: gripper
+    profile: devices/gripper/profile.yaml
+    config:
+      part: right_gripper
+  torso:
+    binding: robocasa.joint/1
+    entity: torso
+    profile: devices/torso/profile.yaml
+    config:
+      part: torso
+  world:
+    binding: robocasa.world/1
+    entity: world
+    profile: devices/world/profile.yaml

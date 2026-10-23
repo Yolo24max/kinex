@@ -1,0 +1,99 @@
+{
+  "verified_as_of": "2026-10-22",
+  "packaged_on": "2026-10-23",
+  "functional_successes": 3,
+  "strict_official_benchmark_completed": false,
+  "tasks": [
+    {
+      "key": "libero-spatial-03",
+      "title": "黑碗放到盘子中央",
+      "native_id": "libero/libero-spatial-03",
+      "robot": "libero/libero-panda-tabletop",
+      "port": 8123,
+      "frames": 9339,
+      "raw_score": 1.0,
+      "prompt": "Pick the akita black bowl from table center and place it in the center of the plate.",
+      "seed": 0,
+      "model": "gpt-6.1-sol",
+      "provider": "openai-codex",
+      "thinking": "high",
+      "success": true,
+      "reward": 1.0,
+      "control_budget_max": null,
+      "mode": "practice/realtime",
+      "strict_official_benchmark": false,
+      "tool_calls": 17,
+      "python_steps": 11,
+      "last_assistant": {
+        "provider": "openai-codex",
+        "model": "gpt-6.1-sol",
+        "stopReason": "stop",
+        "errorMessage": null
+      },
+      "source_log_sha256": "8fa580d73bcf1ae8744e1cf3caac528178238f844ad8f784f1823cdf2ff108bf",
+      "terminal_sha256": "b860878f8262f627811e15583786686cf135b2fed5428ae4823873e943eb816b"
+    },
+    {
+      "key": "robotwin-handover-block",
+      "title": "双臂交接木块并放到蓝色垫子",
+      "native_id": "robotwin/handover-block-aloha-agilex",
+      "robot": "robotwin/robotwin-aloha-agilex",
+      "port": 8124,
+      "frames": 6481,
+      "raw_score": 1.0,
+      "prompt": "Use the left arm to grasp the red block on the table, hand it over to the right arm, and set it down in the center of the blue pad. Release it with the right gripper open.",
+      "seed": 0,
+      "model": "gpt-6.1-sol",
+      "provider": "openai-codex",
+      "thinking": "high",
+      "success": true,
+      "reward": 1.0,
+      "control_budget_max": null,
+      "mode": "practice/realtime",
+      "strict_official_benchmark": false,
+      "tool_calls": 42,
+      "python_steps": 29,
+      "last_assistant": {
+        "provider": "openai-codex",
+        "model": "gpt-6.1-sol",
+        "stopReason": "stop",
+        "errorMessage": null
+      },
+      "source_log_sha256": "f23a8d06a456e11d27d998afc7af434660bf2d45dd1f5653d11ad1fbed3f92d1",
+      "terminal_sha256": "9d855ea59cc0ae77e82931c350e8f10e426fd0ed353a5bafe73f069a6606909f"
+    },
+    {
+      "key": "robodojo-stack-bowls",
+      "title": "三个碗套叠并让双臂返回起始位置",
+      "native_id": "robodojo/stack-bowls",
+      "robot": "robodojo/robodojo-arx-x5",
+      "port": 8125,
+      "frames": 13295,
+      "raw_score": 100.0,
+      "prompt": "Stack the three bowls into one centered, nested stack with their openings facing up. Return both arms to their starting poses.",
+      "seed": 0,
+      "model": "gpt-6.1-sol",
+      "provider": "openai-codex",
+      "thinking": "high",
+      "success": true,
+      "reward": 1.0,
+      "control_budget_max": null,
+      "mode": "practice/realtime",
+      "strict_official_benchmark": false,
+      "tool_calls": 60,
+      "python_steps": 38,
+      "last_assistant": {
+        "provider": "openai-codex",
+        "model": "gpt-6.1-sol",
+        "stopReason": "stop",
+        "errorMessage": null
+      },
+      "source_log_sha256": "40b554e19f97764390232f17cd1f5d3c7852fa2c469aab0a7dbc60176caa2105",
+      "terminal_sha256": "fa0b7591cce4a1dfc5d6fae16a42e77f7917bc993bc9552f7a4b3ef99804483b",
+      "known_limits": [
+        "diagnostics_complete=false",
+        "Native return-to-origin tolerances do not imply exact joint zeroing."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+id: simple/bend-pick-and-place
+robot: simple/simple-g1
+instruction: bend to grasp the cracker box and drop it in the basket.
+seed: 0
+budget_mode: practice
+execution_mode: realtime
+stop_on_success: false
+backend_kwargs:
+  env_id: simple/G1WholebodyBendPickAndPlaceTeleop-v0
+  sim_mode: mujoco_isaac
+  dr_level: 0
+  arm_gravity_compensation: true

@@ -1,0 +1,2246 @@
+[
+  {
+    "key": "task02/01",
+    "title": "LIBERO-10-01",
+    "family": "task02",
+    "native_id": "libero/libero-10-01",
+    "suite": "libero_10",
+    "environment": "libero",
+    "instruction": "put both the blue-and-yellow alphabet soup can and the tomato sauce in the basket",
+    "native_instruction": "put both the alphabet soup and the tomato sauce in the basket",
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 600,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task02/02",
+    "title": "LIBERO-10-02",
+    "family": "task02",
+    "native_id": "libero/libero-10-02",
+    "suite": "libero_10",
+    "environment": "libero",
+    "instruction": "put both the white-and-blue cream cheese box and the butter in the basket",
+    "native_instruction": "put both the cream cheese box and the butter in the basket",
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 600,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task02/03",
+    "title": "LIBERO-10-03",
+    "family": "task02",
+    "native_id": "libero/libero-10-03",
+    "suite": "libero_10",
+    "environment": "libero",
+    "instruction": "turn on the stove and put the moka pot on it",
+    "native_instruction": "turn on the stove and put the moka pot on it",
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 600,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task02/04",
+    "title": "LIBERO-10-04",
+    "family": "task02",
+    "native_id": "libero/libero-10-04",
+    "suite": "libero_10",
+    "environment": "libero",
+    "instruction": "put the black bowl in the bottom drawer of the cabinet and close it",
+    "native_instruction": "put the black bowl in the bottom drawer of the cabinet and close it",
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 600,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task02/05",
+    "title": "LIBERO-10-05",
+    "family": "task02",
+    "native_id": "libero/libero-10-05",
+    "suite": "libero_10",
+    "environment": "libero",
+    "instruction": "put the white mug in the center of the left plate and put the yellow and white mug in the center of the right plate",
+    "native_instruction": "put the white mug on the left plate and put the yellow and white mug on the right plate",
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 600,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task02/06",
+    "title": "LIBERO-10-06",
+    "family": "task02",
+    "native_id": "libero/libero-10-06",
+    "suite": "libero_10",
+    "environment": "libero",
+    "instruction": "pick up the book and place it in the back compartment of the caddy, between the two large side compartments",
+    "native_instruction": "pick up the book and place it in the back compartment of the caddy",
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 600,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task02/07",
+    "title": "LIBERO-10-07",
+    "family": "task02",
+    "native_id": "libero/libero-10-07",
+    "suite": "libero_10",
+    "environment": "libero",
+    "instruction": "put the white mug in the center of the plate and put the chocolate pudding immediately to the right of the plate",
+    "native_instruction": "put the white mug on the plate and put the chocolate pudding to the right of the plate",
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 600,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task02/08",
+    "title": "LIBERO-10-08",
+    "family": "task02",
+    "native_id": "libero/libero-10-08",
+    "suite": "libero_10",
+    "environment": "libero",
+    "instruction": "put both the blue-and-yellow alphabet soup can and the white-and-blue cream cheese box in the basket",
+    "native_instruction": "put both the alphabet soup and the cream cheese box in the basket",
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 600,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task02/09",
+    "title": "LIBERO-10-09",
+    "family": "task02",
+    "native_id": "libero/libero-10-09",
+    "suite": "libero_10",
+    "environment": "libero",
+    "instruction": "put both moka pots on the stove and turn the stove on",
+    "native_instruction": "put both moka pots on the stove",
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 600,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task02/10",
+    "title": "LIBERO-10-10",
+    "family": "task02",
+    "native_id": "libero/libero-10-10",
+    "suite": "libero_10",
+    "environment": "libero",
+    "instruction": "put the yellow and white mug in the microwave and close it",
+    "native_instruction": "put the yellow and white mug in the microwave and close it",
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 600,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task02/11",
+    "title": "LIBERO-spatial-01",
+    "family": "task02",
+    "native_id": "libero/libero-spatial-01",
+    "suite": "libero_spatial",
+    "environment": "libero",
+    "instruction": "Pick the akita black bowl between the plate and the ramekin and place it in the center of the plate",
+    "native_instruction": null,
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 600,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task02/12",
+    "title": "LIBERO-spatial-02",
+    "family": "task02",
+    "native_id": "libero/libero-spatial-02",
+    "suite": "libero_spatial",
+    "environment": "libero",
+    "instruction": "Pick the akita black bowl next to the ramekin and place it in the center of the plate",
+    "native_instruction": null,
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 600,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task02/13",
+    "title": "LIBERO-spatial-03",
+    "family": "task02",
+    "native_id": "libero/libero-spatial-03",
+    "suite": "libero_spatial",
+    "environment": "libero",
+    "instruction": "Pick the akita black bowl from table center and place it in the center of the plate",
+    "native_instruction": null,
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 600,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task02/14",
+    "title": "LIBERO-spatial-04",
+    "family": "task02",
+    "native_id": "libero/libero-spatial-04",
+    "suite": "libero_spatial",
+    "environment": "libero",
+    "instruction": "Pick the akita black bowl on the cookies box and place it in the center of the plate",
+    "native_instruction": null,
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 600,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task02/15",
+    "title": "LIBERO-spatial-05",
+    "family": "task02",
+    "native_id": "libero/libero-spatial-05",
+    "suite": "libero_spatial",
+    "environment": "libero",
+    "instruction": "Pick the akita black bowl in the top drawer of the wooden cabinet and place it in the center of the plate",
+    "native_instruction": null,
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 600,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task02/16",
+    "title": "LIBERO-spatial-06",
+    "family": "task02",
+    "native_id": "libero/libero-spatial-06",
+    "suite": "libero_spatial",
+    "environment": "libero",
+    "instruction": "Pick the akita black bowl on the ramekin and place it in the center of the plate",
+    "native_instruction": null,
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 600,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task02/17",
+    "title": "LIBERO-spatial-07",
+    "family": "task02",
+    "native_id": "libero/libero-spatial-07",
+    "suite": "libero_spatial",
+    "environment": "libero",
+    "instruction": "Pick the akita black bowl next to the cookies box and place it in the center of the plate",
+    "native_instruction": null,
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 600,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task02/18",
+    "title": "LIBERO-spatial-08",
+    "family": "task02",
+    "native_id": "libero/libero-spatial-08",
+    "suite": "libero_spatial",
+    "environment": "libero",
+    "instruction": "Pick the akita black bowl on the stove and place it in the center of the plate",
+    "native_instruction": null,
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 600,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task02/19",
+    "title": "LIBERO-spatial-09",
+    "family": "task02",
+    "native_id": "libero/libero-spatial-09",
+    "suite": "libero_spatial",
+    "environment": "libero",
+    "instruction": "Pick the akita black bowl next to the plate and place it in the center of the plate",
+    "native_instruction": null,
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 600,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task02/20",
+    "title": "LIBERO-spatial-10",
+    "family": "task02",
+    "native_id": "libero/libero-spatial-10",
+    "suite": "libero_spatial",
+    "environment": "libero",
+    "instruction": "Pick the akita black bowl on the wooden cabinet and place it in the center of the plate",
+    "native_instruction": null,
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 600,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task02/21",
+    "title": "LIBERO-object-01",
+    "family": "task02",
+    "native_id": "libero/libero-object-01",
+    "suite": "libero_object",
+    "environment": "libero",
+    "instruction": "Pick the blue-and-yellow alphabet soup can and place it in the basket",
+    "native_instruction": null,
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 600,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task02/22",
+    "title": "LIBERO-object-02",
+    "family": "task02",
+    "native_id": "libero/libero-object-02",
+    "suite": "libero_object",
+    "environment": "libero",
+    "instruction": "Pick the white-and-blue cream cheese box and place it in the basket",
+    "native_instruction": null,
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 600,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task02/23",
+    "title": "LIBERO-object-03",
+    "family": "task02",
+    "native_id": "libero/libero-object-03",
+    "suite": "libero_object",
+    "environment": "libero",
+    "instruction": "Pick the salad dressing and place it in the basket",
+    "native_instruction": null,
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 600,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task02/24",
+    "title": "LIBERO-object-04",
+    "family": "task02",
+    "native_id": "libero/libero-object-04",
+    "suite": "libero_object",
+    "environment": "libero",
+    "instruction": "Pick the bbq sauce and place it in the basket",
+    "native_instruction": null,
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 600,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task02/25",
+    "title": "LIBERO-object-05",
+    "family": "task02",
+    "native_id": "libero/libero-object-05",
+    "suite": "libero_object",
+    "environment": "libero",
+    "instruction": "Pick the white-capped ketchup bottle and place it in the basket",
+    "native_instruction": null,
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 600,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task02/26",
+    "title": "LIBERO-object-06",
+    "family": "task02",
+    "native_id": "libero/libero-object-06",
+    "suite": "libero_object",
+    "environment": "libero",
+    "instruction": "Pick the tomato sauce and place it in the basket",
+    "native_instruction": null,
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 600,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task02/27",
+    "title": "LIBERO-object-07",
+    "family": "task02",
+    "native_id": "libero/libero-object-07",
+    "suite": "libero_object",
+    "environment": "libero",
+    "instruction": "Pick the butter and place it in the basket",
+    "native_instruction": null,
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 600,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task02/28",
+    "title": "LIBERO-object-08",
+    "family": "task02",
+    "native_id": "libero/libero-object-08",
+    "suite": "libero_object",
+    "environment": "libero",
+    "instruction": "Pick the milk and place it in the basket",
+    "native_instruction": null,
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 600,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task02/29",
+    "title": "LIBERO-object-09",
+    "family": "task02",
+    "native_id": "libero/libero-object-09",
+    "suite": "libero_object",
+    "environment": "libero",
+    "instruction": "Pick the chocolate pudding and place it in the basket",
+    "native_instruction": null,
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 600,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task02/30",
+    "title": "LIBERO-object-10",
+    "family": "task02",
+    "native_id": "libero/libero-object-10",
+    "suite": "libero_object",
+    "environment": "libero",
+    "instruction": "Pick the orange juice and place it in the basket",
+    "native_instruction": null,
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 600,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task02/31",
+    "title": "LIBERO-goal-01",
+    "family": "task02",
+    "native_id": "libero/libero-goal-01",
+    "suite": "libero_goal",
+    "environment": "libero",
+    "instruction": "Fully open the middle layer of the drawer",
+    "native_instruction": null,
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 600,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task02/32",
+    "title": "LIBERO-goal-02",
+    "family": "task02",
+    "native_id": "libero/libero-goal-02",
+    "suite": "libero_goal",
+    "environment": "libero",
+    "instruction": "Put the bowl on the stove",
+    "native_instruction": null,
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 600,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task02/33",
+    "title": "LIBERO-goal-03",
+    "family": "task02",
+    "native_id": "libero/libero-goal-03",
+    "suite": "libero_goal",
+    "environment": "libero",
+    "instruction": "Put the wine bottle on the top of the drawer",
+    "native_instruction": null,
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 600,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task02/34",
+    "title": "LIBERO-goal-04",
+    "family": "task02",
+    "native_id": "libero/libero-goal-04",
+    "suite": "libero_goal",
+    "environment": "libero",
+    "instruction": "Open the top layer of the drawer and put the bowl inside",
+    "native_instruction": null,
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 600,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task02/35",
+    "title": "LIBERO-goal-05",
+    "family": "task02",
+    "native_id": "libero/libero-goal-05",
+    "suite": "libero_goal",
+    "environment": "libero",
+    "instruction": "Put the bowl on the top of the drawer",
+    "native_instruction": null,
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 600,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task02/36",
+    "title": "LIBERO-goal-06",
+    "family": "task02",
+    "native_id": "libero/libero-goal-06",
+    "suite": "libero_goal",
+    "environment": "libero",
+    "instruction": "Push the plate to the front of the stove, close to its front edge",
+    "native_instruction": null,
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 600,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task02/37",
+    "title": "LIBERO-goal-07",
+    "family": "task02",
+    "native_id": "libero/libero-goal-07",
+    "suite": "libero_goal",
+    "environment": "libero",
+    "instruction": "Put the white-and-blue cream cheese box in the center of the bowl",
+    "native_instruction": null,
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 600,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task02/38",
+    "title": "LIBERO-goal-08",
+    "family": "task02",
+    "native_id": "libero/libero-goal-08",
+    "suite": "libero_goal",
+    "environment": "libero",
+    "instruction": "Turn on the stove",
+    "native_instruction": null,
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 600,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task02/39",
+    "title": "LIBERO-goal-09",
+    "family": "task02",
+    "native_id": "libero/libero-goal-09",
+    "suite": "libero_goal",
+    "environment": "libero",
+    "instruction": "Put the bowl in the center of the plate",
+    "native_instruction": null,
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 600,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task02/40",
+    "title": "LIBERO-goal-10",
+    "family": "task02",
+    "native_id": "libero/libero-goal-10",
+    "suite": "libero_goal",
+    "environment": "libero",
+    "instruction": "Put the wine bottle on the upper rack, with its base against the lower rail",
+    "native_instruction": null,
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 600,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task03/01",
+    "title": "Handover block",
+    "family": "task03",
+    "native_id": "robotwin/handover-block-aloha-agilex",
+    "suite": "RoboTwin",
+    "environment": "robotwin",
+    "instruction": "use the left arm to grasp the red block on the table, hand it over to the right arm, and set it down in the center of the blue pad. Release it with the right gripper open",
+    "native_instruction": "use the left arm to grasp the red block on the table, handover it to the right arm and place it on the blue pad",
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 800,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task03/02",
+    "title": "Place dual shoes",
+    "family": "task03",
+    "native_id": "robotwin/place-dual-shoes-aloha-agilex",
+    "suite": "RoboTwin",
+    "environment": "robotwin",
+    "instruction": "use both arms to pick up the two shoes on the table and put them flat in the shoebox, with the shoe tips pointing to the left and the shoe initially on the left nearer the robot. Leave both grippers open",
+    "native_instruction": "use both arms to pick up the two shoes on the table and put them in the shoebox, with the shoe tip pointing to the left",
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 600,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task03/03",
+    "title": "Put bottles dustbin",
+    "family": "task03",
+    "native_id": "robotwin/put-bottles-dustbin-aloha-agilex",
+    "suite": "RoboTwin",
+    "environment": "robotwin",
+    "instruction": "use arms to grab the bottles and put them into the dustbin to the left of the table",
+    "native_instruction": "use arms to grab the bottles and put them into the dustbin to the left of the table",
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 1700,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task03/04",
+    "title": "Scan object",
+    "family": "task03",
+    "native_id": "robotwin/scan-object-aloha-agilex",
+    "suite": "RoboTwin",
+    "environment": "robotwin",
+    "instruction": "pick up the scanner and the object simultaneously with separate arms. Hold the scanner’s scanning face close to and directly facing the object’s center, keeping both grippers closed around the items",
+    "native_instruction": "simultaneously pick up the scanner and the object with separate arms, then scan the object",
+    "seeds_by_case": {
+      "astra-kinex": 5,
+      "astra-device": 0,
+      "astra-control": 5
+    },
+    "control_budget": 500,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task03/05",
+    "title": "Stack bowls three",
+    "family": "task03",
+    "native_id": "robotwin/stack-bowls-three-aloha-agilex",
+    "suite": "RoboTwin",
+    "environment": "robotwin",
+    "instruction": "nest the three bowls on the table, leaving both grippers open",
+    "native_instruction": "stack the three bowls on top of each other",
+    "seeds_by_case": {
+      "astra-kinex": 12,
+      "astra-device": 0,
+      "astra-control": 12
+    },
+    "control_budget": 1200,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task03/06",
+    "title": "Stack blocks three",
+    "family": "task03",
+    "native_id": "robotwin/stack-blocks-three-aloha-agilex",
+    "suite": "RoboTwin",
+    "environment": "robotwin",
+    "instruction": "build a three-block stack at the center by placing the red block first, the green block on red, and the blue block on green",
+    "native_instruction": "build a three-block stack at the center by placing the red block first, the green block on red, and the blue block on green",
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 1200,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task03/07",
+    "title": "Hanging mug",
+    "family": "task03",
+    "native_id": "robotwin/hanging-mug-aloha-agilex",
+    "suite": "RoboTwin",
+    "environment": "robotwin",
+    "instruction": "Use left arm to pick the mug on the table, rotate the mug and put the mug down in the middle of the table, use the right arm to pick the mug and hang it onto the rack.",
+    "native_instruction": "Use left arm to pick the mug on the table, rotate the mug and put the mug down in the middle of the table, use the right arm to pick the mug and hang it onto the rack.",
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 900,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task03/08",
+    "title": "Put object cabinet",
+    "family": "task03",
+    "native_id": "robotwin/put-object-cabinet-aloha-agilex",
+    "suite": "RoboTwin",
+    "environment": "robotwin",
+    "instruction": "use one arm to hold the object and the other arm to open the bottom cabinet drawer. Set the object down near the center of the drawer interior and release it",
+    "native_instruction": "use one arm to hold the object and the other arm to open the cabinet drawer, then place the object inside",
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 37
+    },
+    "control_budget": 700,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task03/09",
+    "title": "Blocks ranking size",
+    "family": "task03",
+    "native_id": "robotwin/blocks-ranking-size-aloha-agilex",
+    "suite": "RoboTwin",
+    "environment": "robotwin",
+    "instruction": "move the three randomly colored blocks to the center of the table and arrange them in a close, straight row from largest to smallest, from left to right. Release them with both grippers open",
+    "native_instruction": "there are three blocks on the table, the color of the blocks is random, move the blocks to the center of the table, and arrange them from largest to smallest, from left to right",
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 1200,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task03/10",
+    "title": "Lift pot",
+    "family": "task03",
+    "native_id": "robotwin/lift-pot-aloha-agilex",
+    "suite": "RoboTwin",
+    "environment": "robotwin",
+    "instruction": "grasp the round kitchenpot with handles and lift it well clear of the tabletop. Keep each gripper centered on its handle while holding the pot up",
+    "native_instruction": "use BOTH!!! arms to lift the pot",
+    "seeds_by_case": {
+      "astra-kinex": 1,
+      "astra-device": 0,
+      "astra-control": 1
+    },
+    "control_budget": 400,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task03/11",
+    "title": "Adjust bottle",
+    "family": "task03",
+    "native_id": "robotwin/adjust-bottle-aloha-agilex",
+    "suite": "RoboTwin",
+    "environment": "robotwin",
+    "instruction": "Pick up the {bottle_description} head-up and hold it high toward the {side} edge of the table",
+    "native_instruction": null,
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 400,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task03/12",
+    "title": "Beat block hammer",
+    "family": "task03",
+    "native_id": "robotwin/beat-block-hammer-aloha-agilex",
+    "suite": "RoboTwin",
+    "environment": "robotwin",
+    "instruction": "pick up the hammer and hit the center of the block",
+    "native_instruction": null,
+    "seeds_by_case": {
+      "astra-kinex": 1,
+      "astra-device": 0,
+      "astra-control": 1
+    },
+    "control_budget": 400,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task03/13",
+    "title": "Blocks ranking rgb",
+    "family": "task03",
+    "native_id": "robotwin/blocks-ranking-rgb-aloha-agilex",
+    "suite": "RoboTwin",
+    "environment": "robotwin",
+    "instruction": "Place the red, green, and blue blocks in a close horizontal row from left to right, then release them with both grippers open.",
+    "native_instruction": null,
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 1200,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task03/14",
+    "title": "Click alarmclock",
+    "family": "task03",
+    "native_id": "robotwin/click-alarmclock-aloha-agilex",
+    "suite": "RoboTwin",
+    "environment": "robotwin",
+    "instruction": "click the center of the alarm clock's top button, keeping the gripper on the clock's side closed",
+    "native_instruction": null,
+    "seeds_by_case": {
+      "astra-kinex": 1,
+      "astra-device": 0,
+      "astra-control": 1
+    },
+    "control_budget": 400,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task03/15",
+    "title": "Click bell",
+    "family": "task03",
+    "native_id": "robotwin/click-bell-aloha-agilex",
+    "suite": "RoboTwin",
+    "environment": "robotwin",
+    "instruction": "click the bell's top center, keeping the gripper on the bell's side closed",
+    "native_instruction": null,
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 400,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task03/16",
+    "title": "Dump bin bigbin",
+    "family": "task03",
+    "native_id": "robotwin/dump-bin-bigbin-aloha-agilex",
+    "suite": "RoboTwin",
+    "environment": "robotwin",
+    "instruction": "Grab the small bin and pour the balls into the big bin, keeping the empty small bin held high",
+    "native_instruction": null,
+    "seeds_by_case": {
+      "astra-kinex": 5,
+      "astra-device": 5,
+      "astra-control": 5
+    },
+    "control_budget": 600,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task03/17",
+    "title": "Grab roller",
+    "family": "task03",
+    "native_id": "robotwin/grab-roller-aloha-agilex",
+    "suite": "RoboTwin",
+    "environment": "robotwin",
+    "instruction": "use both grippers to grasp the roller and lift it well clear of the table. Keep both grippers closed while holding it up",
+    "native_instruction": null,
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 400,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task03/18",
+    "title": "Handover mic",
+    "family": "task03",
+    "native_id": "robotwin/handover-mic-aloha-agilex",
+    "suite": "RoboTwin",
+    "environment": "robotwin",
+    "instruction": "Hand the microphone to the arm opposite its starting side and hold it high on that side",
+    "native_instruction": null,
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 600,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task03/19",
+    "title": "Move can pot",
+    "family": "task03",
+    "native_id": "robotwin/move-can-pot-aloha-agilex",
+    "suite": "RoboTwin",
+    "environment": "robotwin",
+    "instruction": "place the can upright directly beside the pot on the can's starting side. Leave both grippers open",
+    "native_instruction": null,
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 400,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task03/20",
+    "title": "Move pillbottle pad",
+    "family": "task03",
+    "native_id": "robotwin/move-pillbottle-pad-aloha-agilex",
+    "suite": "RoboTwin",
+    "environment": "robotwin",
+    "instruction": "Pick up the pill bottle and set it down in the center of the pad. Release it with both grippers open.",
+    "native_instruction": null,
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 400,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task03/21",
+    "title": "Move playingcard away",
+    "family": "task03",
+    "native_id": "robotwin/move-playingcard-away-aloha-agilex",
+    "suite": "RoboTwin",
+    "environment": "robotwin",
+    "instruction": "pick up the playing-card box and move it farther outward on its starting side, leaving both grippers open.",
+    "native_instruction": null,
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 400,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task03/22",
+    "title": "Move stapler pad",
+    "family": "task03",
+    "native_id": "robotwin/move-stapler-pad-aloha-agilex",
+    "suite": "RoboTwin",
+    "environment": "robotwin",
+    "instruction": "place the stapler straight in the center of the colored mat, leaving both grippers open",
+    "native_instruction": null,
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 400,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task03/23",
+    "title": "Open laptop",
+    "family": "task03",
+    "native_id": "robotwin/open-laptop-aloha-agilex",
+    "suite": "RoboTwin",
+    "environment": "robotwin",
+    "instruction": "open the laptop, keeping the gripper on its opening side near the lid",
+    "native_instruction": null,
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 700,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task03/24",
+    "title": "Open microwave",
+    "family": "task03",
+    "native_id": "robotwin/open-microwave-aloha-agilex",
+    "suite": "RoboTwin",
+    "environment": "robotwin",
+    "instruction": "Open the microwave door widely.",
+    "native_instruction": null,
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 1500,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task03/25",
+    "title": "Pick diverse bottles",
+    "family": "task03",
+    "native_id": "robotwin/pick-diverse-bottles-aloha-agilex",
+    "suite": "RoboTwin",
+    "environment": "robotwin",
+    "instruction": "simultaneously pick up the two different bottles, one with each arm, and hold them high near the front center of the table, each on its original side",
+    "native_instruction": null,
+    "seeds_by_case": {
+      "astra-kinex": 1,
+      "astra-device": 1,
+      "astra-control": 1
+    },
+    "control_budget": 400,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task03/26",
+    "title": "Pick dual bottles",
+    "family": "task03",
+    "native_id": "robotwin/pick-dual-bottles-aloha-agilex",
+    "suite": "RoboTwin",
+    "environment": "robotwin",
+    "instruction": "simultaneously pick up one bottle with each arm, and hold them high near the front center of the table, each on its original side",
+    "native_instruction": null,
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 400,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task03/27",
+    "title": "Place a2b left",
+    "family": "task03",
+    "native_id": "robotwin/place-a2b-left-aloha-agilex",
+    "suite": "RoboTwin",
+    "environment": "robotwin",
+    "instruction": "place the {movable_object_description} directly to the left of the {reference_object_description}, with a small gap between them and both grippers open",
+    "native_instruction": null,
+    "seeds_by_case": {
+      "astra-kinex": 16,
+      "astra-device": 0,
+      "astra-control": 16
+    },
+    "control_budget": 400,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task03/28",
+    "title": "Place a2b right",
+    "family": "task03",
+    "native_id": "robotwin/place-a2b-right-aloha-agilex",
+    "suite": "RoboTwin",
+    "environment": "robotwin",
+    "instruction": "place the {movable_object_description} directly to the right of the {reference_object_description}, with a small gap between them and both grippers open",
+    "native_instruction": null,
+    "seeds_by_case": {
+      "astra-kinex": 8,
+      "astra-device": 0,
+      "astra-control": 8
+    },
+    "control_budget": 400,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task03/29",
+    "title": "Place bread basket",
+    "family": "task03",
+    "native_id": "robotwin/place-bread-basket-aloha-agilex",
+    "suite": "RoboTwin",
+    "environment": "robotwin",
+    "instruction": "place all the bread in the basket near its center, leaving both grippers open",
+    "native_instruction": null,
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 700,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task03/30",
+    "title": "Place bread skillet",
+    "family": "task03",
+    "native_id": "robotwin/place-bread-skillet-aloha-agilex",
+    "suite": "RoboTwin",
+    "environment": "robotwin",
+    "instruction": "use one arm to keep the skillet lifted clear of the table while the other places the bread in its center",
+    "native_instruction": null,
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 1
+    },
+    "control_budget": 500,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task03/31",
+    "title": "Place burger fries",
+    "family": "task03",
+    "native_id": "robotwin/place-burger-fries-aloha-agilex",
+    "suite": "RoboTwin",
+    "environment": "robotwin",
+    "instruction": "simultaneously pick up the hamburger and fries with both arms, then place the hamburger in the left section of the tray and the fries in the right section, leaving both grippers open",
+    "native_instruction": null,
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 500,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task03/32",
+    "title": "Place can basket",
+    "family": "task03",
+    "native_id": "robotwin/place-can-basket-aloha-agilex",
+    "suite": "RoboTwin",
+    "environment": "robotwin",
+    "instruction": "use one arm to put the can inside the basket, then use the other arm to lift the basket with the can inside. Keep the basket upright and both the can and basket clear of the table",
+    "native_instruction": null,
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 700,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task03/33",
+    "title": "Place cans plasticbox",
+    "family": "task03",
+    "native_id": "robotwin/place-cans-plasticbox-aloha-agilex",
+    "suite": "RoboTwin",
+    "environment": "robotwin",
+    "instruction": "simultaneously pick up both cans with separate arms, then place them side by side in the plastic box, leaving both grippers open",
+    "native_instruction": null,
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 800,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task03/34",
+    "title": "Place container plate",
+    "family": "task03",
+    "native_id": "robotwin/place-container-plate-aloha-agilex",
+    "suite": "RoboTwin",
+    "environment": "robotwin",
+    "instruction": "place the container in the center of the plate, leaving both grippers open",
+    "native_instruction": null,
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 400,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task03/35",
+    "title": "Place empty cup",
+    "family": "task03",
+    "native_id": "robotwin/place-empty-cup-aloha-agilex",
+    "suite": "RoboTwin",
+    "environment": "robotwin",
+    "instruction": "place the empty cup in the center of the coaster, leaving both grippers open",
+    "native_instruction": null,
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 500,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task03/36",
+    "title": "Place fan",
+    "family": "task03",
+    "native_id": "robotwin/place-fan-aloha-agilex",
+    "suite": "RoboTwin",
+    "environment": "robotwin",
+    "instruction": "place the fan in the center of the colored mat, facing the robot, leaving both grippers open",
+    "native_instruction": null,
+    "seeds_by_case": {
+      "astra-kinex": 1,
+      "astra-device": 0,
+      "astra-control": 1
+    },
+    "control_budget": 400,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task03/37",
+    "title": "Place mouse pad",
+    "family": "task03",
+    "native_id": "robotwin/place-mouse-pad-aloha-agilex",
+    "suite": "RoboTwin",
+    "environment": "robotwin",
+    "instruction": "place the mouse in the center of the colored mat, facing straight, leaving both grippers open",
+    "native_instruction": null,
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 400,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task03/38",
+    "title": "Place object basket",
+    "family": "task03",
+    "native_id": "robotwin/place-object-basket-aloha-agilex",
+    "suite": "RoboTwin",
+    "environment": "robotwin",
+    "instruction": "use one arm to place the target object inside the basket, then use the other arm to lift the basket with the object inside. Keep the basket upright and both the object and basket clear of the table",
+    "native_instruction": null,
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 2
+    },
+    "control_budget": 700,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task03/39",
+    "title": "Place object scale",
+    "family": "task03",
+    "native_id": "robotwin/place-object-scale-aloha-agilex",
+    "suite": "RoboTwin",
+    "environment": "robotwin",
+    "instruction": "place the object in the center of the scale's weighing platform. Leave the gripper on the object's starting side open",
+    "native_instruction": null,
+    "seeds_by_case": {
+      "astra-kinex": 2,
+      "astra-device": 0,
+      "astra-control": 2
+    },
+    "control_budget": 400,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task03/40",
+    "title": "Place object stand",
+    "family": "task03",
+    "native_id": "robotwin/place-object-stand-aloha-agilex",
+    "suite": "RoboTwin",
+    "environment": "robotwin",
+    "instruction": "set the target object on the center of the display stand, leaving both grippers open",
+    "native_instruction": null,
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 400,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task03/41",
+    "title": "Place phone stand",
+    "family": "task03",
+    "native_id": "robotwin/place-phone-stand-aloha-agilex",
+    "suite": "RoboTwin",
+    "environment": "robotwin",
+    "instruction": "place the phone on the phone stand, centered against its support, leaving both grippers open",
+    "native_instruction": null,
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 400,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task03/42",
+    "title": "Place shoe",
+    "family": "task03",
+    "native_id": "robotwin/place-shoe-aloha-agilex",
+    "suite": "RoboTwin",
+    "environment": "robotwin",
+    "instruction": "place the shoe straight in the center of the mat with its toe pointing left, leaving both grippers open",
+    "native_instruction": null,
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 500,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task03/43",
+    "title": "Press stapler",
+    "family": "task03",
+    "native_id": "robotwin/press-stapler-aloha-agilex",
+    "suite": "RoboTwin",
+    "environment": "robotwin",
+    "instruction": "Use one arm to press the stapler.",
+    "native_instruction": null,
+    "seeds_by_case": {
+      "astra-kinex": 1,
+      "astra-device": 0,
+      "astra-control": 1
+    },
+    "control_budget": 400,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task03/44",
+    "title": "Rotate qrcode",
+    "family": "task03",
+    "native_id": "robotwin/rotate-qrcode-aloha-agilex",
+    "suite": "RoboTwin",
+    "environment": "robotwin",
+    "instruction": "Use arm to catch the qrcode board on the table, pick it up, rotate to let the qrcode face towards you, then put it back on the table and release it",
+    "native_instruction": null,
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 400,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task03/45",
+    "title": "Shake bottle",
+    "family": "task03",
+    "native_id": "robotwin/shake-bottle-aloha-agilex",
+    "suite": "RoboTwin",
+    "environment": "robotwin",
+    "instruction": "Shake the bottle with proper arm while holding it well clear of the table",
+    "native_instruction": null,
+    "seeds_by_case": {
+      "astra-kinex": 4,
+      "astra-device": 2,
+      "astra-control": 4
+    },
+    "control_budget": 700,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task03/46",
+    "title": "Shake bottle horizontally",
+    "family": "task03",
+    "native_id": "robotwin/shake-bottle-horizontally-aloha-agilex",
+    "suite": "RoboTwin",
+    "environment": "robotwin",
+    "instruction": "Shake the bottle with proper arm horizontally while holding it well clear of the table",
+    "native_instruction": null,
+    "seeds_by_case": {
+      "astra-kinex": 2,
+      "astra-device": 2,
+      "astra-control": 2
+    },
+    "control_budget": 700,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task03/47",
+    "title": "Stack blocks two",
+    "family": "task03",
+    "native_id": "robotwin/stack-blocks-two-aloha-agilex",
+    "suite": "RoboTwin",
+    "environment": "robotwin",
+    "instruction": "move the red and green blocks to the center of the table and stack the green block centrally on the red block, leaving both grippers open",
+    "native_instruction": null,
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 800,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task03/48",
+    "title": "Stack bowls two",
+    "family": "task03",
+    "native_id": "robotwin/stack-bowls-two-aloha-agilex",
+    "suite": "RoboTwin",
+    "environment": "robotwin",
+    "instruction": "nest the two bowls on the table, leaving both grippers open",
+    "native_instruction": null,
+    "seeds_by_case": {
+      "astra-kinex": 6,
+      "astra-device": 0,
+      "astra-control": 6
+    },
+    "control_budget": 900,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task03/49",
+    "title": "Stamp seal",
+    "family": "task03",
+    "native_id": "robotwin/stamp-seal-aloha-agilex",
+    "suite": "RoboTwin",
+    "environment": "robotwin",
+    "instruction": "Grab the stamp and stamp onto the center of the colored mat, leaving the stamp there and both grippers open",
+    "native_instruction": null,
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 400,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task03/50",
+    "title": "Turn switch",
+    "family": "task03",
+    "native_id": "robotwin/turn-switch-aloha-agilex",
+    "suite": "RoboTwin",
+    "environment": "robotwin",
+    "instruction": "press the switch fully down",
+    "native_instruction": null,
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 400,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task04/01",
+    "title": "Make toast",
+    "family": "task04",
+    "native_id": "robodojo/make-toast",
+    "suite": "RoboDojo",
+    "environment": "robodojo",
+    "instruction": "Pick up two slices of bread, place them into the toaster, and press the lever down. Return both arms to their starting poses.",
+    "native_instruction": "Pick up two slices of bread, place them into the toaster, and press the lever down.",
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 1875,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task04/02",
+    "title": "Classify objects by language",
+    "family": "task04",
+    "native_id": "robodojo/classify-objects-by-language",
+    "suite": "RoboDojo",
+    "environment": "robodojo",
+    "instruction": "Put {cat0} objects into the left basket, {cat1} objects into the middle basket, and {cat2} objects into the right basket, then reset the robot arm.",
+    "native_instruction": "Put car objects into the left basket, watch objects into the middle basket, and wooden_toy objects into the right basket, then reset the robot arm.",
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 1875,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task04/03",
+    "title": "Store laptop and headphones",
+    "family": "task04",
+    "native_id": "robodojo/store-laptop-and-headphones",
+    "suite": "RoboDojo",
+    "environment": "robodojo",
+    "instruction": "Hang the headphones on the headphone stand, close the laptop, then place it into the vertical laptop stand. Return both arms to their starting poses.",
+    "native_instruction": "Hang the headphones on the headphone stand, close the laptop, then place it into the vertical laptop stand.",
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 1875,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task04/04",
+    "title": "Cover blocks",
+    "family": "task04",
+    "native_id": "robodojo/cover-blocks",
+    "suite": "RoboDojo",
+    "environment": "robodojo",
+    "instruction": "Cover the blocks from left to right, remember their colors, then uncover them in the order: red, green, and blue. Keep the cups upside down and the blocks in place. Return both arms to their starting poses.",
+    "native_instruction": "Cover the blocks from left to right, remember their colors, then uncover them in the order: red, green, and blue.",
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 1875,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task04/05",
+    "title": "Play xylophone",
+    "family": "task04",
+    "native_id": "robodojo/play-xylophone",
+    "suite": "RoboDojo",
+    "environment": "robodojo",
+    "instruction": "Pick up the mallet and strike all xylophone keys from left to right.",
+    "native_instruction": "Pick up the mallet and strike all xylophone keys from left to right.",
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 1875,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task04/06",
+    "title": "Store tools in toolbox",
+    "family": "task04",
+    "native_id": "robodojo/store-tools-in-toolbox",
+    "suite": "RoboDojo",
+    "environment": "robodojo",
+    "instruction": "Place each tool flat in its matching shaped recess, aligned with the outline and fully below the toolbox rim. Release all tools and return both arms to their starting poses.",
+    "native_instruction": "Place each tool into its matching position in the toolbox, then reset the robot arm.",
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 1875,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task04/07",
+    "title": "Insert tubes",
+    "family": "task04",
+    "native_id": "robodojo/insert-tubes",
+    "suite": "RoboDojo",
+    "environment": "robodojo",
+    "instruction": "Insert the three tubes fully into the rack one by one, pointed ends down. Return both arms to their starting poses.",
+    "native_instruction": "Insert the three tubes into the rack one by one.",
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 1875,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task04/08",
+    "title": "Deposit coin",
+    "family": "task04",
+    "native_id": "robodojo/deposit-coin",
+    "suite": "RoboDojo",
+    "environment": "robodojo",
+    "instruction": "Pick up the coin from the holder and deposit it fully inside the coin bank. Return both arms to their starting poses.",
+    "native_instruction": "Pick up the coin from the holder and insert it precisely into the coin bank.",
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 1875,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task04/09",
+    "title": "Fasten screws",
+    "family": "task04",
+    "native_id": "robodojo/fasten-screws",
+    "suite": "RoboDojo",
+    "environment": "robodojo",
+    "instruction": "Seat each nut upright on the bolt of the same color. Fully open both grippers and return both arms to their starting poses.",
+    "native_instruction": "Insert and tighten each screw into the nut of the same color.",
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 1875,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task04/10",
+    "title": "Play stacking toy",
+    "family": "task04",
+    "native_id": "robodojo/play-stacking-toy",
+    "suite": "RoboDojo",
+    "environment": "robodojo",
+    "instruction": "Place all stacking toy pieces onto the correct pegs. Return both arms to their starting poses.",
+    "native_instruction": "Place all stacking toy pieces onto the correct pegs.",
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 1875,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task04/11",
+    "title": "Align blocks",
+    "family": "task04",
+    "native_id": "robodojo/align-blocks",
+    "suite": "RoboDojo",
+    "environment": "robodojo",
+    "instruction": "Use the set square to push the three blocks into a straight, aligned row. Keep all three blocks on the table, then return both arms to their starting poses.",
+    "native_instruction": "Use the set square to push the three blocks into a straight, aligned row, then reset the robot arm.",
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 1875,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task04/12",
+    "title": "Arrange largest number",
+    "family": "task04",
+    "native_id": "robodojo/arrange-largest-number",
+    "suite": "RoboDojo",
+    "environment": "robodojo",
+    "instruction": "Arrange the numbers on the pads from left to right to form the largest possible number, readable from the robot's side. Return both arms to their starting poses.",
+    "native_instruction": "Arrange the numbers from left to right to form the largest possible number, and place them on the pad.",
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 1875,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task04/14",
+    "title": "Build tower",
+    "family": "task04",
+    "native_id": "robodojo/build-tower",
+    "suite": "RoboDojo",
+    "environment": "robodojo",
+    "instruction": "Build a tower using all the wooden blocks and boards, with the green roof on top and its ridge perpendicular to the plank's long edges. Return both arms to their starting poses.",
+    "native_instruction": "Build a tower using the wooden blocks and wooden boards.",
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 1875,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task04/15",
+    "title": "Classify objects",
+    "family": "task04",
+    "native_id": "robodojo/classify-objects",
+    "suite": "RoboDojo",
+    "environment": "robodojo",
+    "instruction": "Sort the objects by category into the three baskets, with one category per basket. Return both arms to their starting poses.",
+    "native_instruction": "Sort the objects by category into the three baskets.",
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 1875,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task04/16",
+    "title": "Fill egg holder",
+    "family": "task04",
+    "native_id": "robodojo/fill-egg-holder",
+    "suite": "RoboDojo",
+    "environment": "robodojo",
+    "instruction": "Place the four eggs from the basket into the egg holder, then close the lid. Return both arms to their starting poses.",
+    "native_instruction": "Place the four eggs from the basket into the egg holder, then close the lid.",
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 1875,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task04/17",
+    "title": "Fill pen holder",
+    "family": "task04",
+    "native_id": "robodojo/fill-pen-holder",
+    "suite": "RoboDojo",
+    "environment": "robodojo",
+    "instruction": "Hold the pen holder with one hand, place all pens into it with the other hand, writing ends down, then put it back down upright. Return both arms to their starting poses.",
+    "native_instruction": "Hold the pen holder with one hand, place all pens into it with the other hand, then put it back down.",
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 1875,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task04/18",
+    "title": "Fold clothes",
+    "family": "task04",
+    "native_id": "robodojo/fold-clothes",
+    "suite": "RoboDojo",
+    "environment": "robodojo",
+    "instruction": "Fold the clothes neatly into a compact rectangle, then release them and return both arms to their starting poses.",
+    "native_instruction": "Fold the clothes neatly.",
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 1875,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task04/20",
+    "title": "General pickup",
+    "family": "task04",
+    "native_id": "robodojo/general-pickup",
+    "suite": "RoboDojo",
+    "environment": "robodojo",
+    "instruction": "Pick up the {target} by 10 cm.",
+    "native_instruction": "Pick up the mint green scissors by 10 cm.",
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 1875,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task04/21",
+    "title": "Hang mugs",
+    "family": "task04",
+    "native_id": "robodojo/hang-mugs",
+    "suite": "RoboDojo",
+    "environment": "robodojo",
+    "instruction": "Hang all three mugs by their handles on the mug rack, with the mug hanging clear of the table. Release all mugs and return both arms to their starting poses.",
+    "native_instruction": "Hang all the mugs on the mug rack.",
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 1875,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task04/23",
+    "title": "Imitate sorting sequence",
+    "family": "task04",
+    "native_id": "robodojo/imitate-sorting-sequence",
+    "suite": "RoboDojo",
+    "environment": "robodojo",
+    "instruction": "Observe the object placement order with both arms at their starting poses, then place the corresponding objects into the empty basket in the same order. Return both arms to their starting poses.",
+    "native_instruction": "Observe the object placement order, remember it, then place the corresponding objects into the basket in the same order.",
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 1875,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task04/24",
+    "title": "Insert key",
+    "family": "task04",
+    "native_id": "robodojo/insert-key",
+    "suite": "RoboDojo",
+    "environment": "robodojo",
+    "instruction": "Pick up the key, hand it over to the other hand, insert it fully into the keyhole, then turn it clockwise.",
+    "native_instruction": "Pick up the key, hand it over to the other hand, insert it into the keyhole, then turn it.",
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 1875,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task04/25",
+    "title": "Make kong",
+    "family": "task04",
+    "native_id": "robodojo/make-kong",
+    "suite": "RoboDojo",
+    "environment": "robodojo",
+    "instruction": "Wait for the opponent to discard a tile, then declare a kong with the matching tiles and add the replacement tile to the right end of your hand. Keep both arms at their starting poses during the opponent's turn.",
+    "native_instruction": "Wait for the opponent to discard a tile, then declare a kong with the matching tiles.",
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 1875,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task04/27",
+    "title": "Match and pick from conveyor",
+    "family": "task04",
+    "native_id": "robodojo/match-and-pick-from-conveyor",
+    "suite": "RoboDojo",
+    "environment": "robodojo",
+    "instruction": "Remember the first object on the conveyor, then pick up the matching object when it appears again and lift it well above its starting height.",
+    "native_instruction": "Remember the first object on the conveyor, then pick the matching object when it appears again.",
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 1875,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task04/28",
+    "title": "Organize table",
+    "family": "task04",
+    "native_id": "robodojo/organize-table",
+    "suite": "RoboDojo",
+    "environment": "robodojo",
+    "instruction": "Place the alarm clock upright on the drawer, put the figurine upright on the stand, place the mouse on the mouse pad facing the monitor, and push the keyboard into the frame facing the robot. Return both arms to their starting poses.",
+    "native_instruction": "Place the alarm clock on the drawer, put the figurine on the stand, place the mouse on the mouse pad, and push the keyboard into the frame.",
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 1875,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task04/29",
+    "title": "Pack objects into box",
+    "family": "task04",
+    "native_id": "robodojo/pack-objects-into-box",
+    "suite": "RoboDojo",
+    "environment": "robodojo",
+    "instruction": "Place all the objects into the box with their front sides facing left. Keep the box upright with its long sides running left to right. Return both arms to their starting poses.",
+    "native_instruction": "Place all the objects into the box with their front sides facing left.",
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 1875,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task04/31",
+    "title": "Pick from conveyor by image",
+    "family": "task04",
+    "native_id": "robodojo/pick-from-conveyor-by-image",
+    "suite": "RoboDojo",
+    "environment": "robodojo",
+    "instruction": "Lift the basket more than 8 cm, identify the target object on the conveyor according to the image on the board, pick it up, and place it into the basket. Keep the basket raised with the object resting inside.",
+    "native_instruction": "Lift the basket more than 8 cm, identify the target object on the conveyor according to the image on the board, pick it up, and place it into the basket.",
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 1875,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task04/32",
+    "title": "Play tic tac toe",
+    "family": "task04",
+    "native_id": "robodojo/play-tic-tac-toe",
+    "suite": "RoboDojo",
+    "environment": "robodojo",
+    "instruction": "Play tic-tac-toe as the first player and fill the board with the opponent. Return both arms to their starting poses after each move and wait there during the opponent's turn.",
+    "native_instruction": "Play tic-tac-toe as the first player and fill the board with the opponent.",
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 1875,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task04/33",
+    "title": "Plug in charger",
+    "family": "task04",
+    "native_id": "robodojo/plug-in-charger",
+    "suite": "RoboDojo",
+    "environment": "robodojo",
+    "instruction": "Plug the charger into the power strip. Return both arms to their starting poses.",
+    "native_instruction": "Plug the charger into the power strip.",
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 1875,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task04/34",
+    "title": "Pour balls into vase",
+    "family": "task04",
+    "native_id": "robodojo/pour-balls-into-vase",
+    "suite": "RoboDojo",
+    "environment": "robodojo",
+    "instruction": "Pour all the balls from the cup into the vase. Leave the cup upright. Return both arms to their starting poses.",
+    "native_instruction": "Pour all the balls from the cup into the vase.",
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 1875,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task04/35",
+    "title": "Pour by language",
+    "family": "task04",
+    "native_id": "robodojo/pour-by-language",
+    "suite": "RoboDojo",
+    "environment": "robodojo",
+    "instruction": "Pour the liquid from the first {bottle_color_0} bottle into the first {bowl_color_3} bowl, from the second {bottle_color_1} bottle into the second {bowl_color_4} bowl, and from the third {bottle_color_2} bottle into the third {bowl_color_5} bowl. Then reset the robot arm.",
+    "native_instruction": "Pour the liquid from the first violet bottle into the first black bowl, from the second red bottle into the second white bowl, and from the third turquoise bottle into the third brown bowl. Then reset the robot arm.",
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 1875,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task04/36",
+    "title": "Pour liquid into cup",
+    "family": "task04",
+    "native_id": "robodojo/pour-liquid-into-cup",
+    "suite": "RoboDojo",
+    "environment": "robodojo",
+    "instruction": "Pour the liquid from the bottle into the cup with minimal spillage, leaving the bottle nearly empty and upright.",
+    "native_instruction": "Pour the liquid from the bottle into the cup.",
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 1875,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task04/38",
+    "title": "Press by number",
+    "family": "task04",
+    "native_id": "robodojo/press-by-number",
+    "suite": "RoboDojo",
+    "environment": "robodojo",
+    "instruction": "Press the red buttons from left to right the number of times shown on their cards, pressing the blue button to confirm each count. Return both arms to their starting poses.",
+    "native_instruction": "Press the two red buttons the required number of times according to the number cards, then press the blue button to confirm.",
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 1875,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task04/39",
+    "title": "Push t",
+    "family": "task04",
+    "native_id": "robodojo/push-t",
+    "suite": "RoboDojo",
+    "environment": "robodojo",
+    "instruction": "Push the T-shaped block to align it precisely with the gray T-shaped pad. Return both arms to their starting poses.",
+    "native_instruction": "Push the T-shaped block to align it precisely with the gray T-shaped pad.",
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 1875,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task04/41",
+    "title": "Put bottles into dustbin",
+    "family": "task04",
+    "native_id": "robodojo/put-bottles-into-dustbin",
+    "suite": "RoboDojo",
+    "environment": "robodojo",
+    "instruction": "Pick up the bottles and throw them into the dustbin, using handover when needed. Return both arms to their starting poses.",
+    "native_instruction": "Pick up the bottles and throw them into the dustbin, using handover when needed.",
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 1875,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task04/42",
+    "title": "Solve equation",
+    "family": "task04",
+    "native_id": "robodojo/solve-equation",
+    "suite": "RoboDojo",
+    "environment": "robodojo",
+    "instruction": "Complete the equation by selecting the correct missing number or operator and placing it flat in the center of the empty pad, readable from the robot's side. Return both arms to their starting poses.",
+    "native_instruction": "Complete the equation by selecting the correct missing number or operator and placing it on the pad, then reset the robot arm.",
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 1875,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task04/43",
+    "title": "Sort nesting dolls by size",
+    "family": "task04",
+    "native_id": "robodojo/sort-nesting-dolls-by-size",
+    "suite": "RoboDojo",
+    "environment": "robodojo",
+    "instruction": "Arrange the five nesting dolls upright in a row from left to right, from smallest to largest. Return both arms to their starting poses.",
+    "native_instruction": "Arrange the five nesting dolls in a row from left to right, from smallest to largest.",
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 1875,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task04/45",
+    "title": "Stack blocks",
+    "family": "task04",
+    "native_id": "robodojo/stack-blocks",
+    "suite": "RoboDojo",
+    "environment": "robodojo",
+    "instruction": "Stack all three differently textured blocks in a single vertical tower. Center each block over the one below, release the completed stack, and return both arms to their starting poses.",
+    "native_instruction": "Stack the three blocks with different textures.",
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 1875,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task04/46",
+    "title": "Stack blocks by language",
+    "family": "task04",
+    "native_id": "robodojo/stack-blocks-by-language",
+    "suite": "RoboDojo",
+    "environment": "robodojo",
+    "instruction": "stack the blocks from bottom to top in the order of {color_0}, {color_1}, and {color_2}, centering each block over the one below. Release the completed stack and return both arms to their starting poses.",
+    "native_instruction": "stack the blocks from bottom to top in the order of blue, yellow, and orange, then reset the robot arm.",
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 1875,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task04/48",
+    "title": "Stack bowls",
+    "family": "task04",
+    "native_id": "robodojo/stack-bowls",
+    "suite": "RoboDojo",
+    "environment": "robodojo",
+    "instruction": "Stack the three bowls into one centered, nested stack with their openings facing up. Return both arms to their starting poses.",
+    "native_instruction": "Stack the three bowls together.",
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 1875,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task04/51",
+    "title": "Swap t",
+    "family": "task04",
+    "native_id": "robodojo/swap-t",
+    "suite": "RoboDojo",
+    "environment": "robodojo",
+    "instruction": "Swap the positions and orientations of the two T-shaped blocks. Return both arms to their starting poses.",
+    "native_instruction": "Pick up the two T-shaped blocks, swap their positions, and place them back with the correct orientations.",
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 1875,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task04/52",
+    "title": "Swap blocks",
+    "family": "task04",
+    "native_id": "robodojo/swap-blocks",
+    "suite": "RoboDojo",
+    "environment": "robodojo",
+    "instruction": "Swap the two blocks using the empty mat, pressing the button after each move. Return both arms to their starting poses.",
+    "native_instruction": "Swap the two blocks using the empty mat, pressing the button after each move.",
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 1875,
+    "evidence_origin": "official published reference; no new local episode"
+  },
+  {
+    "key": "task04/53",
+    "title": "Sweep blocks",
+    "family": "task04",
+    "native_id": "robodojo/sweep-blocks",
+    "suite": "RoboDojo",
+    "environment": "robodojo",
+    "instruction": "Pick up the broom, hand it over to the right hand, and sweep all the objects into the dustpan. Leave the dustpan flat on the table to the left of the broom. Return both arms to their starting poses.",
+    "native_instruction": "Pick up the broom, hand it over to the right hand, then use the dustpan to sweep the blocks.",
+    "seeds_by_case": {
+      "astra-kinex": 0,
+      "astra-device": 0,
+      "astra-control": 0
+    },
+    "control_budget": 1875,
+    "evidence_origin": "official published reference; no new local episode"
+  }
+]

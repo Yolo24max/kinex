@@ -1,0 +1,140 @@
+{
+  "aloha": {
+    "approach_axis": [
+      1,
+      0,
+      0
+    ],
+    "contacts": [
+      {
+        "point_m": [
+          0.0635,
+          -0.024494417012,
+          -0.00119651
+        ],
+        "normal": [
+          0.0,
+          -1.0,
+          0.0
+        ]
+      },
+      {
+        "point_m": [
+          0.0635,
+          0.024494417012,
+          -0.00119646
+        ],
+        "normal": [
+          0.0,
+          1.0,
+          0.0
+        ]
+      }
+    ],
+    "source": {
+      "files": [
+        {
+          "file": "embodiments/aloha-agilex/urdf/aloha_maniskill_sim/meshes/link7.STL",
+          "sha256": "ec3d40b39cccde0075ca3d16603f14f180fce41a46b446473d384def7a1b0be0"
+        },
+        {
+          "file": "embodiments/aloha-agilex/urdf/aloha_maniskill_sim/meshes/link8.STL",
+          "sha256": "29f7a8379cad81797e82e4ba099455cc275ac6ac5bb9e264ce46719fd7d2bb60"
+        }
+      ],
+      "repository": "TianxingChen/RoboTwin2.0",
+      "revision": "785feb15aa4a4f532395ad2b1d2be5f28cb561ad"
+    }
+  },
+  "x5": {
+    "approach_axis": [
+      1,
+      0,
+      0
+    ],
+    "contacts": [
+      {
+        "point_m": [
+          0.0635,
+          -0.024494417012,
+          -0.0011964
+        ],
+        "normal": [
+          0.0,
+          -1.0,
+          0.0
+        ]
+      },
+      {
+        "point_m": [
+          0.0635,
+          0.024494417012,
+          -0.00119634
+        ],
+        "normal": [
+          0.0,
+          1.0,
+          0.0
+        ]
+      }
+    ],
+    "source": {
+      "files": [
+        {
+          "file": "Assets/Robots/x5/meshes/link7.STL",
+          "sha256": "ec3d40b39cccde0075ca3d16603f14f180fce41a46b446473d384def7a1b0be0"
+        },
+        {
+          "file": "Assets/Robots/x5/meshes/link8.STL",
+          "sha256": "29f7a8379cad81797e82e4ba099455cc275ac6ac5bb9e264ce46719fd7d2bb60"
+        }
+      ],
+      "repository": "RoboDojo-Benchmark/RoboDojo",
+      "revision": "0a709fe7863f6c869a8d141676585a883fce4270"
+    }
+  },
+  "r1pro": {
+    "approach_axis": [
+      0,
+      0,
+      -1
+    ],
+    "contacts": [
+      {
+        "point_m": [
+          8.8709e-05,
+          -0.014296054381,
+          -0.00946
+        ],
+        "normal": [
+          0.0078060294,
+          -0.999969532488,
+          7.85353e-07
+        ]
+      },
+      {
+        "point_m": [
+          -8.9046e-05,
+          0.014296295522,
+          -0.00946
+        ],
+        "normal": [
+          -0.007918673212,
+          0.999968642562,
+          -9.223755e-05
+        ]
+      }
+    ],
+    "source": {
+      "files": [
+        {
+          "file": "models/r1pro/usd/r1pro.usda",
+          "sha256": "6029617cdd3aefce981428058a1c82cffe6af20ae61dc5be1da7334342c3bc52"
+        }
+      ],
+      "repository": "behavior-1k/omnigibson-robot-assets",
+      "revision": "c325bd3b6d1560d3145f3c9c0e885e79e47f180c",
+      "geometry": "native USD convex collision meshes; URDF collision paths are obsolete"
+    }
+  }
+}

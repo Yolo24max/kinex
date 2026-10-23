@@ -1,0 +1,313 @@
+name: right_hand
+loaded: false
+type: dexterous_hand
+intrinsics:
+  source: introspected
+  method: introspection
+  calibrated_at: null
+  frames:
+    palm:
+      parent_frame: null
+      translation_m:
+      - 0.0415
+      - -0.003
+      - 0.0
+      rotation_xyzw:
+      - 0.0
+      - 0.0
+      - 0.0
+      - 1.0
+    grasp_reference:
+      parent_frame: null
+      translation_m:
+      - 0.140693943998
+      - 0.054693943998
+      - 0.0
+      rotation_xyzw:
+      - 0
+      - 0
+      - 0
+      - 1
+  geometry:
+    description: 'Three fingers: a three-joint thumb opposed by two two-joint fingers.
+      Nominal tips follow the distal links; they are not contact measurements.'
+    fingers:
+      thumb:
+        chain:
+        - origin:
+          - 0.067
+          - -0.003
+          - 0.0
+          - 0.0
+          - 0.0
+          - 0.0
+          - 1.0
+          joint: right_hand_thumb_0_joint
+          axis:
+          - 0.0
+          - 1.0
+          - 0.0
+          anchor:
+          - 0.0
+          - 0.0
+          - 0.0
+          reference: 0.0
+        - origin:
+          - -0.0025
+          - 0.0193
+          - 0.0
+          - 0.0
+          - 0.0
+          - 0.0
+          - 1.0
+          joint: right_hand_thumb_1_joint
+          axis:
+          - 0.0
+          - 0.0
+          - 1.0
+          anchor:
+          - 0.0
+          - 0.0
+          - 0.0
+          reference: 0.0
+        - origin:
+          - 0.0
+          - 0.0458
+          - 0.0
+          - 0.0
+          - 0.0
+          - 0.0
+          - 1.0
+          joint: right_hand_thumb_2_joint
+          axis:
+          - 0.0
+          - 0.0
+          - 1.0
+          anchor:
+          - 0.0
+          - 0.0
+          - 0.0
+          reference: 0.0
+        tip_frame: thumb_tip
+        tip_offset:
+        - -7.3787291e-05
+        - 0.051961675286
+        - 0.000100064091
+        - 0.0
+        - 0.0
+        - 0.0
+        - 1.0
+      index:
+        chain:
+        - origin:
+          - 0.1192
+          - -0.0046
+          - 0.0285
+          - 0.0
+          - 0.0
+          - 0.0
+          - 1.0
+          joint: right_hand_index_0_joint
+          axis:
+          - 0.0
+          - 0.0
+          - 1.0
+          anchor:
+          - 0.0
+          - 0.0
+          - 0.0
+          reference: 0.0
+        - origin:
+          - 0.0458
+          - 0.0
+          - 0.0
+          - 0.0
+          - 0.0
+          - 0.0
+          - 1.0
+          joint: right_hand_index_1_joint
+          axis:
+          - 0.0
+          - 0.0
+          - 1.0
+          anchor:
+          - 0.0
+          - 0.0
+          - 0.0
+          reference: 0.0
+        tip_frame: index_tip
+        tip_offset:
+        - 0.051961675286
+        - -7.3787291e-05
+        - -0.000100064091
+        - 0.0
+        - 0.0
+        - 0.0
+        - 1.0
+      middle:
+        chain:
+        - origin:
+          - 0.1192
+          - -0.0046
+          - -0.0285
+          - 0.0
+          - 0.0
+          - 0.0
+          - 1.0
+          joint: right_hand_middle_0_joint
+          axis:
+          - 0.0
+          - 0.0
+          - 1.0
+          anchor:
+          - 0.0
+          - 0.0
+          - 0.0
+          reference: 0.0
+        - origin:
+          - 0.0458
+          - 0.0
+          - 0.0
+          - 0.0
+          - 0.0
+          - 0.0
+          - 1.0
+          joint: right_hand_middle_1_joint
+          axis:
+          - 0.0
+          - 0.0
+          - 1.0
+          anchor:
+          - 0.0
+          - 0.0
+          - 0.0
+          reference: 0.0
+        tip_frame: middle_tip
+        tip_offset:
+        - 0.051961675286
+        - -7.3787291e-05
+        - -0.000100064091
+        - 0.0
+        - 0.0
+        - 0.0
+        - 1.0
+    center:
+      frame: grasp_center
+      weights:
+        thumb: 0.5
+        index: 0.25
+        middle: 0.25
+      rotation_xyzw:
+      - 0
+      - 0
+      - 0
+      - 1
+  model:
+    format: joints
+    joints:
+    - name: right_hand_thumb_0_joint
+      type: revolute
+      limits:
+        min: -1.0472
+        max: 1.0472
+      max_velocity: null
+      max_effort: null
+    - name: right_hand_thumb_1_joint
+      type: revolute
+      limits:
+        min: -1.0472
+        max: 0.724312
+      max_velocity: null
+      max_effort: null
+    - name: right_hand_thumb_2_joint
+      type: revolute
+      limits:
+        min: -1.74533
+        max: 0.0
+      max_velocity: null
+      max_effort: null
+    - name: right_hand_index_0_joint
+      type: revolute
+      limits:
+        min: 0.0
+        max: 1.5708
+      max_velocity: null
+      max_effort: null
+    - name: right_hand_index_1_joint
+      type: revolute
+      limits:
+        min: 0.0
+        max: 1.74533
+      max_velocity: null
+      max_effort: null
+    - name: right_hand_middle_0_joint
+      type: revolute
+      limits:
+        min: 0.0
+        max: 1.5708
+      max_velocity: null
+      max_effort: null
+    - name: right_hand_middle_1_joint
+      type: revolute
+      limits:
+        min: 0.0
+        max: 1.74533
+      max_velocity: null
+      max_effort: null
+  kinematics: null
+  home:
+    right_hand_thumb_0_joint: 0.0
+    right_hand_thumb_1_joint: 0.0
+    right_hand_thumb_2_joint: 0.0
+    right_hand_index_0_joint: 0.0
+    right_hand_index_1_joint: 0.0
+    right_hand_middle_0_joint: 0.0
+    right_hand_middle_1_joint: 0.0
+  control:
+    mode: position
+    limit_handling: native
+  feedback:
+    velocities: true
+    efforts: false
+  stop:
+    behavior: hold
+    affected_devices:
+    - right_hand
+extrinsics:
+  source: introspected
+  method: introspection
+  calibrated_at: null
+  mount:
+    parent: right_arm
+    parent_frame: flange
+    translation_m:
+    - 0
+    - 0
+    - 0
+    rotation_xyzw:
+    - 0
+    - 0
+    - 0
+    - 1
+meta:
+  created_at: '2026-09-14T00:00:00Z'
+  updated_at: '2026-09-14T00:00:00Z'
+access:
+  source: user
+  method: unknown
+  calibrated_at: null
+  connection:
+    kind: url
+    url: http://127.0.0.1:8123
+    device: right_hand
+  driver:
+    entry: driver.py
+    persistent: true
+    actions:
+    - read
+    - write
+    - stop
+    - load
+    - unload
+    - status
+    - fk

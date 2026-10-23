@@ -1,0 +1,51 @@
+{
+  "evidence": {
+    "complete": true,
+    "files": {
+      "native-episode.json": {
+        "complete": true,
+        "path": "native-episode.json",
+        "sha256": "b2c7d11f7c317e53c862a42711559e3bbf1cb491e7f00e2a63ff054ce174200b"
+      }
+    },
+    "schema": "roboenv/terminal-evidence/1"
+  },
+  "seed": 0,
+  "status": {
+    "budget": {
+      "max": null,
+      "unit": "action_frames",
+      "used": 6481
+    },
+    "capabilities": {
+      "bounded_episodes": true,
+      "terminal_feedback": true
+    },
+    "generation": 0,
+    "reason": "success",
+    "schema": "roboenv/simulation-status/1",
+    "session": "8d77564e7176d814",
+    "simulation_time_s": null,
+    "state": "terminal",
+    "success": true,
+    "terminal": true
+  },
+  "task": "robotwin/handover-block-aloha-agilex",
+  "verdict": {
+    "budget": {
+      "max": null,
+      "unit": "action_frames",
+      "used": 6481
+    },
+    "completed": true,
+    "detail": {
+      "control_protocol": "absolute_joint_position_25hz_practice",
+      "official_action_equivalence": false
+    },
+    "latched": true,
+    "raw_score": 1.0,
+    "reward": 1.0,
+    "submitted": true,
+    "tier": 0
+  }
+}

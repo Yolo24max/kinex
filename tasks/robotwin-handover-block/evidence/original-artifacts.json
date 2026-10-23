@@ -1,0 +1,46 @@
+{
+  "local_archive_key": "robotwin-handover-block-retry3",
+  "files": [
+    {
+      "path": "actions.jsonl",
+      "bytes": 1945266,
+      "sha256": "374bb751883be98123e72da6d69885ce5dc52e34738d88ae882f8fe11d505cec"
+    },
+    {
+      "path": "left_wrist.mp4",
+      "bytes": 10374736,
+      "sha256": "cf234e2a2d476adf2a11110ab84783d08d1b3388bc57f96def1d484e09d70391"
+    },
+    {
+      "path": "manifest.json",
+      "bytes": 870,
+      "sha256": "b32bb9f5cbbf2cc60bc0103979729d4d1fa1deff9e0495a5717615533074aeaa"
+    },
+    {
+      "path": "native-episode.json",
+      "bytes": 186204,
+      "sha256": "b2c7d11f7c317e53c862a42711559e3bbf1cb491e7f00e2a63ff054ce174200b"
+    },
+    {
+      "path": "native-terminal.json",
+      "bytes": 1159,
+      "sha256": "9d855ea59cc0ae77e82931c350e8f10e426fd0ed353a5bafe73f069a6606909f"
+    },
+    {
+      "path": "right_wrist.mp4",
+      "bytes": 6099317,
+      "sha256": "8b909d37ad3ebc80d417f0d30cbb7e27bfb56541383b156d9c1170a5eafbfac5"
+    },
+    {
+      "path": "stopped.json",
+      "bytes": 419,
+      "sha256": "9b345ef6c560b40967fc7a7896ef1634e6432ead89ee381c9e08b4d5df1f74a8"
+    },
+    {
+      "path": "third_person.mp4",
+      "bytes": 11551178,
+      "sha256": "efa2e3837056baf998a07ca7c02e6e802c0b905c280a2a0db695e51cec43914d"
+    }
+  ],
+  "availability": "Full original evidence is retained in the owner local backup; hashes are not download links."
+}

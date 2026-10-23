@@ -1,0 +1,623 @@
+{
+  "source_log_sha256": "40b554e19f97764390232f17cd1f5d3c7852fa2c469aab0a7dbc60176caa2105",
+  "method": "Only assistant toolCall arguments from message_end events; no hidden thinking, stream deltas, or image payloads.",
+  "calls": [
+    {
+      "sequence": 1,
+      "name": "ls",
+      "arguments": {
+        "path": ".kinex/devices"
+      }
+    },
+    {
+      "sequence": 2,
+      "name": "read",
+      "arguments": {
+        "path": ".kinex/devices/left_arm/profile.yaml",
+        "offset": null,
+        "limit": null
+      }
+    },
+    {
+      "sequence": 3,
+      "name": "read",
+      "arguments": {
+        "path": ".kinex/devices/right_arm/profile.yaml",
+        "offset": null,
+        "limit": null
+      }
+    },
+    {
+      "sequence": 4,
+      "name": "read",
+      "arguments": {
+        "path": ".kinex/devices/left_gripper/profile.yaml",
+        "offset": null,
+        "limit": null
+      }
+    },
+    {
+      "sequence": 5,
+      "name": "read",
+      "arguments": {
+        "path": ".kinex/devices/right_gripper/profile.yaml",
+        "offset": null,
+        "limit": null
+      }
+    },
+    {
+      "sequence": 6,
+      "name": "read",
+      "arguments": {
+        "path": ".kinex/devices/head_camera/profile.yaml",
+        "offset": null,
+        "limit": null
+      }
+    },
+    {
+      "sequence": 7,
+      "name": "read",
+      "arguments": {
+        "path": ".kinex/devices/world/profile.yaml",
+        "offset": null,
+        "limit": null
+      }
+    },
+    {
+      "sequence": 8,
+      "name": "devices",
+      "arguments": {
+        "calls": [
+          {
+            "deviceID": "world",
+            "action": "status"
+          },
+          {
+            "deviceID": "left_arm",
+            "action": "status"
+          },
+          {
+            "deviceID": "right_arm",
+            "action": "status"
+          },
+          {
+            "deviceID": "left_gripper",
+            "action": "status"
+          },
+          {
+            "deviceID": "right_gripper",
+            "action": "status"
+          },
+          {
+            "deviceID": "head_camera",
+            "action": "status"
+          },
+          {
+            "deviceID": "left_camera",
+            "action": "status"
+          },
+          {
+            "deviceID": "right_camera",
+            "action": "status"
+          }
+        ]
+      }
+    },
+    {
+      "sequence": 9,
+      "name": "devices",
+      "arguments": {
+        "calls": [
+          {
+            "deviceID": "world"
+          },
+          {
+            "deviceID": "left_arm"
+          },
+          {
+            "deviceID": "right_arm"
+          },
+          {
+            "deviceID": "left_gripper"
+          },
+          {
+            "deviceID": "right_gripper"
+          },
+          {
+            "deviceID": "head_camera"
+          },
+          {
+            "deviceID": "left_camera"
+          },
+          {
+            "deviceID": "right_camera"
+          }
+        ]
+      }
+    },
+    {
+      "sequence": 10,
+      "name": "read",
+      "arguments": {
+        "path": ".kinex/devices/left_camera/profile.yaml",
+        "offset": null,
+        "limit": null
+      }
+    },
+    {
+      "sequence": 11,
+      "name": "read",
+      "arguments": {
+        "path": ".kinex/devices/right_camera/profile.yaml",
+        "offset": null,
+        "limit": null
+      }
+    },
+    {
+      "sequence": 12,
+      "name": "devices",
+      "arguments": {
+        "calls": [
+          {
+            "deviceID": "left_arm",
+            "action": "fk",
+            "args": {
+              "joints": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          {
+            "deviceID": "right_arm",
+            "action": "fk",
+            "args": {
+              "joints": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "sequence": 13,
+      "name": "exec",
+      "arguments": {
+        "description": "measure bowl positions from calibrated camera rays",
+        "python": "from kinex import device, call\nimport numpy as np\nfrom scipy.spatial.transform import Rotation as R\ncams={}\nfor c in ['head_camera','left_camera','right_camera']:\n p=call('relative_pose',child={'frame':c},parent={'frame':'world'})['pose']\n cams[c]=(np.array(p[:3]),R.from_quat(p[3:]).as_matrix(),288.13254096884566 if c=='head_camera' else 397.04127893104277)\n print(c,p)\ndef tri(c1,uv1,c2,uv2):\n rays=[]\n for c,uv in [(c1,uv1),(c2,uv2)]:\n  o,m,f=cams[c]; d=m@np.array([(uv[0]-320)/f,(uv[1]-240)/f,1]); d/=np.linalg.norm(d); rays.append((o,d))\n a=sum(np.eye(3)-np.outer(d,d) for o,d in rays); b=sum((np.eye(3)-np.outer(d,d))@o for o,d in rays)\n x=np.linalg.solve(a,b); return x,[np.linalg.norm(np.cross(x-o,d)) for o,d in rays]\nfor name,c,h,w in [('left back','left_camera',(194,192),(357,246)),('left bottom','left_camera',(185,240),(367,385)),('right back','right_camera',(435,183),(241,230)),('right bottom','right_camera',(438,229),(250,353))]:\n print(name,tri('head_camera',h,c,w))"
+      }
+    },
+    {
+      "sequence": 14,
+      "name": "exec",
+      "arguments": {
+        "description": "estimate bowl rims and plan a clear approach",
+        "python": "from kinex import device,call\nimport numpy as np, cv2\nfrom scipy.spatial.transform import Rotation as R\nfrom scipy.optimize import least_squares\ncams={}\nfor c in ['head_camera','left_camera','right_camera']:\n p=call('relative_pose',child={'frame':c},parent={'frame':'world'})['pose']; cams[c]=(np.array(p[:3]),R.from_quat(p[3:]).as_matrix(),288.13254 if c=='head_camera' else 397.041279)\n im=device(c)['color']; mask=cv2.inRange(im,np.array([160,160,160]),np.array([255,255,255])); cs,_=cv2.findContours(mask,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_NONE)\n for ct in cs:\n  x,y,w,h=cv2.boundingRect(ct)\n  if cv2.contourArea(ct)>1300 and y>140 and w<250 and h<200:\n   pts=ct[:,0,:]; print(c,'bbox',x,y,w,h,'top',pts[pts[:,1].argmin()].tolist(),'left',pts[pts[:,0].argmin()].tolist(),'right',pts[pts[:,0].argmax()].tolist(),'bottom',pts[pts[:,1].argmax()].tolist())\n# Fit rim circles to observed upper-half boundaries, excluding front wall.\n# use top/left/right approximate rim edges with nonlinear projection\nobs=[('left',[('head_camera',[(194,192),(159,214),(218,210)]),('left_camera',[(357,246),(267,303),(455,305)])]),('right',[('head_camera',[(435,183),(408,202),(465,206)]),('right_camera',[(241,230),(155,283),(330,285)])])]\nfor name,views in obs:\n def residual(v):\n  cx,cy,z,rad=v; t=np.linspace(0,2*np.pi,720); pts=np.array([cx+rad*np.cos(t),cy+rad*np.sin(t),np.full_like(t,z)]).T; out=[]\n  for c,uvs in views:\n   o,m,f=cams[c]; cp=(pts-o)@m; uv=cp[:,:2]/cp[:,2:]*f+[320,240]\n   for uv0 in uvs: out.append(np.min(np.linalg.norm(uv-uv0,axis=1)))\n  return out\n fit=least_squares(residual,[-.28 if name=='left' else .25,-.065,.82,.06],diff_step=1e-4)\n print('rim fit',name,fit.x,'pixel residual',fit.fun.tolist())"
+      }
+    },
+    {
+      "sequence": 15,
+      "name": "exec",
+      "arguments": {
+        "description": "refine rim geometry and precompute approach inverse kinematics",
+        "python": "from kinex import device,call\nimport numpy as np, cv2\nfrom scipy.spatial.transform import Rotation as R\nfrom scipy.optimize import least_squares\ncams={}; rims={}\nfor c in ['head_camera','left_camera','right_camera']:\n p=call('relative_pose',child={'frame':c},parent={'frame':'world'})['pose']; cams[c]=(np.array(p[:3]),R.from_quat(p[3:]).as_matrix(),288.13254 if c=='head_camera' else 397.041279)\n im=device(c)['color']; mask=cv2.inRange(im,np.array([160]*3),np.array([255]*3)); cs,_=cv2.findContours(mask,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_NONE)\n rims[c]=[]\n for ct in cs:\n  x,y,w,h=cv2.boundingRect(ct)\n  if cv2.contourArea(ct)>1300 and y>140 and w<250 and h<200 and x>100 and x<500:\n   pts=ct[:,0,:]; xs=np.arange(x+int(.12*w),x+int(.88*w),3)\n   upper=np.array([[xx,pts[pts[:,0]==xx,1].min()] for xx in xs]); rims[c].append((x,upper))\n rims[c].sort(key=lambda v:v[0])\nfor name,hi,wc,wi,x0,y0 in [('left',0,'left_camera',0,-.275,-.065),('center',1,None,None,.045,-.14),('right',2,'right_camera',0,.25,-.035)]:\n views=[('head_camera',rims['head_camera'][hi][1])]\n if wc: views.append((wc,rims[wc][wi][1]))\n def res(v):\n  x,y,z,rad=v; t=np.linspace(0,2*np.pi,1800); pts=np.array([x+rad*np.cos(t),y+rad*np.sin(t),np.full_like(t,z)]).T; out=[]\n  for c,uvs in views:\n   o,m,f=cams[c]; cp=(pts-o)@m; uv=cp[:,:2]/cp[:,2:]*f+[320,240]\n   out.extend(np.min(np.linalg.norm(uv[None,:,:]-uvs[:,None,:],axis=2),axis=1))\n  return out\n fit=least_squares(res,[x0,y0,.815,.06],max_nfev=160,diff_step=1e-4)\n print(name,'rim_xyz_radius',fit.x.tolist(),'rms_px',np.sqrt(np.mean(fit.fun**2)))\nrot=R.from_matrix(np.array([[0,1,0],[0,0,-1],[-1,0,0]])).as_quat().tolist()\n# TCP at outside left rim, above scene; down-looking approach and radial closure.\ntcp=np.array([-.334,-.065,1.01]); flange=tcp-R.from_quat(rot).apply([.15007,-.000002,-.00144])\np=flange.tolist()+rot\nprint('approach flange world',p)\nprint(call('relative_pose',child={'frame':'world','pose':p},parent={'frame':'left_arm'}))\nprint(device('left_arm','ik',{'pose':call('relative_pose',child={'frame':'world','pose':p},parent={'frame':'left_arm'})['pose']}))"
+      }
+    },
+    {
+      "sequence": 16,
+      "name": "exec",
+      "arguments": {
+        "description": "approach the left bowl above its rim",
+        "python": "from kinex import device,call,finish\np=[-.333998,-.06444,1.10007,.5,.5,-.5,.5]\nr=call('servo',device='left_arm',pose=p,frame='world',speedFraction=.3)\nprint(r); print(device('left_arm'))\nimgs=[device(c,args={'output':'file'})['file'] for c in ['head_camera','left_camera']]\nfinish({},file=imgs)"
+      }
+    },
+    {
+      "sequence": 17,
+      "name": "device_stop",
+      "arguments": {
+        "reason": "World wait timed out during first approach; stop before checking feedback."
+      }
+    },
+    {
+      "sequence": 18,
+      "name": "devices",
+      "arguments": {
+        "calls": [
+          {
+            "deviceID": "world"
+          },
+          {
+            "deviceID": "left_arm"
+          },
+          {
+            "deviceID": "right_arm"
+          },
+          {
+            "deviceID": "head_camera"
+          },
+          {
+            "deviceID": "left_camera"
+          }
+        ]
+      }
+    },
+    {
+      "sequence": 19,
+      "name": "relative_pose",
+      "arguments": {
+        "child": {
+          "frame": "left_gripper:tcp"
+        },
+        "parent": {
+          "frame": "world"
+        }
+      }
+    },
+    {
+      "sequence": 20,
+      "name": "servo",
+      "arguments": {
+        "device": "left_arm",
+        "block": false,
+        "pose": [
+          -0.334148,
+          -0.0645,
+          1.01007,
+          0.5,
+          0.5,
+          -0.5,
+          0.5
+        ],
+        "frame": "world",
+        "speedFraction": 0.5
+      }
+    },
+    {
+      "sequence": 21,
+      "name": "device",
+      "arguments": {
+        "deviceID": "world",
+        "action": "wait",
+        "args": {
+          "duration_s": 2.2
+        }
+      }
+    },
+    {
+      "sequence": 22,
+      "name": "exec",
+      "arguments": {
+        "description": "check the lowered rim approach",
+        "python": "from kinex import device,call,finish\nprint(device('left_arm')); print(call('relative_pose',child={'frame':'left_gripper:tcp'},parent={'frame':'world'}))\nfinish({},file=[device(c,args={'output':'file'})['file'] for c in ['head_camera','left_camera']])"
+      }
+    },
+    {
+      "sequence": 23,
+      "name": "exec",
+      "arguments": {
+        "description": "lower fingers around the left bowl rim",
+        "python": "from kinex import call,device\nprint(call('servo',device='left_arm',block=False,pose=[-.334148,-.0645,.95807,.5,.5,-.5,.5],frame='world',speedFraction=.35))\nprint(device('world','wait',{'duration_s':1.8}));print(device('left_arm'))"
+      }
+    },
+    {
+      "sequence": 24,
+      "name": "exec",
+      "arguments": {
+        "description": "pinch the left rim and check a short lift",
+        "python": "from kinex import device,call,finish\nprint(device('left_gripper','write',{'actions':[0],'duration_s':.6})); device('world','wait',{'duration_s':1})\nprint(device('left_gripper'))\nprint(call('servo',device='left_arm',block=False,pose=[-.334148,-.0645,1.01807,.5,.5,-.5,.5],frame='world',speedFraction=.35)); device('world','wait',{'duration_s':1.8})\nprint(device('left_arm'));finish({},file=[device(c,args={'output':'file'})['file'] for c in ['head_camera','left_camera']])"
+      }
+    },
+    {
+      "sequence": 25,
+      "name": "exec",
+      "arguments": {
+        "description": "raise the held bowl to transfer clearance",
+        "python": "from kinex import call,device\nr=call('servo',device='left_arm',block=False,pose=[-.334148,-.0645,1.07007,.5,.5,-.5,.5],frame='world',speedFraction=.4);print(r)\ndevice('world','wait',{'duration_s':r['duration_s']+.5});print(device('left_arm'))"
+      }
+    },
+    {
+      "sequence": 26,
+      "name": "exec",
+      "arguments": {
+        "description": "transfer left bowl over the center bowl",
+        "python": "from kinex import call,device,finish\nr=call('servo',device='left_arm',block=False,pose=[-.018813,-.14664,1.07007,.5,.5,-.5,.5],frame='world',speedFraction=.3);print(r)\ndevice('world','wait',{'duration_s':r['duration_s']+.7});print(device('left_arm'));finish({},file=[device(c,args={'output':'file'})['file'] for c in ['head_camera','left_camera']])"
+      }
+    },
+    {
+      "sequence": 27,
+      "name": "exec",
+      "arguments": {
+        "description": "find a wrist-safe transfer orientation without moving",
+        "python": "from kinex import call,device\nimport numpy as np\nfrom scipy.spatial.transform import Rotation as R\nq0=R.from_quat([.5,.5,-.5,.5]); offset=np.array([.15007,-.000002,-.00144]); seed=device('left_arm')['positions']\nfor center,yaw in [([-.20,-.095,.91],-.4),([-.12,-.12,.91],-.8),([.041,-.145,.91],-1.2)]:\n r=R.from_euler('z',yaw)*q0; tcp=np.array(center)-R.from_euler('z',yaw).apply([.06,0,0]); p=(tcp-r.apply(offset)).tolist()+r.as_quat().tolist()\n try:\n  local=call('relative_pose',child={'frame':'world','pose':p},parent={'frame':'left_arm'})['pose']; result=device('left_arm','ik',{'pose':local,'seed':seed}); seed=result['joints'];print('waypoint',p,'ik',result)\n except Exception as e: print('not solved',str(e))"
+      }
+    },
+    {
+      "sequence": 28,
+      "name": "exec",
+      "arguments": {
+        "description": "check reachable placement clearance",
+        "python": "from kinex import call,device\nimport numpy as np\nfrom scipy.spatial.transform import Rotation as R\nseed=[-.35,2.1,2.13,-1.60,0,-2.69]\nfor z,yaw in [(.88,-1.2),(.87,-1.2),(.86,-1.2),(.88,-.8),(.87,-.8)]:\n r=R.from_euler('z',yaw)*R.from_quat([.5,.5,-.5,.5]); tcp=np.array([.041,-.145,z])-R.from_euler('z',yaw).apply([.06,0,0]); p=(tcp-r.apply([.15007,-.000002,-.00144])).tolist()+r.as_quat().tolist()\n try:\n  lp=call('relative_pose',child={'frame':'world','pose':p},parent={'frame':'left_arm'})['pose']; ik=device('left_arm','ik',{'pose':lp,'seed':seed});print(z,yaw,'pose',p,'joints',ik['joints'])\n except Exception as e: print(z,yaw,'unreachable')"
+      }
+    },
+    {
+      "sequence": 29,
+      "name": "exec",
+      "arguments": {
+        "description": "transfer the bowl in wrist-safe waypoints",
+        "python": "from kinex import call,device,finish\nimport numpy as np\nfrom scipy.spatial.transform import Rotation as R\nfor center,yaw in [([-.20,-.095,.91],-.4),([-.12,-.12,.89],-.8)]:\n r=R.from_euler('z',yaw)*R.from_quat([.5,.5,-.5,.5]); tcp=np.array(center)-R.from_euler('z',yaw).apply([.06,0,0]); p=(tcp-r.apply([.15007,-.000002,-.00144])).tolist()+r.as_quat().tolist()\n result=call('servo',device='left_arm',block=False,pose=p,frame='world',speedFraction=.3); print(result); device('world','wait',{'duration_s':result['duration_s']+.5}); state=device('left_arm'); print(state)\n if state['faults']: raise RuntimeError(state['faults'])\nfinish({},file=[device(c,args={'output':'file'})['file'] for c in ['head_camera','left_camera']])"
+      }
+    },
+    {
+      "sequence": 30,
+      "name": "device_stop",
+      "arguments": {
+        "reason": "Camera shows bowl slipped during transfer; stop and reassess before regrasping."
+      }
+    },
+    {
+      "sequence": 31,
+      "name": "exec",
+      "arguments": {
+        "description": "locate the slipped bowl and open the gripper",
+        "python": "from kinex import call,device\nimport numpy as np,cv2\nfrom scipy.spatial.transform import Rotation as R\nfrom scipy.optimize import least_squares\nim=device('head_camera')['color'];cs,_=cv2.findContours(cv2.inRange(im,np.array([160]*3),np.array([255]*3)),cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_NONE)\np=call('relative_pose',child={'frame':'head_camera'},parent={'frame':'world'})['pose'];o=np.array(p[:3]);m=R.from_quat(p[3:]).as_matrix()\nfor ct in cs:\n x,y,w,h=cv2.boundingRect(ct)\n if 90<x<180 and 175<y<240 and 40<w<90:\n  pts=ct[:,0,:];uvs=np.array([[xx,pts[pts[:,0]==xx,1].min()] for xx in range(x+8,x+w-8,2)])\n  def res(v):\n   cx,cy,rad=v;t=np.linspace(0,2*np.pi,1800);pts3=np.array([cx+rad*np.cos(t),cy+rad*np.sin(t),np.full_like(t,.814)]).T;cp=(pts3-o)@m;uv=cp[:,:2]/cp[:,2:]*288.13254+[320,240];return np.min(np.linalg.norm(uv[None,:,:]-uvs[:,None,:],axis=2),axis=1)\n  f=least_squares(res,[-.36,-.06,.06],diff_step=1e-4);print('bowl center radius',f.x)\nprint(device('left_gripper','write',{'actions':[1],'duration_s':.5}));print(device('left_gripper'))"
+      }
+    },
+    {
+      "sequence": 32,
+      "name": "exec",
+      "arguments": {
+        "description": "reorient above the near-side rim",
+        "python": "from kinex import call,device,finish\n# Tool X down, local Y toward -world Y. TCP .371 left and near-side rim y -.117.\np=[-.36956,-.1182,1.08007,.7071067812,0,-.7071067812,0]\nr=call('servo',device='left_arm',block=False,pose=p,frame='world',speedFraction=.35);print(r);device('world','wait',{'duration_s':r['duration_s']+.5});print(device('left_arm'));finish({},file=[device('head_camera',args={'output':'file'})['file']])"
+      }
+    },
+    {
+      "sequence": 33,
+      "name": "exec",
+      "arguments": {
+        "description": "take a deeper near-rim grasp and test lift",
+        "python": "from kinex import call,device,finish\nr=call('servo',device='left_arm',block=False,pose=[-.372508,-.111202,.94007,.7071067812,0,-.7071067812,0],frame='world',speedFraction=.3);print(r);device('world','wait',{'duration_s':r['duration_s']+.5})\nprint(device('left_gripper','write',{'actions':[0],'duration_s':.8}));device('world','wait',{'duration_s':1.2});print(device('left_gripper'))\nr=call('servo',device='left_arm',block=False,pose=[-.372508,-.111202,1.02007,.7071067812,0,-.7071067812,0],frame='world',speedFraction=.3);print(r);device('world','wait',{'duration_s':r['duration_s']+.5});print(device('left_arm'));finish({},file=[device(c,args={'output':'file'})['file'] for c in ['head_camera','left_camera']])"
+      }
+    },
+    {
+      "sequence": 34,
+      "name": "exec",
+      "arguments": {
+        "description": "move the deeper grasp toward the stack",
+        "python": "from kinex import call,device,finish\nfor x,y in [(-.23,-.14),(-.08,-.17)]:\n r=call('servo',device='left_arm',block=False,pose=[x-.00144,y-.000002,1.02007,.7071067812,0,-.7071067812,0],frame='world',speedFraction=.28);print(r);device('world','wait',{'duration_s':r['duration_s']+.4});s=device('left_arm');print(s)\n if s['faults']:raise RuntimeError(s['faults'])\nfinish({},file=[device(c,args={'output':'file'})['file'] for c in ['head_camera','left_camera']])"
+      }
+    },
+    {
+      "sequence": 35,
+      "name": "exec",
+      "arguments": {
+        "description": "align the held bowl over the middle bowl",
+        "python": "from kinex import call,device,finish\nr=call('servo',device='left_arm',block=False,pose=[.03974,-.198002,1.02007,.7071067812,0,-.7071067812,0],frame='world',speedFraction=.25);print(r);device('world','wait',{'duration_s':r['duration_s']+.5});print(device('left_arm'));finish({},file=[device(c,args={'output':'file'})['file'] for c in ['head_camera','left_camera']])"
+      }
+    },
+    {
+      "sequence": 36,
+      "name": "exec",
+      "arguments": {
+        "description": "measure alignment before lowering into the stack",
+        "python": "from kinex import call,device\nimport numpy as np\nfrom scipy.spatial.transform import Rotation as R\nfor c in ['left_gripper:tcp','left_camera']:\n print(c,call('relative_pose',child={'frame':c},parent={'frame':'world'}))\np=call('relative_pose',child={'frame':'head_camera'},parent={'frame':'world'})['pose'];o=np.array(p[:3]);m=R.from_quat(p[3:]).as_matrix()\nfor uv in [(390,255),(342,248)]:\n d=m@np.array([(uv[0]-320)/288.13254,(uv[1]-240)/288.13254,1]); pt=o+d*((.89-o[2])/d[2]);print(uv,pt)\nprint(device('left_gripper'))"
+      }
+    },
+    {
+      "sequence": 37,
+      "name": "exec",
+      "arguments": {
+        "description": "inspect the bowl rim alignment close up",
+        "python": "from kinex import device,finish\nfrom PIL import Image\nim=device('head_camera')['color']; path='/tmp/stack-alignment.png';Image.fromarray(im[200:305,290:440]).resize((600,420)).save(path);finish({},file=path)"
+      }
+    },
+    {
+      "sequence": 38,
+      "name": "device",
+      "arguments": {
+        "deviceID": "right_camera"
+      }
+    },
+    {
+      "sequence": 39,
+      "name": "device_stop",
+      "arguments": {
+        "reason": "Possible contact with the center bowl during alignment; stop to inspect bowl positions."
+      }
+    },
+    {
+      "sequence": 40,
+      "name": "exec",
+      "arguments": {
+        "description": "lift back slightly for an unobstructed stack view",
+        "python": "from kinex import call,device,finish\nr=call('servo',device='left_arm',block=False,pose=[-.03144,-.230002,1.05007,.7071067812,0,-.7071067812,0],frame='world',speedFraction=.25);print(r);device('world','wait',{'duration_s':r['duration_s']+.5}); print(device('left_arm'));finish({},file=[device(c,args={'output':'file'})['file'] for c in ['head_camera','left_camera']])"
+      }
+    },
+    {
+      "sequence": 41,
+      "name": "exec",
+      "arguments": {
+        "description": "estimate the held bowl rim from two views",
+        "python": "from kinex import call,device\nimport numpy as np,cv2\nfrom scipy.spatial.transform import Rotation as R\nfrom scipy.optimize import least_squares\ncams={}; data=[]\nfor c in ['head_camera','left_camera']:\n p=call('relative_pose',child={'frame':c},parent={'frame':'world'})['pose'];cams[c]=(np.array(p[:3]),R.from_quat(p[3:]).as_matrix(),288.13254 if c=='head_camera' else 397.041279)\n im=device(c)['color']\n if c=='left_camera':\n  mask=cv2.inRange(im,np.array([160]*3),np.array([255]*3)); pts=[]\n  for yy in range(10,251,10):\n   xs=np.flatnonzero(mask[yy]);\n   if len(xs):pts.append([int(xs.min()),yy])\n  data.append((c,np.array(pts)));print('wrist boundary',pts)\n else:data.append((c,np.array([[315,228],[326,231],[334,237],[337,244]])))\ndef res(v):\n x,y,z,rx,ry,rad=v;t=np.linspace(0,2*np.pi,1800);rr=R.from_rotvec([rx,ry,0]);pts=rr.apply(np.array([rad*np.cos(t),rad*np.sin(t),np.zeros_like(t)]).T)+[x,y,z];out=[]\n for c,uvs in data:\n  o,m,f=cams[c];cp=(pts-o)@m;uv=cp[:,:2]/cp[:,2:]*f+[320,240];out.extend(np.min(np.linalg.norm(uv[None,:,:]-uvs[:,None,:],axis=2),axis=1))\n out.append((rad-.06)*200)\n return out\nfor guess in [[-.03,-.177,.92,0,0,.06],[-.03,-.17,.85,.3,.3,.06]]:\n fit=least_squares(res,guess,max_nfev=200,diff_step=1e-4);print('rim estimate',fit.x,'px rms',np.sqrt(np.mean(fit.fun**2)))"
+      }
+    },
+    {
+      "sequence": 42,
+      "name": "exec",
+      "arguments": {
+        "description": "place the held bowl as the centered base",
+        "python": "from kinex import call,device,finish\nr=call('servo',device='left_arm',block=False,pose=[-.00484,-.203702,1.01507,.7071067812,0,-.7071067812,0],frame='world',speedFraction=.2);print(r);device('world','wait',{'duration_s':r['duration_s']+.5});print(device('left_arm'))\nprint(device('left_gripper','write',{'actions':[1],'duration_s':.8}));device('world','wait',{'duration_s':1.2})\nr=call('servo',device='left_arm',block=False,pose=[-.00484,-.203702,1.08507,.7071067812,0,-.7071067812,0],frame='world',speedFraction=.25);print(r);device('world','wait',{'duration_s':r['duration_s']+.4});finish({},file=[device(c,args={'output':'file'})['file'] for c in ['head_camera','left_camera']])"
+      }
+    },
+    {
+      "sequence": 43,
+      "name": "exec",
+      "arguments": {
+        "description": "clear and return the left arm to its starting configuration",
+        "python": "from kinex import call,device,finish\nr=call('servo',device='left_arm',block=False,pose=[-.25144,-.230002,1.09007,.7071067812,0,-.7071067812,0],frame='world',speedFraction=.35);print(r);device('world','wait',{'duration_s':r['duration_s']+.5});print(device('left_arm'))\nr=call('servo',device='left_arm',block=False,joints=[0]*6,speedFraction=.35);print(r);device('world','wait',{'duration_s':r['duration_s']+.5});print(device('left_arm'));finish({},file=[device('head_camera',args={'output':'file'})['file']])"
+      }
+    },
+    {
+      "sequence": 44,
+      "name": "exec",
+      "arguments": {
+        "description": "measure the current bowl centers",
+        "python": "from kinex import device,call\nimport numpy as np,cv2\nfrom scipy.spatial.transform import Rotation as R\nfrom scipy.optimize import least_squares\nim=device('head_camera')['color'];cs,_=cv2.findContours(cv2.inRange(im,np.array([160]*3),np.array([255]*3)),cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_NONE)\np=call('relative_pose',child={'frame':'head_camera'},parent={'frame':'world'})['pose'];o=np.array(p[:3]);m=R.from_quat(p[3:]).as_matrix()\nfor ct in cs:\n x,y,w,h=cv2.boundingRect(ct)\n if 230<x<450 and 170<y<330 and 40<w<90:\n  pts=ct[:,0,:];uvs=np.array([[xx,pts[pts[:,0]==xx,1].min()] for xx in range(x+8,x+w-8,2)])\n  def res(v):\n   cx,cy,rad=v;t=np.linspace(0,2*np.pi,1800);pts3=np.array([cx+rad*np.cos(t),cy+rad*np.sin(t),np.full_like(t,.814)]).T;cp=(pts3-o)@m;uv=cp[:,:2]/cp[:,2:]*288.13254+[320,240];return np.min(np.linalg.norm(uv[None,:,:]-uvs[:,None,:],axis=2),axis=1)\n  f=least_squares(res,[(x+w/2-320)*.002,-.2,.06],diff_step=1e-4);print('bbox',x,y,w,h,'center radius',f.x,'rms',np.sqrt(np.mean(f.fun**2)))"
+      }
+    },
+    {
+      "sequence": 45,
+      "name": "exec",
+      "arguments": {
+        "description": "approach the nearer right-side bowl",
+        "python": "from kinex import call,device,finish\nr=call('servo',device='right_arm',block=False,pose=[.131334,-.221818,1.08007,.7071067812,0,-.7071067812,0],frame='world',speedFraction=.35);print(r);device('world','wait',{'duration_s':r['duration_s']+.5});print(device('right_arm'));finish({},file=[device(c,args={'output':'file'})['file'] for c in ['head_camera','right_camera']])"
+      }
+    },
+    {
+      "sequence": 46,
+      "name": "exec",
+      "arguments": {
+        "description": "grasp the nearer bowl rim and verify a clearance lift",
+        "python": "from kinex import call,device,finish\nr=call('servo',device='right_arm',block=False,pose=[.131334,-.221818,.99207,.7071067812,0,-.7071067812,0],frame='world',speedFraction=.3);print(r);device('world','wait',{'duration_s':r['duration_s']+.5})\nprint(device('right_gripper','write',{'actions':[0],'duration_s':.7}));device('world','wait',{'duration_s':1});print(device('right_gripper'))\nr=call('servo',device='right_arm',block=False,pose=[.131334,-.221818,1.08007,.7071067812,0,-.7071067812,0],frame='world',speedFraction=.3);print(r);device('world','wait',{'duration_s':r['duration_s']+.5});print(device('right_arm'));finish({},file=[device(c,args={'output':'file'})['file'] for c in ['head_camera','right_camera']])"
+      }
+    },
+    {
+      "sequence": 47,
+      "name": "exec",
+      "arguments": {
+        "description": "retry the rim grasp at the observed rim height",
+        "python": "from kinex import call,device,finish\nprint(device('right_gripper','write',{'actions':[1],'duration_s':.5}));device('world','wait',{'duration_s':.7})\nr=call('servo',device='right_arm',block=False,pose=[.131334,-.221818,.94707,.7071067812,0,-.7071067812,0],frame='world',speedFraction=.3);print(r);device('world','wait',{'duration_s':r['duration_s']+.4})\nprint(device('right_gripper','write',{'actions':[0],'duration_s':.7}));device('world','wait',{'duration_s':1});print(device('right_gripper'))\nr=call('servo',device='right_arm',block=False,pose=[.131334,-.221818,1.08007,.7071067812,0,-.7071067812,0],frame='world',speedFraction=.3);print(r);device('world','wait',{'duration_s':r['duration_s']+.5});print(device('right_arm'));finish({},file=[device(c,args={'output':'file'})['file'] for c in ['head_camera','right_camera']])"
+      }
+    },
+    {
+      "sequence": 48,
+      "name": "exec",
+      "arguments": {
+        "description": "check the lifted bowl geometry against the wrist view",
+        "python": "from kinex import call,device\nfrom scipy.spatial.transform import Rotation as R\nimport numpy as np\np=call('relative_pose',child={'frame':'right_camera'},parent={'frame':'world'})['pose'];o=np.array(p[:3]);m=R.from_quat(p[3:]).as_matrix();print('camera',p,'axes',m.tolist())\nfor uv in [(310,240),(500,150),(550,0),(450,450)]:\n d=m@np.array([(uv[0]-320)/397.041279,(uv[1]-240)/397.041279,1]);print(uv,[(z,(o+d*((z-o[2])/d[2])).tolist()) for z in [.94,.90,.85]])\nprint(device('right_gripper'))"
+      }
+    },
+    {
+      "sequence": 49,
+      "name": "exec",
+      "arguments": {
+        "description": "estimate the held rim and base centers for nesting",
+        "python": "from kinex import call,device\nimport numpy as np,cv2\nfrom scipy.spatial.transform import Rotation as R\nfrom scipy.optimize import least_squares\np=call('relative_pose',child={'frame':'right_camera'},parent={'frame':'world'})['pose'];o=np.array(p[:3]);m=R.from_quat(p[3:]).as_matrix();im=device('right_camera')['color'];mask=cv2.inRange(im,np.array([160]*3),np.array([255]*3));uvs=[]\nfor yy in range(5,225,5):\n xs=np.flatnonzero(mask[yy]);\n if len(xs):uvs.append([xs.min(),yy])\nuvs=np.array(uvs)\ndef fit_circle(o,m,f,uvs,guess,zfixed=None):\n t=np.linspace(0,2*np.pi,2400)\n def res(v):\n  x,y,z=v if zfixed is None else [v[0],v[1],zfixed]; pts=np.array([x+.06*np.cos(t),y+.06*np.sin(t),np.full_like(t,z)]).T;cp=(pts-o)@m;uv=cp[:,:2]/cp[:,2:]*f+[320,240];return np.min(np.linalg.norm(uv[None,:,:]-uvs[:,None,:],axis=2),axis=1)\n fit=least_squares(res,guess,diff_step=1e-4,max_nfev=300);print('fit',fit.x,'rms',np.sqrt(np.mean(fit.fun**2)))\nfit_circle(o,m,397.041279,uvs,[.133,-.16,.94])\np=call('relative_pose',child={'frame':'head_camera'},parent={'frame':'world'})['pose'];o=np.array(p[:3]);m=R.from_quat(p[3:]).as_matrix();im=device('head_camera')['color'];mask=cv2.inRange(im,np.array([160]*3),np.array([255]*3));uvs=[]\nfor xx in range(272,325,2):\n ys=np.flatnonzero(mask[275:355,xx]);\n if len(ys):uvs.append([xx,ys.min()+275])\nfit_circle(o,m,288.13254,np.array(uvs),[-.04,-.28],.814)"
+      }
+    },
+    {
+      "sequence": 50,
+      "name": "exec",
+      "arguments": {
+        "description": "carry the second bowl above the centered base",
+        "python": "from kinex import call,device,finish\nfor x,y in [(.047,-.277),(-.03843,-.33235)]:\n r=call('servo',device='right_arm',block=False,pose=[x-.00144,y-.000002,1.08007,.7071067812,0,-.7071067812,0],frame='world',speedFraction=.28);print(r);device('world','wait',{'duration_s':r['duration_s']+.5});s=device('right_arm');print(s)\n if s['faults']:raise RuntimeError(s['faults'])\nprint(device('right_gripper'));finish({},file=[device(c,args={'output':'file'})['file'] for c in ['head_camera','right_camera']])"
+      }
+    },
+    {
+      "sequence": 51,
+      "name": "exec",
+      "arguments": {
+        "description": "lower the second bowl into the base opening",
+        "python": "from kinex import call,device,finish\nr=call('servo',device='right_arm',block=False,pose=[-.03987,-.332352,1.03007,.7071067812,0,-.7071067812,0],frame='world',speedFraction=.2);print(r);device('world','wait',{'duration_s':r['duration_s']+.5});print(device('right_arm'));print(device('right_gripper'));finish({},file=[device(c,args={'output':'file'})['file'] for c in ['head_camera','right_camera']])"
+      }
+    },
+    {
+      "sequence": 52,
+      "name": "exec",
+      "arguments": {
+        "description": "release the second bowl and inspect nesting",
+        "python": "from kinex import device,call,finish\nprint(device('right_gripper','write',{'actions':[1],'duration_s':.8}));device('world','wait',{'duration_s':1.5})\nr=call('servo',device='right_arm',block=False,pose=[-.03987,-.332352,1.11007,.7071067812,0,-.7071067812,0],frame='world',speedFraction=.25);print(r);device('world','wait',{'duration_s':r['duration_s']+.5})\nr=call('servo',device='right_arm',block=False,pose=[.16856,-.270002,1.11007,.7071067812,0,-.7071067812,0],frame='world',speedFraction=.3);print(r);device('world','wait',{'duration_s':r['duration_s']+.5});print(device('right_arm'));finish({},file=[device(c,args={'output':'file'})['file'] for c in ['head_camera','right_camera']])"
+      }
+    },
+    {
+      "sequence": 53,
+      "name": "exec",
+      "arguments": {
+        "description": "verify the two-bowl stack visually",
+        "python": "from kinex import device,finish\nfrom PIL import Image\nim=device('head_camera')['color'];p='/tmp/two-bowl-stack.png';Image.fromarray(im[275:360,255:345]).resize((450,425)).save(p);finish({},file=p)"
+      }
+    },
+    {
+      "sequence": 54,
+      "name": "exec",
+      "arguments": {
+        "description": "approach and grasp the final bowl",
+        "python": "from kinex import call,device,finish\nfor z in [.93,.797]:\n r=call('servo',device='right_arm',block=False,pose=[.24629,-.096292,z+.15007,.7071067812,0,-.7071067812,0],frame='world',speedFraction=.3);print(r);device('world','wait',{'duration_s':r['duration_s']+.5});print(device('right_arm'))\nprint(device('right_gripper','write',{'actions':[0],'duration_s':.7}));device('world','wait',{'duration_s':1});print(device('right_gripper'))\nr=call('servo',device='right_arm',block=False,pose=[.24629,-.096292,1.08007,.7071067812,0,-.7071067812,0],frame='world',speedFraction=.3);print(r);device('world','wait',{'duration_s':r['duration_s']+.5});print(device('right_arm'));finish({},file=[device(c,args={'output':'file'})['file'] for c in ['head_camera','right_camera']])"
+      }
+    },
+    {
+      "sequence": 55,
+      "name": "exec",
+      "arguments": {
+        "description": "measure the final held bowl before transferring",
+        "python": "from kinex import call,device\nimport numpy as np,cv2\nfrom scipy.spatial.transform import Rotation as R\nfrom scipy.optimize import least_squares\np=call('relative_pose',child={'frame':'right_camera'},parent={'frame':'world'})['pose'];o=np.array(p[:3]);m=R.from_quat(p[3:]).as_matrix();im=device('right_camera')['color'];mask=cv2.inRange(im,np.array([160]*3),np.array([255]*3));uvs=[]\nfor yy in range(5,225,5):\n xs=np.flatnonzero(mask[yy]);\n if len(xs):uvs.append([xs.min(),yy])\nuvs=np.array(uvs);t=np.linspace(0,2*np.pi,2400)\ndef res(v):\n x,y,z=v;pts=np.array([x+.06*np.cos(t),y+.06*np.sin(t),np.full_like(t,z)]).T;cp=(pts-o)@m;uv=cp[:,:2]/cp[:,2:]*397.041279+[320,240];return np.min(np.linalg.norm(uv[None,:,:]-uvs[:,None,:],axis=2),axis=1)\nf=least_squares(res,[.248,-.036,.91],diff_step=1e-4,max_nfev=300);print('held rim xyz',f.x,'rms',np.sqrt(np.mean(f.fun**2)));print(device('right_gripper'))"
+      }
+    },
+    {
+      "sequence": 56,
+      "name": "exec",
+      "arguments": {
+        "description": "transfer the last bowl over the two-bowl stack",
+        "python": "from kinex import call,device,finish\nfor x,y in [(.11,-.21),(-.038,-.3333)]:\n r=call('servo',device='right_arm',block=False,pose=[x-.00144,y-.000002,1.08007,.7071067812,0,-.7071067812,0],frame='world',speedFraction=.28);print(r);device('world','wait',{'duration_s':r['duration_s']+.5});s=device('right_arm');print(s)\n if s['faults']:raise RuntimeError(s['faults'])\nprint(device('right_gripper'));finish({},file=[device(c,args={'output':'file'})['file'] for c in ['head_camera','right_camera']])"
+      }
+    },
+    {
+      "sequence": 57,
+      "name": "exec",
+      "arguments": {
+        "description": "nest the final bowl and clear the stack",
+        "python": "from kinex import call,device,finish\nr=call('servo',device='right_arm',block=False,pose=[-.03944,-.333302,1.04007,.7071067812,0,-.7071067812,0],frame='world',speedFraction=.2);print(r);device('world','wait',{'duration_s':r['duration_s']+.5});print(device('right_arm'));print(device('right_gripper'))\nprint(device('right_gripper','write',{'actions':[1],'duration_s':.8}));device('world','wait',{'duration_s':1.5})\nr=call('servo',device='right_arm',block=False,pose=[-.03944,-.333302,1.11007,.7071067812,0,-.7071067812,0],frame='world',speedFraction=.25);print(r);device('world','wait',{'duration_s':r['duration_s']+.5})\nr=call('servo',device='right_arm',block=False,pose=[.16856,-.270002,1.11007,.7071067812,0,-.7071067812,0],frame='world',speedFraction=.3);print(r);device('world','wait',{'duration_s':r['duration_s']+.5});print(device('right_arm'));finish({},file=[device(c,args={'output':'file'})['file'] for c in ['head_camera','right_camera']])"
+      }
+    },
+    {
+      "sequence": 58,
+      "name": "exec",
+      "arguments": {
+        "description": "return the right arm and verify the final stack and arm states",
+        "python": "from kinex import call,device,finish\nfrom PIL import Image\nr=call('servo',device='right_arm',block=False,joints=[0]*6,speedFraction=.35);print(r);device('world','wait',{'duration_s':r['duration_s']+.8})\nfor d in ['left_arm','right_arm','left_gripper','right_gripper']:print(d,device(d))\nimgs=[device(c,args={'output':'file'})['file'] for c in ['head_camera','left_camera','right_camera']]\nim=device('head_camera')['color'];p='/tmp/final-three-bowl-stack.png';Image.fromarray(im[275:360,255:345]).resize((450,425)).save(p)\nfinish({},file=imgs+[p])"
+      }
+    },
+    {
+      "sequence": 59,
+      "name": "device_stop",
+      "arguments": {
+        "reason": "Simulator reported native episode termination during the return-home wait; stop and inspect final observations."
+      }
+    },
+    {
+      "sequence": 60,
+      "name": "devices",
+      "arguments": {
+        "calls": [
+          {
+            "deviceID": "left_arm"
+          },
+          {
+            "deviceID": "right_arm"
+          },
+          {
+            "deviceID": "head_camera"
+          },
+          {
+            "deviceID": "left_camera"
+          },
+          {
+            "deviceID": "right_camera"
+          },
+          {
+            "deviceID": "world"
+          }
+        ]
+      }
+    }
+  ]
+}

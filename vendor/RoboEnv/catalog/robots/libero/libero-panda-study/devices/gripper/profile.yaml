@@ -1,0 +1,80 @@
+name: gripper
+type: gripper
+intrinsics:
+  source: introspected
+  method: introspection
+  calibrated_at: null
+  aperture_m:
+    min: 0.0
+    max: 0.079
+  control:
+    mode: direction
+    open_target: -1
+    close_target: 1
+  feedback:
+    aperture_m: true
+  stop:
+    behavior: hold
+    affected_devices:
+    - gripper
+  frames:
+    tcp:
+      parent_frame: null
+      translation_m:
+      - 0
+      - 0
+      - 0.097
+      rotation_xyzw:
+      - 0
+      - 0
+      - 0
+      - 1
+  geometry:
+    approach_axis:
+    - 0
+    - 0
+    - 1
+    closing_axis:
+    - 1.0
+    - 0.0
+    - 0.0
+    description: Two opposing fingers slide along a fixed closing axis. Each inner
+      pad has a 16 by 16 mm rectangular surface. Aperture is the inner-pad gap; it
+      does not describe whole-finger clearance.
+extrinsics:
+  source: introspected
+  method: introspection
+  calibrated_at: null
+  mount:
+    parent: arm
+    parent_frame: flange
+    translation_m:
+    - 0
+    - 0
+    - 0
+    rotation_xyzw:
+    - 0.0
+    - 0.0
+    - -0.707106781187
+    - 0.707106781187
+meta:
+  created_at: '2026-09-07T00:00:00Z'
+  updated_at: '2026-09-08T00:00:00Z'
+access:
+  source: user
+  method: unknown
+  calibrated_at: null
+  connection:
+    kind: url
+    url: http://127.0.0.1:8123
+    device: gripper
+  driver:
+    entry: driver.py
+    persistent: true
+    actions:
+    - read
+    - write
+    - stop
+    - load
+    - unload
+    - status
